@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg width="50" height="50" version="1.1" viewBox="0 0 13.229 13.229" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <filter id="filter2975" x="-.090363" y="-.17371" width="1.1807" height="1.3474" color-interpolation-filters="sRGB">
+   <feGaussianBlur stdDeviation="0.2988568"/>
+  </filter>
+ </defs>
+ <g transform="matrix(.98288 0 0 1.0281 15.878 -5.609)">
+  <g transform="matrix(1 0 0 -1 0 22.434)">
+   <g transform="matrix(1.6279 0 0 1.6089 5.9885 -6.7463)" fill-rule="evenodd">
+    <circle transform="matrix(1 0 0 -1 -4.8751e-8 22.434)" cx="-9.3693" cy="10.144" r="1.9725" fill="#800080" stroke-width=".26458"/>
+    <g transform="matrix(.44147 0 0 .33648 -5.2496 7.6919)" fill="#1a1a1a" filter="url(#filter2975)" opacity=".3819">
+     <path d="m-12.607 13.204 3.1631-1.9387v-2.1124l-3.9688 2.273v1.3269c0 0.29225 0.23692 0.52917 0.52917 0.52917 0.0976 0 0.1933-0.02699 0.27652-0.078z"/>
+     <path d="m-6.2805 13.204-3.1631-1.9387v-2.1124l3.9687 2.273v1.3269c0 0.29225-0.23692 0.52917-0.52917 0.52917-0.097603 0-0.19331-0.02699-0.27652-0.078z"/>
+    </g>
+    <path d="m-12.607 13.204 3.1631-1.9387v-4.1049l-3.9688 2.273v3.3194c0 0.29225 0.23692 0.52917 0.52917 0.52917 0.0976 0 0.1933-0.02699 0.27652-0.078z" fill="#9e69fd"/>
+    <path d="m-6.2805 13.204-3.1631-1.9387v-4.1049l3.9687 2.273v3.3194c0 0.29225-0.23692 0.52917-0.52917 0.52917-0.097603 0-0.19331-0.02699-0.27652-0.078z" fill="#b992fe"/>
+   </g>
+  </g>
+ </g>
+</svg>
