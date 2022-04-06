@@ -29446,7 +29446,7 @@ var render = function () {
                       _c(
                         "v-list-item-content",
                         [
-                          _c("v-list-itemtitle", [
+                          _c("v-list-item-title", [
                             _vm._v(
                               "\n                            Nama User\n                        "
                             ),

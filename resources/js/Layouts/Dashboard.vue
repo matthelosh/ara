@@ -42,9 +42,9 @@
                             </v-avatar>
                         </v-list-item-avatar>
                         <v-list-item-content>
-                            <v-list-itemtitle>
+                            <v-list-item-title>
                                 Nama User
-                            </v-list-itemtitle>
+                            </v-list-item-title>
                             <v-list-item-subtitle>
                                 Admin
                             </v-list-item-subtitle>

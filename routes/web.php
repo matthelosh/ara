@@ -20,12 +20,13 @@ Route::get('/', function () {
     return Inertia::render('Welcome');
 });
 
-Route::group(['prefix' => 'auth'], function(){
-    Route::get('/login', function(){
-        return Inertia::render('Auth/Login');
-    })->name('auth.login');
-});
+Route::get('/login', function(){
+    return Inertia::render('Auth/Login');
+})->name('login');
 
-Route::group(['prefix' => 'admin'], function() {
-    Route::get('/', [DashController::class, 'admin'])->name('welcome');
+Route::middleware('auth')->group(function() {
+    // Admin Route
+    Route::prefix('admin')->group(function() {
+        Route::get('/', [DashController::class, 'admin'])->name('admin.welcome');
+    });
 });
