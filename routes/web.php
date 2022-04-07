@@ -27,6 +27,6 @@ Route::get('/login', function(){
 Route::middleware('auth')->group(function() {
     // Admin Route
     Route::prefix('admin')->group(function() {
-        Route::get('/', [DashController::class, 'admin'])->name('admin.welcome');
+        Route::get('/', [DashController::class, 'admin'])->name('admin.home');
     });
 });

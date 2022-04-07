@@ -10,6 +10,8 @@ class DashController extends Controller
     public function admin(Request $request)
     {
         $routeName = $request->route()->getName();
-        return Inertia::render(ucfirst($routeName));
+        $endPoint=explode('.', $routeName);
+        $page = count($endPoint) > 1 ?ucfirst( $endPoint[0]) . '/' . ucfirst($endPoint[1]) : ucfirst($endPoint[0]);
+        return Inertia::render($page);
     }
 }
