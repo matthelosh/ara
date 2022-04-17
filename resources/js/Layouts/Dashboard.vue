@@ -31,6 +31,44 @@
                         v-bind="attrs"
                         v-on="on"
                     >
+                        <v-icon>mdi-bell</v-icon>
+                    </v-avatar>
+                </template>
+                <v-list dense>
+                    <v-list-item>
+                        <v-list-item-avatar>
+                            <v-avatar>
+                                <img src="/images/1.png" alt="">
+                            </v-avatar>
+                        </v-list-item-avatar>
+                        <v-list-item-content>
+                            <v-list-item-title>
+                                {{ $page.props.user.name }}
+                            </v-list-item-title>
+                            <v-list-item-subtitle>
+                                {{ $page.props.user.role }}
+                            </v-list-item-subtitle>
+                        </v-list-item-content>
+                    </v-list-item>
+                    <v-divider class="my-3"></v-divider>
+                    <v-list-item-group>
+                        <v-list-item @click="logout">
+                            <v-list-item-icon>
+                                <v-icon>mdi-exit-to-app</v-icon>
+                            </v-list-item-icon>
+                            <v-list-item-content>
+                                <v-list-item-title>Logout</v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </v-list-item-group>
+                </v-list>
+            </v-menu>
+            <v-menu offset-y>
+                <template v-slot:activator="{on,attrs}">
+                    <v-avatar
+                        v-bind="attrs"
+                        v-on="on"
+                    >
                         <img src="/images/1.png" alt="">
                     </v-avatar>
                 </template>
@@ -43,16 +81,16 @@
                         </v-list-item-avatar>
                         <v-list-item-content>
                             <v-list-item-title>
-                                Nama User
+                                {{ $page.props.user.name }}
                             </v-list-item-title>
                             <v-list-item-subtitle>
-                                Admin
+                                {{ $page.props.user.role }}
                             </v-list-item-subtitle>
                         </v-list-item-content>
                     </v-list-item>
                     <v-divider class="my-3"></v-divider>
                     <v-list-item-group>
-                        <v-list-item>
+                        <v-list-item @click="logout">
                             <v-list-item-icon>
                                 <v-icon>mdi-exit-to-app</v-icon>
                             </v-list-item-icon>
@@ -80,6 +118,16 @@ export default {
         sideMenu: true,
         // sideBar
     }),
+    methods: {
+        logout() {
+            axios({
+                method: 'post',
+                url: '/logout'
+            }).then(res => {
+                window.location.href='/'
+            })
+        }
+    },
     computed: {
         side() {
 

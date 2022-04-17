@@ -68,7 +68,7 @@ export default {
             {
                 url: '/profil',
                 icon: 'mdi-account',
-                label: 'Dashboard',
+                label: 'Profil',
                 roles: ['admin','wali','mapel','siswa'],
                 active: false,
                 children: []
@@ -120,7 +120,12 @@ export default {
             },
 
         ]
-    })
+    }),
+    computed: {
+        user() {
+            return this.$page.props.user
+        }
+    }
 }
 </script>
 <style css scoped>

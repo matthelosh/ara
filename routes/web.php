@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -20,13 +21,22 @@ Route::get('/', function () {
     return Inertia::render('Welcome');
 });
 
+
+
 Route::get('/login', function(){
-    return Inertia::render('Auth/Login');
+    if (!auth()->check())
+        return Inertia::render('Auth/Login');
+    else return to_route('admin.home');
 })->name('login');
 
 Route::middleware('auth')->group(function() {
+    
     // Admin Route
     Route::prefix('admin')->group(function() {
         Route::get('/', [DashController::class, 'admin'])->name('admin.home');
     });
+});
+
+Route::group(['prefix' => 'error'], function() {
+    Route::get('403', [ErrorController::class, 'index'])->name('error.403');
 });

@@ -46,7 +46,8 @@ return [
     |
     */
 
-    'username' => 'email',
+    #'username' => 'email',
+    'username' => 'username',
 
     'email' => 'email',
 
@@ -62,7 +63,8 @@ return [
     */
 
     'home' => RouteServiceProvider::HOME,
-
+    // 'admin' => RouteServiceProvider::ADMIN,
+    // 'guru' => RouteServiceProvider::GURU,
     /*
     |--------------------------------------------------------------------------
     | Fortify Routes Prefix / Subdomain
