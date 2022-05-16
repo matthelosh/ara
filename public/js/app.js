@@ -4233,22 +4233,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Layouts/FrontEnd.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Layouts/FrontEnd.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************************************************************************************************************************/
-/***/ (() => {
-
-//
-//
-//
-//
-//
-//
-//
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Auth/Login.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Pages/Auth/Login.vue?vue&type=script&lang=js& ***!
@@ -4315,13 +4299,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Login',
   data: function data() {
     return {
       showPassword: false,
       email: '',
-      password: ''
+      password: '',
+      loading: false,
+      errors: null
     };
   },
   methods: {
@@ -4329,6 +4324,9 @@ __webpack_require__.r(__webpack_exports__);
       this.showPassword = !this.showPassword;
     },
     login: function login() {
+      var _this = this;
+
+      this.loading = true;
       var data = {
         username: this.email,
         password: this.password
@@ -4338,9 +4336,10 @@ __webpack_require__.r(__webpack_exports__);
         url: '/login',
         data: data
       }).then(function (res) {
-        console.log(res);
+        window.location.href = "/admin";
       })["catch"](function (err) {
-        console.log(err);
+        _this.errors = err.response.data.message;
+        _this.loading = false;
       });
     }
   }
@@ -4418,9 +4417,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue */ "./node_modules/@inertiajs/inertia-vue/dist/index.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+ // import { ZiggyVue } from 'ziggy';
+// import { Ziggy } from './ziggy';
 
 
 
+vue__WEBPACK_IMPORTED_MODULE_2__["default"].prototype.$route = route();
 (0,_inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_1__.createInertiaApp)({
   resolve: function resolve(name) {
     return __webpack_require__("./resources/js/Pages sync recursive ^\\.\\/.*$")("./".concat(name));
@@ -4430,7 +4432,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
         app = _ref.app,
         props = _ref.props,
         plugin = _ref.plugin;
-    vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(plugin);
+    vue__WEBPACK_IMPORTED_MODULE_2__["default"].use(plugin); // Vue.use(ZiggyVue, Ziggy)
+
     new vue__WEBPACK_IMPORTED_MODULE_2__["default"]({
       vuetify: _plugins_vuetify__WEBPACK_IMPORTED_MODULE_0__["default"],
       render: function render(h) {
@@ -28494,20 +28497,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _FrontEnd_vue_vue_type_template_id_250fb776___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FrontEnd.vue?vue&type=template&id=250fb776& */ "./resources/js/Layouts/FrontEnd.vue?vue&type=template&id=250fb776&");
-/* harmony import */ var _FrontEnd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FrontEnd.vue?vue&type=script&lang=js& */ "./resources/js/Layouts/FrontEnd.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ var __WEBPACK_REEXPORT_OBJECT__ = {};
-/* harmony reexport (unknown) */ for(const __WEBPACK_IMPORT_KEY__ in _FrontEnd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== "default") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = () => _FrontEnd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[__WEBPACK_IMPORT_KEY__]
-/* harmony reexport (unknown) */ __webpack_require__.d(__webpack_exports__, __WEBPACK_REEXPORT_OBJECT__);
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-
-
+var script = {}
 
 
 /* normalize component */
 ;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _FrontEnd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  script,
   _FrontEnd_vue_vue_type_template_id_250fb776___WEBPACK_IMPORTED_MODULE_0__.render,
   _FrontEnd_vue_vue_type_template_id_250fb776___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
@@ -28599,26 +28597,6 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 if (false) { var api; }
 component.options.__file = "resources/js/Pages/Welcome.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/Layouts/FrontEnd.vue?vue&type=script&lang=js&":
-/*!********************************************************************!*\
-  !*** ./resources/js/Layouts/FrontEnd.vue?vue&type=script&lang=js& ***!
-  \********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FrontEnd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FrontEnd.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Layouts/FrontEnd.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FrontEnd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FrontEnd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ var __WEBPACK_REEXPORT_OBJECT__ = {};
-/* harmony reexport (unknown) */ for(const __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FrontEnd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== "default") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = () => _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FrontEnd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[__WEBPACK_IMPORT_KEY__]
-/* harmony reexport (unknown) */ __webpack_require__.d(__webpack_exports__, __WEBPACK_REEXPORT_OBJECT__);
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FrontEnd_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default())); 
 
 /***/ }),
 
@@ -28721,7 +28699,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("v-app", [_vm._t("default")], 2)
+  return _c("div", [_vm._v("\n    Frontend\n")])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -28748,149 +28726,197 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "v-app",
-    { staticStyle: { background: "#f5f5f5" } },
+    { staticClass: "align-center", staticStyle: { background: "#f5f5f5" } },
     [
       _c(
-        "v-container",
+        "v-main",
         [
           _c(
-            "v-row",
+            "v-container",
+            { attrs: { "fill-height": "" } },
             [
-              _c("v-col", { staticClass: "d-none d-sm-inline" }),
-              _vm._v(" "),
               _c(
-                "v-col",
-                { attrs: { cols: "12", sm: "5" } },
+                "v-row",
+                {
+                  staticClass: "d-flex align-center justify-center fill-height",
+                  attrs: { align: "center", "align-content": "center" },
+                },
                 [
+                  _c("v-col", { staticClass: "d-none d-sm-inline" }),
+                  _vm._v(" "),
                   _c(
-                    "v-card",
+                    "v-col",
+                    { attrs: { cols: "12", sm: "5" } },
                     [
                       _c(
-                        "v-card-text",
-                        { staticClass: "pa-10" },
+                        "v-card",
                         [
                           _c(
-                            "v-card-title",
-                            {
-                              staticClass: "d-flex justify-center align-center",
-                            },
-                            [
-                              _c("img", {
-                                attrs: { src: "/images/ara1.svg", alt: "Logo" },
-                              }),
-                              _vm._v(" "),
-                              _c("h3", { staticClass: "purple--text mx-5" }, [
-                                _vm._v("A.R.A."),
-                              ]),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("h2", [_vm._v("Selamat Datang!")]),
-                          _vm._v(" "),
-                          _c("p", [_vm._v("Di Aplikasi Rapor Anyar")]),
-                          _vm._v(" "),
-                          _c(
-                            "v-form",
-                            {
-                              ref: "formLogin",
-                              on: {
-                                submit: function ($event) {
-                                  $event.preventDefault()
-                                  return _vm.login.apply(null, arguments)
-                                },
-                              },
-                            },
+                            "v-card-text",
+                            { staticClass: "pa-10" },
                             [
                               _c(
-                                "v-row",
+                                "v-card-title",
+                                {
+                                  staticClass:
+                                    "d-flex justify-center align-center",
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "/images/ara1.svg",
+                                      alt: "Logo",
+                                    },
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "h3",
+                                    { staticClass: "purple--text mx-5" },
+                                    [_vm._v("A.R.A.")]
+                                  ),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("h2", [_vm._v("Selamat Datang!")]),
+                              _vm._v(" "),
+                              _c("p", [_vm._v("Di Aplikasi Rapor Anyar")]),
+                              _vm._v(" "),
+                              _c(
+                                "v-form",
+                                {
+                                  ref: "formLogin",
+                                  on: {
+                                    submit: function ($event) {
+                                      $event.preventDefault()
+                                      return _vm.login.apply(null, arguments)
+                                    },
+                                  },
+                                },
                                 [
                                   _c(
-                                    "v-col",
-                                    { attrs: { cols: "12" } },
-                                    [
-                                      _c("v-text-field", {
-                                        staticClass: "my-2",
-                                        attrs: {
-                                          label: "Email",
-                                          "append-icon": "mdi-qrcode",
-                                          outlined: "",
-                                          "hide-details": "",
-                                        },
-                                        model: {
-                                          value: _vm.email,
-                                          callback: function ($$v) {
-                                            _vm.email = $$v
-                                          },
-                                          expression: "email",
-                                        },
-                                      }),
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-col",
-                                    { attrs: { cols: "12" } },
-                                    [
-                                      _c("v-text-field", {
-                                        attrs: {
-                                          label: "Password",
-                                          "append-icon": _vm.showPassword
-                                            ? "mdi-eye-off"
-                                            : "mdi-eye",
-                                          outlined: "",
-                                          type: _vm.showPassword
-                                            ? "text"
-                                            : "password",
-                                          "hide-details": "",
-                                        },
-                                        on: {
-                                          "click:append": _vm.togglePassword,
-                                        },
-                                        model: {
-                                          value: _vm.password,
-                                          callback: function ($$v) {
-                                            _vm.password = $$v
-                                          },
-                                          expression: "password",
-                                        },
-                                      }),
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-col",
-                                    { attrs: { cols: "12" } },
-                                    [
-                                      _c("v-checkbox", {
-                                        attrs: {
-                                          label: "Ingat Saya",
-                                          "hide-details": "",
-                                        },
-                                      }),
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-col",
-                                    {
-                                      staticClass: "d-flex justify-center",
-                                      attrs: { cols: "12" },
-                                    },
+                                    "v-row",
                                     [
                                       _c(
-                                        "v-btn",
+                                        "v-col",
+                                        { attrs: { cols: "12" } },
+                                        [
+                                          _c("v-text-field", {
+                                            staticClass: "my-2",
+                                            attrs: {
+                                              label: "Email",
+                                              "append-icon": "mdi-qrcode",
+                                              outlined: "",
+                                              "hide-details": "",
+                                            },
+                                            model: {
+                                              value: _vm.email,
+                                              callback: function ($$v) {
+                                                _vm.email = $$v
+                                              },
+                                              expression: "email",
+                                            },
+                                          }),
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-col",
+                                        { attrs: { cols: "12" } },
+                                        [
+                                          _c("v-text-field", {
+                                            attrs: {
+                                              label: "Password",
+                                              "append-icon": _vm.showPassword
+                                                ? "mdi-eye-off"
+                                                : "mdi-eye",
+                                              outlined: "",
+                                              type: _vm.showPassword
+                                                ? "text"
+                                                : "password",
+                                              "hide-details": "",
+                                            },
+                                            on: {
+                                              "click:append":
+                                                _vm.togglePassword,
+                                            },
+                                            model: {
+                                              value: _vm.password,
+                                              callback: function ($$v) {
+                                                _vm.password = $$v
+                                              },
+                                              expression: "password",
+                                            },
+                                          }),
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-col",
                                         {
-                                          staticClass: "mx-auto",
-                                          attrs: {
-                                            type: "submit",
-                                            color: "primary",
-                                            block: "",
-                                          },
+                                          staticClass: "d-flex justify-center",
+                                          attrs: { cols: "12" },
                                         },
-                                        [_vm._v("Login")]
+                                        [
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              staticClass: "mx-auto",
+                                              attrs: {
+                                                type: "submit",
+                                                color: "primary",
+                                                block: "",
+                                                loading: _vm.loading,
+                                              },
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                            " +
+                                                  _vm._s(
+                                                    _vm.loading
+                                                      ? "Tunggu Ya"
+                                                      : "Login"
+                                                  ) +
+                                                  "\n                                        "
+                                              ),
+                                            ]
+                                          ),
+                                        ],
+                                        1
+                                      ),
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-row",
+                                    [
+                                      _c(
+                                        "v-alert",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "show",
+                                              rawName: "v-show",
+                                              value: _vm.errors,
+                                              expression: "errors",
+                                            },
+                                          ],
+                                          staticClass: "error--text",
+                                        },
+                                        [
+                                          _c(
+                                            "v-icon",
+                                            { attrs: { color: "error" } },
+                                            [_vm._v("mdi-exclamation")]
+                                          ),
+                                          _vm._v(
+                                            _vm._s(_vm.errors) +
+                                              "\n                                    "
+                                          ),
+                                        ],
+                                        1
                                       ),
                                     ],
                                     1
@@ -28907,11 +28933,11 @@ var render = function () {
                     ],
                     1
                   ),
+                  _vm._v(" "),
+                  _c("v-col", { staticClass: "d-none d-sm-inline" }),
                 ],
                 1
               ),
-              _vm._v(" "),
-              _c("v-col", { staticClass: "d-none d-sm-inline" }),
             ],
             1
           ),

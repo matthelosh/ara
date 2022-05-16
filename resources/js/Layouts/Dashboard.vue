@@ -109,7 +109,7 @@
     </v-app>
 </template>
 <script>
-import SideMenu from './Components/SideMenu.vue'
+import SideMenu from './Components/Back/SideMenu.vue'
 export default {
     name: 'Dashboard',
     components: { SideMenu },

@@ -18,6 +18,8 @@
   <!-- Font -->
   {{-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" /> --}}
   
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Satisfy&display=swap" rel="stylesheet">
+  
   <script src="{{ asset(mix('js/app.js')) }}" defer></script>
   <style>
     html,body{
