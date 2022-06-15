@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="500"
+   height="500"
+   viewBox="0 0 132.29166 132.29167"
+   version="1.1"
+   id="svg5"
+   xml:space="preserve"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+     id="defs2"><filter
+       id="selectable_hidder_filter"
+       width="1"
+       height="1"
+       x="0"
+       y="0"
+       style="color-interpolation-filters:sRGB;"><feComposite
+         id="boolops_hidder_primitive"
+         result="composite1"
+         operator="arithmetic"
+         in2="SourceGraphic"
+         in="BackgroundImage" /></filter></defs><g
+     id="layer1"><g
+       aria-label="D"
+       id="text1812"
+       style="font-size:124.446px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;text-anchor:middle;fill:#333333;stroke-width:3.11115" /><g
+       id="g7134"
+       transform="matrix(1.1392664,0,0,1.1392664,-18.423791,-3.0143093)">
+       <path
+         id="path2713"
+         style="fill:#BF212F;fill-opacity:1;stroke:none;stroke-width:2.72909;stroke-dashoffset:2.64567"
+         d="M 77.565808,2.6758057 A 52.001261,52.001261 0 0 0 28.289229,54.560494 h 20.98735 a 31.014217,31.014217 0 0 1 28.289229,-30.8653 z M 28.289229,59.516781 a 31.014217,31.014217 0 0 1 5.17e-4,0.0155 31.014217,31.014217 0 0 1 -12.118123,24.559741 v 23.820258 a 52.001261,52.001261 0 0 0 33.105473,-48.379999 52.001261,52.001261 0 0 0 -5.17e-4,-0.0155 z" />
+         <path
+         style="fill:#264B96;fill-opacity:1;stroke:none;stroke-width:2.72909;stroke-dashoffset:2.64567"
+         d="M 83.01395,2.645834 V 23.68474 a 31.014217,31.014217 0 0 1 28.28998,30.890714 31.014217,31.014217 0 0 1 -28.28998,30.87965 V 106.47465 A 52.001261,52.001261 0 0 0 132.29167,54.575454 52.001261,52.001261 0 0 0 83.01395,2.645834 Z"
+         id="path2262" />
+         <path
+         id="path2544"
+         style="fill:#006F3C;fill-opacity:1;stroke:none;stroke-width:2.17186;stroke-dashoffset:2.64567"
+         d="M 77.537265,54.503538 57.884127,54.727584 54.2821,71.79451 c -0.0024,0.09901 0.08006,0.179813 0.179099,0.179099 l 3.293618,-0.02351 V 101.01594 A 52.024114,52.024114 0 0 0 77.3879,106.15656 V 71.808339 Z" /></g></g></svg>

@@ -1,367 +1,439 @@
 <template>
     <frontend>
-        <v-container 
-            justify-center
-            class="main-top pa-0"
-            id="main-top"
-            fluid
-        >
-            
-            <img src="/images/matahari.png" alt="" class="mentari">
-            
-            <v-row class="textContainer" style="margin-top: 50px;margin-left:50px;">
-                <v-col class="white--text px-10" cols="12" sm="6">
-                    <h1>SDN 1 Beda!</h1>
-                    <p>Tempat belajar yang menyenangkan, menggunakan teknologi sebagai sarana dan alat pembelajaran. Disiplin sebagai jalan belajar dan sopan santun menjadi kepribadian.</p>
-                    <v-btn color="primary" href="#motto">jelajah</v-btn>
-                </v-col>
-            </v-row>
-            <img src="/images/gunung.png" alt="" class="gunung" style="left:-200px; transform: translateX(0) scale(1);">
-            <img src="/images/pohon.png" alt="" class="pohon">
-            <img src="/images/skola1.png" alt="" class="kantor">
-            <img src="/images/siswa-l.png" alt="" class="siswa">
-            <img src="/images/siswi-p.png" alt="" class="siswi">
+        <v-container fill-height align-center justify-center v-if="!loaded" transition="fade-transition">
+            <svg width="170" height="150" viewBox="0 0 165 150" fill="none">
+                <path id="s"
+                    d="M87.2377 0.042572C68.3479 1.03368 50.5576 9.23143 37.5313 22.9472C24.505 36.6629 17.2349 54.852 17.2184 73.7678H47.0403C47.0506 62.7572 51.1821 52.1494 58.6216 44.0324C66.0612 35.9154 76.2697 30.8773 87.2377 29.9099V0.042572ZM17.2184 80.8104C17.2187 80.8177 17.2189 80.825 17.2192 80.8324C17.2119 87.5793 15.6556 94.2345 12.6702 100.285C9.68482 106.335 5.35005 111.62 0 115.73V149.578C13.8444 144.178 25.739 134.729 34.1309 122.465C42.5228 110.202 47.0219 95.6925 47.041 80.8324C47.0408 80.825 47.0405 80.8177 47.0403 80.8104H17.2184Z"
+                    fill="#707070" />
+                <path id="d"
+                    d="M94.9791 0V29.8951C105.953 30.8628 116.167 35.9059 123.608 44.0305C131.049 52.1552 135.176 62.7721 135.178 73.789C135.172 84.8033 131.043 95.4163 123.603 103.538C116.162 111.659 105.951 116.7 94.9791 117.667V147.535C113.873 146.544 131.666 138.343 144.694 124.623C157.721 110.903 164.989 92.7086 165 73.789C165 54.862 157.737 36.6566 144.709 22.9272C131.68 9.19782 113.88 0.991295 94.9791 0V0Z"
+                    fill="#707070" />
+                <path id="_1"
+                    d="M87.1971 73.6868L59.2711 74.0052L54.1528 98.2563C54.1494 98.397 54.2666 98.5118 54.4073 98.5108L59.0874 98.4774V139.778C67.8168 144.021 77.2964 146.503 86.9849 147.083V98.276L87.1971 73.6868Z"
+                    fill="#707070" />
+            </svg>
         </v-container>
-        <v-container
-            class="motto d-flex align-center justify-center"
-            id="motto"
-            
-            fluid
-        >
-            <!-- <div class="mottoText">
-                <h1>Mandita</h1>
-                <h3>( Mandiri, Disiplin, Bertakwa )</h3>
-            </div> -->
-            <div class="mottoImgHolder">
-                <!-- <img src="/images/pramuka.jpg" alt="Mandiri" class="pramuka mottoImg">
-                <img src="/images/upacara.jpg" alt="Mandiri" class="upacara mottoImg">
-                <img src="/images/ngaji.jpg" alt="Mandiri" class="ngaji mottoImg"> -->
-
-                <v-img src="/images/pramuka.jpg" width="100" class="d-flex align-end py-5" content-class="mottoImg">
-                    <h1 class="white--text darken-3" style="text-shadow: 0 0 5px rgba(0,0,00,9);">Mandiri</h1>
-                </v-img>
-                <v-img src="/images/upacara.jpg" width="100"  class="d-flex align-end py-5">
-                    <h1 class="white--text darken-3" style="text-shadow: 0 0 5px rgba(0,0,00,9);">Disiplin</h1>
-                </v-img>
-                <v-img src="/images/ngaji.jpg" width="100"  class="d-flex align-end py-5">
-                    <h1 class="white--text darken-3" style="text-shadow: 0 0 5px rgba(0,0,00,9);">Bertakwa</h1>
-                </v-img>
+        <v-container v-if="loaded" fluid fill-height align-center justify-center
+            style="background: #efefef;position:relative;padding:0;" transition="fade-transition">
+            <div id="btn-menu" @click="showMenu">
+                <span style="--i=2"></span>
+                <span style="--i=3"></span>
+                <span style="--i=1"></span>
             </div>
-            
-        </v-container>
-        <v-container
-            class="sambutan"
-            id="sambutan"
-            justify-center
-            align-center
-            fluid
-        >
-            <v-row style="background:transparent!important;">
-                <v-col class="d-flex justify-center">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/sxEZ4FPXyPk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </v-col>
-                <v-col>
-                    <v-card>
-                        <v-card-text>
-                            <v-card-title><h1>Sambutan Kepala Sekolah</h1></v-card-title>
-                            <v-container>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure ab vel placeat. Recusandae doloremque officiis quasi tempore sunt architecto. Expedita veritatis autem dolorum ab maxime quis in odit soluta nemo. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa doloribus ullam quasi corporis ducimus sed esse voluptatum eum magni fuga earum repellendus totam aperiam, architecto cumque, deserunt aliquid pariatur aspernatur.</p>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure ab vel placeat. Recusandae doloremque officiis quasi tempore sunt architecto. Expedita veritatis autem dolorum ab maxime quis in odit soluta nemo. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa doloribus ullam quasi corporis ducimus sed esse voluptatum eum magni fuga earum repellendus totam aperiam, architecto cumque, deserunt aliquid pariatur aspernatur.</p>
-                            </v-container>
-                            
-                        </v-card-text>
-                    </v-card>
-                    
-                </v-col>
-            </v-row>
-        </v-container>
-         <v-container
-            class="info"
-            id="info"
-            fluid
-        >
-            <img src="/images/matahari.png" alt="" class="mentari" style="position:absolute;">
-            <v-row class="d-flex" justify="center">
-                <v-text-field rounded color="primary" label="Cari Info" solo append-icon="mdi-magnify"></v-text-field>
-            </v-row>
-            <v-row>
+            <v-navigation-drawer v-model="menu" right width="100%" app fixed temporary>
                 
-                <v-col>
-                    <v-card>
-                        <v-card-title>
-                            Informasi Terbaru
-                        </v-card-title>
-                        <v-card-text>
-                            <Info />
-                        </v-card-text>
-                    </v-card>
-                </v-col>
-                <v-col></v-col>
-            </v-row>
-         </v-container>
-        <v-container
-            fluid
-            class="ppdb pa-0"
-            id="ppdb"
-        >
-            <v-row class="ma-5">
-                <v-col>
-                    <v-card>
-                        <v-card-text>
-                            <h1>Halo</h1>
-                        </v-card-text>
-                    </v-card>
-                </v-col>
-            </v-row>
+                <v-container id="menu-container"  fluid fill-height align-center justify-center>
+                    <ul id="main-menu">
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#profil">Profil</a></li>
+                        <li><a href="#info">Informasi</a></li>
+                        <li><a href="#galeri">Galeri</a></li>
+                        <li><a href="#kontak">Kontak</a></li>
+                    </ul>
+                </v-container>
+            </v-navigation-drawer>
+            <v-app-bar fixed color="transparent" flat>
+                <img src="/images/logo1.svg" alt="Logo" height="32px">
+                <v-toolbar-title class="grey--text mx-3">SD Negeri 1 Bedalisodo</v-toolbar-title>
+            </v-app-bar>
+            
+            
+            <v-container id="hero" fluid fill-height align-center justify-center>
+
+                <div class="hero-content ">
+                    <h1 class="hero-title">
+                        Man<span class="d-none d-sm-inline">dita<span class="dot">.</span></span>
+                        <span class="d-sm-none">
+                            <span><br />Di</span>
+                            <span><br />Ta<span class="dot">.</span></span>
+                        </span>
+                    </h1>
+                    <h3 class="hero-subtitle">Mandiri, Disiplin, Bertakwa</h3>
+                    <p class="mt-5 black--text">
+
+                    </p>
+                </div>
+
+                <a href="#profil" class="hero-scroll">
+                    <v-icon color="white">mdi-chevron-down</v-icon>
+                </a>
+            </v-container>
+            <v-container id="profil" fluid fill-height align-center justify-center>
+                <div class="profil-content text-center">
+                    <h1 class="profil-title">Profil</h1>
+                    <div class="box-container">
+                        <div class="visi-box box my-5 text-left">
+                            <h3>Visi</h3>
+                            <p>Terwujudnya Peserta Didik yang Mandiri dalam Kehidupan dan Disiplin dalam Pembelajaran yang
+                                Berdasarkan pada Ketakwaan Kepada Tuhan Yang Maha Esa.</p>
+                        </div>
+                        <div class="misi-box box my-5 text-left">
+                            <h3>Misi</h3>
+                            <ol>
+                                <li>Menumbuhkan Rasa Percaya Diri </li>
+                                <li>Menerapkan Pendidikan yang disiplin dalam berpakaian, bersikap dan bertutur</li>
+                                <li>Menumbuh kembangkan Keimanan dan ketakwaan Peserta Didik</li>
+                            </ol>
+                        </div>
+                        <div class="tujuan-box box my-5 text-left">
+                            <h3>Tujuan</h3>
+                            <ol>
+                                <li>Terselenggaranya pembelajaran yang merdeka</li>
+                                <li>Terselenggaranya pendidikan yang kondusif dan nyaman</li>
+                                <li>Terciptanya lingkungan pendidikan yang religius</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <img src="/images/logo-sd.svg" alt="Logo SD" class="logo-sd">
+                </div>
+            </v-container>
+            <v-container id="info" fluid>
+                <div class="info-content">
+                    <h1 class="info-content-title text-center black--text">INFORMASI</h1>
+                    <info />
+                </div>
+            </v-container>
+            <v-container id="galeri" fluid>
+                <div class="galeri-content">
+                    <h1 class="galeri-content-title text-center mt-2">GALERI</h1>
+                    <galeri />
+                </div>
+            </v-container>
+            <v-container id="kontak" fluid>
+                <div class="kontak-content">
+                    <h1 class="kontak-content-title text-center mt-2">KONTAK</h1>
+                    <!-- <galeri /> -->
+                </div>
+            </v-container>
         </v-container>
-        <v-btn fab dark small color="primary" style="position:fixed; bottom: 75px; right: 50px;z-index:3;opacity:0.1;" href="#" id="goUp">
-            <v-icon>mdi-arrow-up</v-icon>
-        </v-btn>
-        <v-dialog
-            v-model="kampanye.show"
-        >
-            <v-sheet flat>
-                <h1>{{kampanye.title}}</h1>
-            </v-sheet>
-        </v-dialog>
     </frontend>
 </template>
 <script>
-import Frontend from '@/js/Layouts/Frontend.vue'
-import Info from '@/js/Pages/Front/Components/Info'
+import Frontend from '../Layouts/Frontend'
+import Info from './Front/Components/Info'
+import Galeri from './Front/Components/Galeri'
 export default {
     name: 'Welcome',
-    components: { Frontend, Info },
-    data:()=>({
-        kampanye: {
-            show: false,
-            title: null,
-            content: null
-        }
+    components: { Frontend, Info, Galeri },
+    data: () => ({
+        loaded: false,
+        menu: false,
     }),
     methods: {
-        handleScroll() {
-            const mainTop = document.querySelector('.main-top')
-            let mentari = document.querySelector('.mentari')
-            let gunung = document.querySelector('.gunung')
-            let pohon = document.querySelector('.pohon')
-            let textContainer = document.querySelector('.textContainer')
-
-            let motto = document.querySelector('.motto')
-            let mottoImgs = document.getElementsByClassName('mottoImg')
-            let value = window.scrollY
-            if (value > 0 ) {
-                // gunung.style.transform = translateX(value * 0.25+'px')
-                gunung.style.transform = 'translateX('+(value*0.20)+'px)'
-                pohon.style.transform = 'translateX(-'+(value*0.25)+'px)'
-                mentari.style.transform = 'translateY('+(value*0.6)+'px)'
-                textContainer.style.transform = 'translateY('+(value*1.1)+'px)'
-
-                if (value > motto.offsetTop) {
-                //    for ( var i = 0; i < mottoImgs.length; i++) {
-                //         mottoImgs[i].classList.add('show')
-                    
-                //    }
-                document.querySelector('#goUp').style.opacity = '1'
-
-                //    setTimeout(function() {
-                //        let mottoText = document.querySelector('.mottoText')
-                //         mottoText.style.zIndex = '100!Important'
-                //         mottoText.style.position = 'absolute'
-                //    }, 500)
-                } else {
-                    document.querySelector('#goUp').style.opacity = '0.2'
-                }
-            // console.log(window.scrollY)
-            }
-            
-        }
-    },
-    computed: {
-        route(){
-            this.$page.props.route
+        showMenu() {
+            let menuContainer = document.querySelector('#menu-container')
+            let btnMenu = document.querySelector('#btn-menu')
+            btnMenu.classList.toggle('show')
+            menuContainer.classList.toggle('shown')
+            this.menu = !this.menu
         },
-        scroll() {
-            return window.scrollY
-        }
+        isLoading() {
+            let s = document.querySelector('#s')
+            let d = document.querySelector('#d')
+            let _1 = document.querySelector('#_1')
+
+            s.classList.add('loading')
+            d.classList.add('loading')
+            _1.classList.add('loading')
+
+            setTimeout(() => {
+                s.classList.remove('loading')
+                d.classList.remove('loading')
+                _1.classList.remove('loading')
+                this.loaded = true
+            }, 5000);
+        },
+        handleScroll() {
+            window.addEventListener("scroll", function () {
+                let gulir = window.scrollY
+                let btnMenu = document.querySelector('#btn-menu')
+                let hero = document.querySelector('#hero')
+                let profil = document.querySelector('#profil')
+                let info = document.querySelector('#info')
+                let galeri = document.querySelector('#galeri')
+                let kontak = document.querySelector('#kontak')
+                // Change btnMenu color based on fragment offset
+                let btnMenuBars = btnMenu.querySelectorAll('span')
+                if(gulir > 60) {
+                    let header = document.querySelector('header')
+                    header.classList.add('scrolled')
+                }
+                if (gulir >= profil.offsetTop) {
+                    btnMenuBars.forEach(bar => {
+                        bar.style.background = 'red'
+                    })
+                } else {
+                    btnMenuBars.forEach(bar => {
+                        bar.style.background = '#636363'
+                    })
+                }
+                // console.log(profil.offsetTop)
+            })
+        },
+    },
+    async mounted() {
+        
+        await this.$nextTick(function () {
+            this.isLoading()
+
+        })
+         
+        await this.handleScroll()
+
     },
     created() {
-        window.addEventListener('scroll', this.handleScroll)
        
-    },
-    mounted(){
-        // setTimeout(()=>{
-        //     this.kampanye = { show: true, title: 'PPDB'}
-        // }, 1000)
-        
     }
-
 }
 </script>
 
-<style scoped>
-    .main-top {
-        box-sizing: border-box;
-        /* padding-top: 65px;*/
-        margin-top: -65px;
-        background-image:  url('/images/langit.png');
-        background-size: cover;
-        background-attachment: fixed;
-        background-position: center;
-       
-        color: rgb(37, 34, 34);
-        background-blend-mode:exclusion;
-        overflow: hidden;
-        height: 100vh;
-        display: flex;
-        position: relative;
-    }
-    /* .main-top::before{
-        content: "";
-        margin-top: -50px;
-        background-image: linear-gradient(to top left, rgba(58, 83, 158, 0.487), rgba(230, 230, 46, 0.405));
-        width: 100%;
-        height: 100%;
-        position:absolute;
-        
+<style lang="sass">
+    @import url('https://fonts.googleapis.com/css2?family=Calistoga&display=swap')
+    #app > div > div > header
+        transition: all .35s linear
+    #app > div > div > header.scrolled
+        border-bottom: 1px solid white!important
+        background: #111919fa!important
+        transition: all .35s linear
+    #btn-menu
+        width: 50px
+        height: 50px
+        display: flex
+        flex-direction: column
+        align-content: center
+        justify-content: center
+        position: fixed
+        top: 5px
+        right: 20px
+        z-index: 10
+        :hover
+            cursor: pointer
+        span
+            height: 2px
+            width: 100%
+            background: #909090
+            margin-top: 5px 
+            margin-bottom: 3px 
+            transform-style: preserve-3d
+            transition: all .35s linear
+        span:nth-child(2)
+            width: 80%
+    #btn-menu.show
+        // border: 1px solid red
+        span:nth-child(1)
+            opacity: 0
+            transition: all .1s ease
+            transform: translateY(5px)
+        span:nth-child(2)
+            transform: rotateZ(45deg) translateX(25%)
+            width: 60%
+            height: 3px
+            background: red
+            transition: all .35s linear
+        span:nth-child(3)
+            transform: rotateZ(-45deg) translateX(25%)
+            width: 60%
+            height: 3px
+            background: red
+            transition: all .35s linear
+    #s, #d, #_1 
+        fill: transparent
     
-    } */
-    .main-top img {
-        position: absolute;
-    }
-    .main-top .gunung {
-        bottom: 0;
-        /* left:-100px; */
-        width: 75%;
-    }
+    #s.loading
+        animation: dims 3s infinite ease
+        animation-delay: 1s
 
-    .main-top .pohon {
-        right: -170px;
-        bottom: 0;
-    }
-    .main-top .kantor {
-        right: -170px;
-        bottom: 0;
-    }
-    .main-top .siswa {
-        right: 300px;
-        bottom: 0;
-    }
-    .main-top .siswi {
-        right:170px;
-        bottom: 0;
-    }
+    #d.loading
+        animation: dimd 2s infinite ease
+        animation-delay: 2s
+    
+    #_1.loading
+        animation: dim1 1s infinite ease
+        animation-delay: 3s
 
-    .info .mentari,
-    .main-top .mentari {
-        right: 400px;
-        top: 60px;
-        filter: drop-shadow(0 0 10px white);
-        animation: pulse 2s linear infinite;
-    }
+    #menu-container
+        z-index: 2
+        width: 100%
+        height: 100%
+        position: fixed
+        background: #3e3e3e
+        opacity: 0
+        ul#main-menu
+            list-style: none
+            li
+                margin: 10px 0
+                a
+                    display: block
+                    text-decoration: none
+                    color: #cfcfcf
+                    font-size: 2rem
+    #menu-container.shown
+        transition: all .35s linear
+        transform: translateX(0)
+        opacity: 1
+    #hero
+        background: url('/images/hero-bg-img.jpg')
+        background-attachment: fixed
+        background-size: cover
+        padding: 0!important
+        overflow: hidden
+        .hero-content
+            width: 100%
+            height: 100%
+            padding: 60px 20px
+            background-color: #111911f0
+            backdrop-filter: blur(5px)
+            -webkit-backdrop-filter: blur(5px)
+            color: #fff
+            // z-index:1
+            h1.hero-title
+                line-height: 90%
+                font-size: 5em
+                border: 3px solid #fff
+                width: 60%
+                padding: 1rem
+                margin-top: 50px
+                // color: #333
+                // font-family: 'Calistoga', cursive
+                font-weight: 800
+                z-index:2
+                .dot
+                    color: orange
+                    animation: dimdot 1s ease-in-out infinite
+            h3.hero-subtitle
+                // color: #333
+                z-index:2
+        a.hero-scroll
+            position: absolute
+            bottom: 20px
+            border: 1px solid #aaa
+            padding: 10px
+            text-decoration: none
+            border-radius: 50%   
+    #profil
+        background: url('/images/pramuka.jpg')
+        background-size: cover
+        background-position: center
+        background-attachment: fixed
+        // position: relative
+        min-height: 100vh
+        height: auto
+        // padding: 50!important
+        .profil-content
+            padding: 60px 20px
+            width: 100%
+            min-height: 80%
+            border-radius: 5px
+            box-shadow: 0 0 1px rgba(0,0,0,0.8)
+            background: rgba(255,255,255,0.8)
+            backdrop-filter: blur(5px)
+            margin: 20px 10px
+            box-sizing: border-box
+            .box-container
+                .box
+                    border: 2px solid #333
+                    padding: 20px
+                    box-sizing: border-box
+                    position: relative
+                    color: #333
+                    border-radius: 3px
+                    box-shadow: 0 0 1px rgba(0,0,0,0.7), inset 0 0 1px rgba(0,0,0,0.7)
+                    h3
+                        position: absolute
+                        top: -15px
+                        background: #363636
+                        padding: 0 10px
+                        border: 1px solid #efefef
+                        color: white
+            h1.profil-title
+                font-size: 2rem
+                text-transform: uppercase
+                color: #333
+                font-weight: 800
+                
+            img.logo-sd
+                -webkit-filter: drop-shadow(0 0 15px rgba(0,0,0,0.6))
+                width: 25%
+    #info
+        min-height: 120vh
+        background: #efefef
+        // padding-top: 60px
+        .info-content
+            // background: #aaa
+            padding: 40px 0
 
-    @keyframes pulse {
-        0% {
-            filter: drop-shadow(0 0 1px white);
-        }
+        // position: relative            
+    #galeri
+        min-height: 100vh
+        padding: 0
+        background: url('/images/upacara.jpg')
+        background-size: cover
+        background-attachment: fixed
+        .galeri-content
+            padding: 20px 20px
+            width: 100%
+            min-height: 100vh
+            background: rgba(30,30,70,0.6)
+            backdrop-filter: blur(5px)
+            h1
+                color: #fff
 
-        50% {
-            filter: drop-shadow(0 0 5px white);
-        }
-         50% {
-            filter: drop-shadow(0 0 10px white);
-        }
-        100% {
-            filter: drop-shadow(0 0 5px white);
-        }
-    }
-    .main-top h1 {
-        font-size: 3rem;
-         font-family: 'Caveat', cursive;
-    }
-    .main-top p {
-         font-family: 'Caveat', cursive;
-        font-size: 2em;
-    }
-    .main-top h1,
-    .main-top p {
-        text-shadow: 0 3px 15px rgba(0,0,0,0.9);
-    }
-    .motto {
-        /* overflow: hidden; */
-        /* background: url('/images/bg.jpg'); */
-        /* background-size: cover; */
-        position: relative;
-        height: 60vh;
-    }
-    .motto h1, .motto h3 {
-        font-family: 'Caveat', cursive;
-        text-align: center;
-    }
-    .motto h3 {
-        font-size: 3em;
-    }
-    .motto h1 {
-        font-size: 5em;
-    }
-    .motto .mottoImgHolder {
-        position: absolute;
-        display: flex;
-        width: 100%;
-        height: 100%;
-        
-    }
+    @keyframes dims
+        0%
+            fill: transparent
+        50%
+            fill: red
+            filter: drop-shadow(1px 1px 3px red)
+        100%
+            fill: transparent
+    
+    @keyframes dimd
+        0%
+            fill: transparent
+        50%
+            fill: blue
+            filter: drop-shadow(1px 1px 3px blue)
+        100%
+            fill: transparent
 
-    .motto .mottoImgHolder .v-image {
-        filter: saturate(.3) ;
-        transition: all .35s linear;
-    }
+    @keyframes dim1
+        0%
+            fill: transparent
+        50%
+            fill: green
+            filter: drop-shadow(1px 1px 3px green)
+        100%
+            fill: transparent
 
-    .motto .mottoImgHolder .v-image:hover {
-        filter: saturate(1) ;
-        transition: all .35s linear;
-        flex-grow: 4;
-        width: 100%;
-        background-position: left center;
-        /* transform: scale(1.3); */
-    }
-    .sambutan, .ppdb {
-        /* background-image: linear-gradient(to bottom right, rgb(192, 243, 255), rgb(130, 237, 243)); */
-        /* background-image: url('/images/asma2.png'); */
-        /* background-size: 100%; */
-        /* background: transparent!important; */
-        position: relative;
-        height: 100vh;
-        display: flex;
-    }
-    .sambutan iframe,.sambutan h1, .sambutan .v-card,
-    .ppdb iframe,.ppdb h1, .ppdb .v-card {
-        z-index: 2;
-    }
-    .sambutan h1, p {
-        font-family: 'Satisfy', cursive;
-    }
-    .ppdb::after,
-    .sambutan::after {
-        position: absolute;
-        content: "";
-        width: 100%;
-        height: 100%;
-        background-image: url('/images/asma2.png');
-        background-size: 100%;
-        z-index: 1;
-        filter: blur(2px);
-        background-attachment: fixed;
-    }
+    @keyframes dimdot
+        0%
+            color: transparent
+        75%
+            color: orange
+        100%
+            color: transparent
 
-    .info {
-        position: relative;
-        min-height: 100vh;
-        box-sizing: border-box;
-        padding: 100px;
-    }
-
-    .info .mentari {
-        opacity: 0.8;
-    }
+    @media screen and(min-width: 414px)
+        #hero
+            .hero-content
+                background: #000000de
+                display: flex
+                flex-direction: column
+                align-items: center
+                justify-content: center
+                h1.hero-title
+                    font-size: 15rem
+                    width: 75%
+                h3.hero-subtitle
+                    font-size: 3rem
+        #profil
+            .profil-content
+                .box-container
+                    display: flex
+                    justify-content: space-between
+                    .box
+                        margin: 20px
+                        width: 33%  
+                img.logo-sd
+                    width: 10%
 </style>

@@ -9,10 +9,10 @@
   {{-- <link href="{{ mix('css/app.css') }}" rel="stylesheet" /> --}}
   <link href="{{ mix('css/styles.css') }}" rel="stylesheet" />
 
-  <title>Materio – Free Vuetify Vuejs Laravel Admin Template</title>
+  <title>SD Negeri 1 Bedalisodo</title>
 
   <!-- Favicon -->
-  <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+  <link rel="shortcut icon" href="{{ asset('images/logo-new.svg') }}">
   <link rel="preconnect" href="https://fonts.gstatic.com" />
 
   <!-- Font -->

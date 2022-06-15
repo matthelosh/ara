@@ -1,9 +1,7 @@
 <template>
     <v-app class="main-front">
-        <navbar></navbar>
-        <v-main >
-            <slot />
-        </v-main>
+        <!-- <navbar></navbar> -->
+        <slot />
     </v-app>
 </template>
 
@@ -17,8 +15,9 @@ export default {
 
 <style>
     .main-front {
-       
-        background-size: 100%;
-        /* background: pink!important; */
+        min-height: 100vh;
+        height: 100vh;
+        position: relative;
+        background-color: aqua;
     }
 </style>

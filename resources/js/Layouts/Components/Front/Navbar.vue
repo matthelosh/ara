@@ -1,21 +1,5 @@
 <template>
     <div>
-        <v-app-bar app  elevate-on-scroll fixed dark 
-        >
-            <v-icon class="mx-2">mdi-leaf</v-icon>
-            <v-toolbar-title class="site-title">
-               Sdn1 Beda!
-            </v-toolbar-title>
-            
-            <v-spacer></v-spacer>
-            <v-btn text href="#">Beranda</v-btn>
-            <v-btn text href="#sambutan">Sambutan</v-btn>
-            <v-btn text href="#info">Info</v-btn>
-            <v-app-bar-nav-icon
-                @click="right=!right"
-            ></v-app-bar-nav-icon>
-
-        </v-app-bar>
         <v-navigation-drawer
             v-model="right"
             fixed
@@ -45,6 +29,7 @@
                 <v-list-item
                 v-for="item in items"
                 :key="item.title"
+                :href="item.url"
                 link
                 >
                 <v-list-item-icon>
@@ -57,6 +42,25 @@
                 </v-list-item>
             </v-list>
         </v-navigation-drawer>
+        <v-app-bar flat
+            style="border-bottom: 1px solid #333!important;"
+        >
+            <img src="/images/logo-new.svg" alt="Logo" height="38" />
+            <v-toolbar-title class="site-title mx-3">
+               SD NEGERI 1 BEDALISODO
+            </v-toolbar-title>
+            <v-spacer></v-spacer>
+            <span class="d-none d-sm-block">
+                <v-btn outlined class="mx-1" href="#hero">Beranda</v-btn>
+                <v-btn outlined class="mx-1" href="#profil">Sambutan</v-btn>
+                <v-btn outlined class="mx-1" href="#info">Info</v-btn>
+            </span>
+            <v-app-bar-nav-icon
+                @click="right=!right"
+            ></v-app-bar-nav-icon>
+
+        </v-app-bar>
+        
     </div>
 </template>
 <script>
@@ -65,8 +69,8 @@ export default {
     data: () => ({
         right: false,
         items: [
-          { title: 'Home', icon: 'mdi-view-dashboard' },
-          { title: 'About', icon: 'mdi-forum' },
+          { title: 'Home', icon: 'mdi-view-dashboard', url: '#' },
+          { title: 'About', icon: 'mdi-forum', url: '#profil' },
         ],
     }),
     methods: {
@@ -94,13 +98,18 @@ export default {
     html {
         scroll-behavior: smooth;
     }
+    /* .theme--light.v-app-bar.v-toolbar.v-sheet,
+    .theme--light.v-toolbar.v-sheet,
+    .theme--light.v-sheet,
     header.v-app-bar {
         background: transparent!important;
-    }
-    header.v-app-bar--is-scrolled {
+    } */
+    /* header.v-app-bar--is-scrolled {
         background: #283861!important;
-    }
+    } */
     .site-title {
-       font-family: 'Caveat', cursive;    
+       font-weight: 800;   
+       color: #363636;
+       font-size: 1.2em;
     }
 </style>

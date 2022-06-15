@@ -23,7 +23,8 @@
         "sass-loader": "^12.6.0",
         "vue-loader": "^15.9.8",
         "vue-template-compiler": "^2.6.14",
-        "webpack-dev-server": "^4.7.4"
+        "webpack-dev-server": "^4.7.4",
+        "@vue/runtime-dom": "latest"
     },
     "dependencies": {
         "@inertiajs/inertia": "^0.11.0",
