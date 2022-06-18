@@ -19,8 +19,12 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
+    
 });
-
+Route::prefix('info')->group(function() {
+    Route::get('/', [FrontController::class, 'index'])->name('info.index');
+    Route::get('/{slug}', [FrontController::class, 'read'])->name('info.read');
+});
 
 
 Route::get('/login', function(){

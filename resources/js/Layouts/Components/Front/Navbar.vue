@@ -112,4 +112,8 @@ export default {
        color: #363636;
        font-size: 1.2em;
     }
+    .site-title a {
+        color: teal;
+        text-decoration: none;
+    }
 </style>

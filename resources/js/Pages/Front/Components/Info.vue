@@ -6,20 +6,23 @@
                 <span class="meta">{{berita.created_at}} | {{berita.author}}</span>
                 <v-divider class="mt-1 mb-3"></v-divider>
                 <span v-html="berita.content.substr(0, 100)" class="d-none d-sm-flex black--text"></span>
-                <v-btn small outlined :ripple="true" plain block @click="view">Baca</v-btn>
+                <Link :href="'/info/'+berita.slug">Baca</Link>
             </div>
         </div>
     </v-container>
 </template>
 
 <script>
+import {Link} from '@inertiajs/inertia-vue'
 export default {
     name: 'Info',
+    components: {Link},
     data: () =>({
         beritas: [
             {
                 id: 1,
                 created_at: '12-07-2022',
+                slug: 'ini-judul',
                 author: 'Muhammad Soleh',
                 title: 'Pengukuhan Pengurus K3S dan KKG Tingkat Gugus 1',
                 content: '<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae.</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae.</p>'
@@ -27,6 +30,7 @@ export default {
             {
                 id: 2,
                 created_at: '12-07-2022',
+                slug: 'ini-judul',
                 author: 'Muhammad Soleh',
                 title: 'Prestes Seleksi PPG PAI Tahun 2022',
                 content: '<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae.</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae.</p>'
@@ -34,6 +38,7 @@ export default {
             {
                 id: 3,
                 created_at: '12-07-2022',
+                slug: 'ini-judul',
                 author: 'Muhammad Soleh',
                 title: 'Persiapan AKM 2022',
                 content: '<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae.</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae.</p>'
@@ -41,6 +46,7 @@ export default {
             {
                 id: 4,
                 created_at: '12-07-2022',
+                slug: 'ini-judul',
                 author: 'Muhammad Soleh',
                 title: 'Pelepasan Siswa 2021-2022',
                 content: '<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae.</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae.</p>'
@@ -48,6 +54,7 @@ export default {
             {
                 id: 4,
                 created_at: '12-07-2022',
+                slug: 'ini-judul',
                 author: 'Muhammad Soleh',
                 title: 'Pelepasan Siswa 2021-2022',
                 content: '<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae.</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae.</p>'
@@ -55,6 +62,7 @@ export default {
             {
                 id: 4,
                 created_at: '12-07-2022',
+                slug: 'ini-judul',
                 author: 'Muhammad Soleh',
                 title: 'Pelepasan Siswa 2021-2022',
                 content: '<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae.</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae.</p>'
@@ -62,6 +70,7 @@ export default {
             {
                 id: 4,
                 created_at: '12-07-2022',
+                slug: 'ini-judul',
                 author: 'Muhammad Soleh',
                 title: 'Pelepasan Siswa 2021-2022',
                 content: '<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae.</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae.</p>'
@@ -69,6 +78,7 @@ export default {
             {
                 id: 4,
                 created_at: '12-07-2022',
+                slug: 'ini-judul',
                 author: 'Muhammad Soleh',
                 title: 'Pelepasan Siswa 2021-2022',
                 content: '<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae.</p><p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam voluptates officiis ducimus, consequatur neque fugit porro nemo voluptate nam veniam voluptatem amet facere officia? Ad dolores nesciunt ipsam deleniti beatae.</p>'
@@ -76,12 +86,12 @@ export default {
         ]
     }),
     methods: {
-        view(e) {
-            let me = e.target
-            let myInfoCard = me.closest('.info-card')
-            myInfoCard.style.transform = 'translateX(-100%)'
-            myInfoCard.style.opacity = '0'
-        }
+        // view(e) {
+        //     let me = e.target
+        //     let myInfoCard = me.closest('.info-card')
+        //     myInfoCard.style.transform = 'translateX(-100%)'
+        //     myInfoCard.style.display = 'none'
+        // }
     }
 }
 </script>

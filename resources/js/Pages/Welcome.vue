@@ -15,7 +15,7 @@
         </v-container>
         <v-container v-if="loaded" fluid fill-height align-center justify-center
             style="background: #efefef;position:relative;padding:0;" transition="fade-transition">
-            <div id="btn-menu" @click="showMenu">
+            <!-- <div id="btn-menu" @click="showMenu">
                 <span style="--i=2"></span>
                 <span style="--i=3"></span>
                 <span style="--i=1"></span>
@@ -35,7 +35,7 @@
             <v-app-bar fixed color="transparent" flat>
                 <img src="/images/logo1.svg" alt="Logo" height="32px">
                 <v-toolbar-title class="grey--text mx-3">SD Negeri 1 Bedalisodo</v-toolbar-title>
-            </v-app-bar>
+            </v-app-bar> -->
             
             
             <v-container id="hero" fluid fill-height align-center justify-center>
@@ -93,8 +93,20 @@
                     <info />
                 </div>
             </v-container>
+            <v-container id="guru" fluid >
+                <div class="guru-content" >
+                    <h1 class="galeri-content-title text-center mt-2 black--text">DEWAN GURU</h1>
+                    <guru />
+                </div>
+            </v-container>
             <v-container id="galeri" fluid>
+                
                 <div class="galeri-content">
+                    <!-- <svg id="top-divider" width="100%" height="100%" viewBox="0 0 100 100">
+                        <polygon
+                            points="0,0 100,0 0, 40"
+                        ></polygon>
+                    </svg> -->
                     <h1 class="galeri-content-title text-center mt-2">GALERI</h1>
                     <galeri />
                 </div>
@@ -112,21 +124,22 @@
 import Frontend from '../Layouts/Frontend'
 import Info from './Front/Components/Info'
 import Galeri from './Front/Components/Galeri'
+import Guru from './Front/Components/Guru'
 export default {
     name: 'Welcome',
-    components: { Frontend, Info, Galeri },
+    components: { Frontend, Info, Galeri, Guru },
     data: () => ({
         loaded: false,
-        menu: false,
+        
     }),
     methods: {
-        showMenu() {
-            let menuContainer = document.querySelector('#menu-container')
-            let btnMenu = document.querySelector('#btn-menu')
-            btnMenu.classList.toggle('show')
-            menuContainer.classList.toggle('shown')
-            this.menu = !this.menu
-        },
+        // showMenu() {
+        //     let menuContainer = document.querySelector('#menu-container')
+        //     let btnMenu = document.querySelector('#btn-menu')
+        //     btnMenu.classList.toggle('show')
+        //     menuContainer.classList.toggle('shown')
+        //     this.menu = !this.menu
+        // },
         isLoading() {
             let s = document.querySelector('#s')
             let d = document.querySelector('#d')
@@ -141,32 +154,28 @@ export default {
                 d.classList.remove('loading')
                 _1.classList.remove('loading')
                 this.loaded = true
-            }, 5000);
+            }, 1000);
         },
         handleScroll() {
             window.addEventListener("scroll", function () {
                 let gulir = window.scrollY
-                let btnMenu = document.querySelector('#btn-menu')
                 let hero = document.querySelector('#hero')
                 let profil = document.querySelector('#profil')
                 let info = document.querySelector('#info')
                 let galeri = document.querySelector('#galeri')
                 let kontak = document.querySelector('#kontak')
                 // Change btnMenu color based on fragment offset
-                let btnMenuBars = btnMenu.querySelectorAll('span')
-                if(gulir > 60) {
-                    let header = document.querySelector('header')
-                    header.classList.add('scrolled')
-                }
-                if (gulir >= profil.offsetTop) {
-                    btnMenuBars.forEach(bar => {
-                        bar.style.background = 'red'
-                    })
-                } else {
-                    btnMenuBars.forEach(bar => {
-                        bar.style.background = '#636363'
-                    })
-                }
+                // let btnMenuBars = btnMenu.querySelectorAll('span')
+                
+                // if (gulir >= profil.offsetTop) {
+                //     btnMenuBars.forEach(bar => {
+                //         bar.style.background = 'red'
+                //     })
+                // } else {
+                //     btnMenuBars.forEach(bar => {
+                //         bar.style.background = '#636363'
+                //     })
+                // }
                 // console.log(profil.offsetTop)
             })
         },
@@ -189,53 +198,53 @@ export default {
 
 <style lang="sass">
     @import url('https://fonts.googleapis.com/css2?family=Calistoga&display=swap')
-    #app > div > div > header
-        transition: all .35s linear
-    #app > div > div > header.scrolled
-        border-bottom: 1px solid white!important
-        background: #111919fa!important
-        transition: all .35s linear
-    #btn-menu
-        width: 50px
-        height: 50px
-        display: flex
-        flex-direction: column
-        align-content: center
-        justify-content: center
-        position: fixed
-        top: 5px
-        right: 20px
-        z-index: 10
-        :hover
-            cursor: pointer
-        span
-            height: 2px
-            width: 100%
-            background: #909090
-            margin-top: 5px 
-            margin-bottom: 3px 
-            transform-style: preserve-3d
-            transition: all .35s linear
-        span:nth-child(2)
-            width: 80%
-    #btn-menu.show
-        // border: 1px solid red
-        span:nth-child(1)
-            opacity: 0
-            transition: all .1s ease
-            transform: translateY(5px)
-        span:nth-child(2)
-            transform: rotateZ(45deg) translateX(25%)
-            width: 60%
-            height: 3px
-            background: red
-            transition: all .35s linear
-        span:nth-child(3)
-            transform: rotateZ(-45deg) translateX(25%)
-            width: 60%
-            height: 3px
-            background: red
-            transition: all .35s linear
+    // #app > div > div > header
+    //     transition: all .35s linear
+    // #app > div > div > header.scrolled
+    //     border-bottom: 1px solid white!important
+    //     background: #111919fa!important
+    //     transition: all .35s linear
+    // #btn-menu
+    //     width: 50px
+    //     height: 50px
+    //     display: flex
+    //     flex-direction: column
+    //     align-content: center
+    //     justify-content: center
+    //     position: fixed
+    //     top: 5px
+    //     right: 20px
+    //     z-index: 10
+    //     :hover
+    //         cursor: pointer
+    //     span
+    //         height: 2px
+    //         width: 100%
+    //         background: #909090
+    //         margin-top: 5px 
+    //         margin-bottom: 3px 
+    //         transform-style: preserve-3d
+    //         transition: all .35s linear
+    //     span:nth-child(2)
+    //         width: 80%
+    // #btn-menu.show
+    //     // border: 1px solid red
+    //     span:nth-child(1)
+    //         opacity: 0
+    //         transition: all .1s ease
+    //         transform: translateY(5px)
+    //     span:nth-child(2)
+    //         transform: rotateZ(45deg) translateX(25%)
+    //         width: 60%
+    //         height: 3px
+    //         background: red
+    //         transition: all .35s linear
+    //     span:nth-child(3)
+    //         transform: rotateZ(-45deg) translateX(25%)
+    //         width: 60%
+    //         height: 3px
+    //         background: red
+    //         transition: all .35s linear
     #s, #d, #_1 
         fill: transparent
     
@@ -251,30 +260,32 @@ export default {
         animation: dim1 1s infinite ease
         animation-delay: 3s
 
-    #menu-container
-        z-index: 2
-        width: 100%
-        height: 100%
-        position: fixed
-        background: #3e3e3e
-        opacity: 0
-        ul#main-menu
-            list-style: none
-            li
-                margin: 10px 0
-                a
-                    display: block
-                    text-decoration: none
-                    color: #cfcfcf
-                    font-size: 2rem
-    #menu-container.shown
-        transition: all .35s linear
-        transform: translateX(0)
-        opacity: 1
+    // #menu-container
+    //     z-index: 2
+    //     width: 100%
+    //     height: 100%
+    //     position: fixed
+    //     background: #3e3e3e
+    //     opacity: 0
+    //     ul#main-menu
+    //         list-style: none
+    //         li
+    //             margin: 10px 0
+    //             a
+    //                 display: block
+    //                 text-decoration: none
+    //                 color: #cfcfcf
+    //                 font-size: 2rem
+    // #menu-container.shown
+    //     transition: all .35s linear
+    //     transform: translateX(0)
+    //     opacity: 1
     #hero
+        position: relative
         background: url('/images/hero-bg-img.jpg')
         background-attachment: fixed
         background-size: cover
+        height: 100vh
         padding: 0!important
         overflow: hidden
         .hero-content
@@ -309,17 +320,32 @@ export default {
             border: 1px solid #aaa
             padding: 10px
             text-decoration: none
-            border-radius: 50%   
-    #profil
+            border-radius: 50%  
+    #profil::before
+        content: ""
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
         background: url('/images/pramuka.jpg')
         background-size: cover
         background-position: center
         background-attachment: fixed
-        // position: relative
+        filter: invert(70%)
+    #profil
+        // background: url('/images/pramuka.jpg')
+        // background-size: cover
+        // background-position: center
+        // background-attachment: fixed
+        // backdrop-filter: saturate(0.1)
+        // -webkit-backdrop-filter: saturate(0, 1)
+        position: relative
         min-height: 100vh
         height: auto
         // padding: 50!important
         .profil-content
+            position: relative
             padding: 60px 20px
             width: 100%
             min-height: 80%
@@ -362,19 +388,34 @@ export default {
             // background: #aaa
             padding: 40px 0
 
-        // position: relative            
+        // position: relative     
+    #guru
+        min-height: 100vh
+        height: auto       
     #galeri
         min-height: 100vh
         padding: 0
         background: url('/images/upacara.jpg')
         background-size: cover
         background-attachment: fixed
+        position: relative
+        
         .galeri-content
             padding: 20px 20px
             width: 100%
             min-height: 100vh
             background: rgba(30,30,70,0.6)
             backdrop-filter: blur(5px)
+            svg
+                position: absolute
+                top: 0
+                left: 0
+                width: 100%
+                transform: translateX(-70%)
+                polygon
+                    fill: #eeeeee
+                    
+                    
             h1
                 color: #fff
 
