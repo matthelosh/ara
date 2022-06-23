@@ -8,15 +8,15 @@
         >
            <v-list-item>
                <span>
-                   <v-img src="/images/ara1.svg" max-height="50" max-width="50"></v-img>
+                   <v-img src="/images/logo-new.svg" height="40" width="40"></v-img>
                </span>
                <v-list-item-content>
                    <v-list-item-title>
-                       <h2 class="ml-2 purple--text darken-3" >A.R.A.</h2>
+                       <h2 class="ml-2 blue--text">Dashboard</h2>
                    </v-list-item-title>
                </v-list-item-content>
            </v-list-item>
-           <v-divider></v-divider>
+           <!-- <v-divider></v-divider> -->
            <side-menu class="my-3"></side-menu>
         </v-navigation-drawer>
         <v-app-bar app absolute flat >

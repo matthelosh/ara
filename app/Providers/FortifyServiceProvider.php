@@ -31,9 +31,9 @@ class FortifyServiceProvider extends ServiceProvider
             public function toResponse($request)
             {
                 // $user = Auth::user();
-                $periode = Periode::where('active', 1)->first();
+                // $periode = Periode::where('active', 1)->first();
                 // session()->put('user', $user);
-                session()->put('periode', $periode);
+                // session()->put('periode', $periode);
                 return response()->json(['success' => true, 'msg' => 'Login Sukses']);
             }
         });

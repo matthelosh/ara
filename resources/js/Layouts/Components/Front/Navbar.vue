@@ -1,64 +1,40 @@
 <template>
     <div>
-        <v-navigation-drawer
-            v-model="right"
-            fixed
-            temporary
-            color="pastel"
-            right
-            app
+       <div id="btn-menu" @click="showMenu">
+            <span style="--i=2"></span>
+            <span style="--i=3"></span>
+            <span style="--i=1"></span>
+        </div>
+        <v-navigation-drawer v-model="menu" right width="100%" app fixed temporary>
             
-        >
-            <v-list-item>
-                <v-list-item-icon>
-                <!-- <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img> -->
-                <v-icon>mdi-hamburger</v-icon>
-                </v-list-item-icon>
-
-                <v-list-item-content>
-                <v-list-item-title>Menu</v-list-item-title>
-                </v-list-item-content>
-                <v-list-item-action>
-                    <v-btn fab small @click="right = !right"><v-icon color="error"> mdi-close</v-icon>  </v-btn>
-                </v-list-item-action>
-            </v-list-item>
-
-            <v-divider></v-divider>
-
-            <v-list dense>
-                <v-list-item
-                v-for="item in items"
-                :key="item.title"
-                :href="item.url"
-                link
-                >
-                <v-list-item-icon>
-                    <v-icon>{{ item.icon }}</v-icon>
-                </v-list-item-icon>
-
-                <v-list-item-content>
-                    <v-list-item-title>{{ item.title }}</v-list-item-title>
-                </v-list-item-content>
-                </v-list-item>
-            </v-list>
+            <v-container id="menu-container"  fluid fill-height align-center justify-center>
+                <ul id="main-menu">
+                    <li><a href="/">Beranda</a></li>
+                    <li><a href="/profil">Profil</a></li>
+                    <li><a href="/info">Informasi</a></li>
+                    <li><a href="/galeri">Galeri</a></li>
+                    <li><a href="/kontak">Kontak</a></li>
+                </ul>
+            </v-container>
         </v-navigation-drawer>
-        <v-app-bar flat
-            style="border-bottom: 1px solid #333!important;"
-        >
-            <img src="/images/logo-new.svg" alt="Logo" height="38" />
-            <v-toolbar-title class="site-title mx-3">
-               SD NEGERI 1 BEDALISODO
+        <v-app-bar fixed color="transparent" flat>
+            <img src="/images/logo1.svg" alt="Logo" height="32px">
+            <v-toolbar-title class="grey--text mx-3 logo-title">
+                <a href="/" style="text-decoration: none; color: transparent;">
+                    <h1>SDN1</h1>
+                    <small>BEDALISODO</small>
+                </a>
             </v-toolbar-title>
+            <v-divider vertical class="d-none d-sm-inline mx-3" dark></v-divider>
+            <div class="address">
+                <p>Jl. Raya Sengon No. 293, Dalisodo</p>
+                <p>Kec. Wagir, Kab. Malang, Kode Pos: 65158</p>
+                <p><a href="mailto:info@sdn1-bedalisodo.sch.id">info@sdn1-bedalisodo.sch.id</a></p>
+            </div>
             <v-spacer></v-spacer>
-            <span class="d-none d-sm-block">
-                <v-btn outlined class="mx-1" href="#hero">Beranda</v-btn>
-                <v-btn outlined class="mx-1" href="#profil">Sambutan</v-btn>
-                <v-btn outlined class="mx-1" href="#info">Info</v-btn>
-            </span>
-            <v-app-bar-nav-icon
-                @click="right=!right"
-            ></v-app-bar-nav-icon>
-
+            <div class="campaign-top mr-16 d-none d-sm-inline">
+                <span class="error--text">INFO PPDB 2023</span>
+            </div>
         </v-app-bar>
         
     </div>
@@ -67,53 +43,139 @@
 export default {
     name: 'Navbar',
     data: () => ({
-        right: false,
-        items: [
-          { title: 'Home', icon: 'mdi-view-dashboard', url: '#' },
-          { title: 'About', icon: 'mdi-forum', url: '#profil' },
-        ],
+        menu: false,
     }),
     methods: {
-        // handleScroll() {
-
-        // }
-        goTo(divId) {
-            const el = document.querySelector(divId)
-            // window.scrollY = el.offsetTop
-            // alert(el.offsetTop)
-            // el.scrollIntoView({behavior: 'smooth'})
-            window.scrollTo({
-                top: el.offsetTop,
-                behavior: 'smooth'
+        showMenu() {
+            let menuContainer = document.querySelector('#menu-container')
+            let btnMenu = document.querySelector('#btn-menu')
+            btnMenu.classList.toggle('show')
+            menuContainer.classList.toggle('shown')
+            this.menu = !this.menu
+        },
+        handleScroll() {
+            window.addEventListener("scroll", function(){
+                let gulir = window.scrollY
+                let btnMenu = document.querySelector('#btn-menu')
+                if(gulir > 60) {
+                        let header = document.querySelector('header')
+                        header.classList.add('scrolled')
+                    }
             })
         }
     },
     created() {
-        // window.addEventListener('scroll', this.handleScroll)
+        this.handleScroll()
     }
 }
 </script>
 
-<style>
-    html {
-        scroll-behavior: smooth;
-    }
-    /* .theme--light.v-app-bar.v-toolbar.v-sheet,
-    .theme--light.v-toolbar.v-sheet,
-    .theme--light.v-sheet,
-    header.v-app-bar {
-        background: transparent!important;
-    } */
-    /* header.v-app-bar--is-scrolled {
-        background: #283861!important;
-    } */
-    .site-title {
-       font-weight: 800;   
-       color: #363636;
-       font-size: 1.2em;
-    }
-    .site-title a {
-        color: teal;
-        text-decoration: none;
-    }
+<style scoped lang="sass">
+    html 
+        scroll-behavior: smooth
+    .logo-title
+        background: url('/images/bg_logo.png')
+        background-size: contain
+        background-clip: text
+        padding-top: 15px
+        display: flex
+        flex-direction: column
+        align-items: center
+        h1
+            font-weight: 900
+            line-height: 50%
+            margin-bottom: -5px
+            padding: 0
+            font-style: italic
+            font-size: 1.3em
+            letter-spacing: .3rem
+        small
+            font-size: .8rem
+            letter-spacing: .1rem
+            margin: 0
+            padding: 0
+    .address
+        display: flex
+        flex-direction: column
+        padding: 5px
+        p
+            padding: 0
+            margin: 0  
+            line-height: 1.1em
+            font-size: .8rem
+            color: white   
+        a
+            color: teal!important
+            text-decoration: none 
+    #app > div > header
+        transition: all .35s linear
+    #app > div > header.scrolled,
+    header.v-app-bar--is-scrolled
+        border-bottom: 1px solid white!important
+        background: #111919fa!important
+        transition: all .2s linear
+    #btn-menu
+        width: 50px
+        height: 50px
+        display: flex
+        flex-direction: column
+        align-content: center
+        justify-content: center
+        position: fixed
+        top: 5px
+        right: 20px
+        z-index: 10
+        :hover
+            cursor: pointer
+        span
+            height: 2px
+            width: 100%
+            background: #909090
+            margin-top: 5px 
+            margin-bottom: 3px 
+            transform-style: preserve-3d
+            transition: all .35s linear
+        span:nth-child(2)
+            width: 80%
+    #btn-menu.show
+        // border: 1px solid red
+        span:nth-child(1)
+            opacity: 0
+            transition: all .1s ease
+            transform: translateY(5px)
+        span:nth-child(2)
+            transform: rotateZ(45deg) translateX(25%)
+            width: 60%
+            height: 3px
+            background: red
+            transition: all .35s linear
+        span:nth-child(3)
+            transform: rotateZ(-45deg) translateX(25%)
+            width: 60%
+            height: 3px
+            background: red
+            transition: all .35s linear
+    #menu-container
+        z-index: 2
+        width: 100%
+        height: 100%
+        position: fixed
+        background: #3e3e3e
+        opacity: 0
+        ul#main-menu
+            list-style: none
+            li
+                margin: 10px 0
+                a
+                    display: block
+                    text-decoration: none
+                    color: #cfcfcf
+                    font-size: 2rem
+    #menu-container.shown
+        transition: all .35s linear
+        transform: translateX(0)
+        opacity: 1
+@media screen and (max-width: 414px)
+        .address
+            display: none
 </style>

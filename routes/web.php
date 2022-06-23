@@ -17,13 +17,35 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome');
-    
+Route::get('/', [FrontController::class, 'index'])->name('welcome');
+Route::prefix('post')->group(function() {
+    Route::post('/', [PostController::class, 'index'])->name('post.index');
+});
+Route::prefix('berita')->group(function() {
+    Route::get('/', [FrontController::class, 'index'])->name('berita');
+    Route::post('/', [PostController::class, 'berita'])->name('berita.index');
+    Route::get('/{slug}', [FrontController::class, 'index'])->name('baca');
+    Route::post('/{slug}', [PostController::class, 'berita'])->name('baca.berita');
+});
+Route::prefix('pengumuman')->group(function() {
+    Route::get('/', [FrontController::class, 'index'])->name('pengumuman');
+    Route::post('/', [PostController::class, 'pengumuman'])->name('pengumuman.index');
+    Route::get('/{slug}', [FrontController::class, 'index'])->name('baca');
+    Route::post('/{slug}', [PostController::class, 'pengumuman'])->name('baca.pengumuman');
+    // Route::get('/{slug}', [FrontController::class, 'read'])->name('berita.read');
+});
+
+Route::prefix('profil')->group(function() {
+    Route::get('/', [FrontController::class, 'index'])->name('profil');
 });
 Route::prefix('info')->group(function() {
-    Route::get('/', [FrontController::class, 'index'])->name('info.index');
-    Route::get('/{slug}', [FrontController::class, 'read'])->name('info.read');
+    Route::get('/', [FrontController::class, 'index'])->name('info');
+});
+Route::prefix('galeri')->group(function() {
+    Route::get('/', [FrontController::class, 'index'])->name('galeri');
+});
+Route::prefix('ppdb')->group(function() {
+    Route::get('/', [FrontController::class, 'index'])->name('ppdb');
 });
 
 
