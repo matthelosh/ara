@@ -13,6 +13,6 @@ class DashController extends Controller
         $routeName = $request->route()->getName();
         $endPoint=explode('.', $routeName);
         $page = count($endPoint) > 1 ?ucfirst( $endPoint[0]) . '/' . ucfirst($endPoint[1]) : ucfirst($endPoint[0]);
-        return Inertia::render($page);
+        return Inertia::render($page, ['page_title' => $endPoint[1]]);
     }
 }

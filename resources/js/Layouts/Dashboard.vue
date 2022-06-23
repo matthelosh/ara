@@ -3,16 +3,18 @@
         <v-navigation-drawer 
             app 
             floating 
-            color="#f5f5f5"
+            color="#cfcfcf"
             v-model="sideMenu"
+
         >
+        <!-- #f5f5f5 Warna Backgroudn yang Asli -->
            <v-list-item>
                <span>
-                   <v-img src="/images/logo-new.svg" height="40" width="40"></v-img>
+                   <v-img src="/images/logo1.svg" width="38"></v-img>
                </span>
                <v-list-item-content>
                    <v-list-item-title>
-                       <h2 class="ml-2 blue--text">Dashboard</h2>
+                       <h2 class="ml-2 purple--text text-uppercase">Dashboard</h2>
                    </v-list-item-title>
                </v-list-item-content>
            </v-list-item>
@@ -23,7 +25,7 @@
             <v-app-bar-nav-icon
                 @click="sideMenu = !sideMenu"
             ></v-app-bar-nav-icon>
-            <v-toolbar-title>Halo</v-toolbar-title>
+            <v-toolbar-title>{{pageTitle}}</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-menu offset-y>
                 <template v-slot:activator="{on,attrs}">
@@ -102,7 +104,6 @@
                 </v-list>
             </v-menu>
         </v-app-bar>
-        
         <v-main>
             <slot />
         </v-main>
@@ -114,7 +115,7 @@ export default {
     name: 'Dashboard',
     components: { SideMenu },
     data: () => ({
-        title: 'Judul',
+        // title: 'Judul',
         sideMenu: true,
         // sideBar
     }),
@@ -129,12 +130,18 @@ export default {
         }
     },
     computed: {
-        side() {
-
+        pageTitle() {
+            let page_title = this.$page.props.page_title.split(" ")
+            let pageTitle =''
+            for(var i=0; i < page_title.length; i++) {
+                // pageTitle += page_title[i][0].toUpperCase()+page_title[i].shift
+                pageTitle += page_title[i][0].toUpperCase()+page_title[i].slice(1)+" "
+            }
+            return pageTitle
         }
     }, 
     created(){
-        document.querySelector('title').innerHTML = this.title
+        document.querySelector('title').innerHTML = this.pageTitle
     }
 }
 

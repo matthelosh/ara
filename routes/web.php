@@ -60,6 +60,33 @@ Route::middleware('auth')->group(function() {
     // Admin Route
     Route::prefix('admin')->group(function() {
         Route::get('/', [DashController::class, 'admin'])->name('admin.home');
+        Route::prefix('sekolah')->group(function() {
+            Route::get('/', [DashController::class, 'admin'])->name('admin.sekolah');
+        });
+        Route::prefix('guru')->group(function() {
+            Route::get('/', [DashController::class, 'admin'])->name('admin.guru');
+        });
+        Route::prefix('siswa')->group(function() {
+            Route::get('/', [DashController::class, 'admin'])->name('admin.siswa');
+        });
+        Route::prefix('rombel')->group(function() {
+            Route::get('/', [DashController::class, 'admin'])->name('admin.rombel');
+        });
+        Route::prefix('post')->group(function() {
+            Route::get('/', [DashController::class, 'admin'])->name('admin.post');
+        });
+        Route::prefix('agenda')->group(function() {
+            Route::get('/', [DashController::class, 'admin'])->name('admin.agenda');
+        });
+        Route::prefix('galeri')->group(function() {
+            Route::get('/', [DashController::class, 'admin'])->name('admin.galeri');
+        });
+        Route::prefix('video')->group(function() {
+            Route::get('/', [DashController::class, 'admin'])->name('admin.video');
+        });
+        Route::prefix('surat')->group(function() {
+            Route::get('/', [DashController::class, 'admin'])->name('admin.surat');
+        });
     });
 });
 

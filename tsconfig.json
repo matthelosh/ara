@@ -1,0 +1,6 @@
+{
+    "vueCompilerOptions": {
+    "allowJs": true,
+    "target": 2
+  }
+}

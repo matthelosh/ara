@@ -9,11 +9,9 @@
             
             <v-container id="menu-container"  fluid fill-height align-center justify-center>
                 <ul id="main-menu">
-                    <li><a href="/">Beranda</a></li>
-                    <li><a href="/profil">Profil</a></li>
-                    <li><a href="/info">Informasi</a></li>
-                    <li><a href="/galeri">Galeri</a></li>
-                    <li><a href="/kontak">Kontak</a></li>
+                    <li v-for="(page,i) in pages" :key="i">
+                        <a :href="page.url">{{page.label}}</a>
+                    </li>
                 </ul>
             </v-container>
         </v-navigation-drawer>
@@ -44,6 +42,32 @@ export default {
     name: 'Navbar',
     data: () => ({
         menu: false,
+        pages: [
+            {
+                label: 'Beranda',
+                url: '/'
+            },
+            {
+                label: 'Profil',
+                url: '/profil'
+            },
+            {
+                label: 'Pengumuman',
+                url: '/pengumuman'
+            },
+            {
+                label: 'Berita',
+                url: '/berita'
+            },
+            {
+                label: 'PPDB',
+                url: '/ppdb'
+            },
+            {
+                label: 'Login',
+                url: '/login'
+            },
+        ]
     }),
     methods: {
         showMenu() {
