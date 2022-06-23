@@ -74,6 +74,9 @@ Route::middleware('auth')->group(function() {
         });
         Route::prefix('post')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.post');
+            Route::post('/', [PostController::class, 'index'])->name('admin.post.index');
+            Route::post('/create', [PostController::class, 'store'])->name('admin.post.store');
+            Route::post('/upload-image', [PostController::class, 'uploadPostImage'])->name('admin.post.uploadImage');
         });
         Route::prefix('agenda')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.agenda');
@@ -86,6 +89,11 @@ Route::middleware('auth')->group(function() {
         });
         Route::prefix('surat')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.surat');
+        });
+
+        // Background Route
+        Route::prefix('category')->group(function() {
+            Route::post('/', [CategoryController::class, 'index'])->name('admin.category');
         });
     });
 });

@@ -13,11 +13,19 @@ const path = require('path')
  */
 
 mix
-    .webpackConfig({
-        resolve: { fallback: { os: false }},
+    .webpackConfig(webpack => {
+        return {
+            resolve: { fallback: { os: false }},
+            plugins: [
+                new webpack.ProvidePlugin({
+                    'window.Quill': 'quill',
+                    'Quill' : 'quill'
+                })
+            ]
         // node: {
         //     fs: "empty"
         //   }
+        }
     })
     .js('resources/js/app.js', 'public/js').vue()
     .sass('resources/sass/styles/styles.scss', 'public/css')
@@ -26,4 +34,5 @@ mix
     })
     .postCss('resources/css/app.css', 'public/css', [
         //
-    ]);
+    ])
+    .sourceMaps();

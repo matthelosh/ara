@@ -5,7 +5,11 @@ import Vue  from 'vue';
 // import { Ziggy } from './ziggy';
 
 import vuetify from './plugins/vuetify'
+// import { TiptapVuetifyPlugin} from 'tiptap-vuetify'
+// import 'tiptap-vuetify/dist/main.css'
 import { createInertiaApp, App, Link } from '@inertiajs/inertia-vue';
+
+
 Vue.prototype.$route = route()
 createInertiaApp({
     resolve: name => require(`./Pages/${name}`),
