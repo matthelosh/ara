@@ -20,7 +20,12 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'username',
         'password',
+        'userid',
+        'level',
+        'userable_id',
+        'userable_type'
     ];
 
     /**
@@ -41,4 +46,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'user_id', 'id');
+    }
+
+    public function userable()
+    {
+        return $this->morphTo();
+    }
+
+    public function guru()
+    {
+        return $this->belongsTo(Guru::class, 'user_id', 'nip');
+    }
+
+    public function siswa()
+    {
+        return $this->belongsTo(Siswa::class, 'user_id','nisn');
+    }
 }

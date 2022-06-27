@@ -23,6 +23,7 @@
                                                 outlined
                                                 class="my-2"
                                                 hide-details=""
+                                                dense
                                             ></v-text-field>
                                         </v-col>
                                         <v-col cols="12">
@@ -34,6 +35,7 @@
                                                 :type="showPassword ? 'text':'password'"
                                                 @click:append="togglePassword"
                                                 hide-details=""
+                                                dense
                                             ></v-text-field>
                                         </v-col>
                                         <!-- <v-col cols="12">

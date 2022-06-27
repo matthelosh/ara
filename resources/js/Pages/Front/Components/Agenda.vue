@@ -1,6 +1,5 @@
 <template>
     <v-row class="fill-height">
-        
       <v-col>
           <v-card>
               <v-card-text>
@@ -61,8 +60,8 @@
               <v-card-title><h3>{{selectedEvent.name}}</h3></v-card-title>
               <v-divider class="mb-3"></v-divider>
               <v-card-text>
-                <v-chip >Mulai: {{selectedEvent.start}}</v-chip> |
-                <v-chip >Selesai: {{selectedEvent.end}}</v-chip> <br>
+                Mulai: {{selectedEvent.start}} |
+                Selesai: {{selectedEvent.end}} <br>
                 <span v-html="selectedEvent.description"></span>
               </v-card-text>
               <v-card-actions>

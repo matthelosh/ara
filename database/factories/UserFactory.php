@@ -25,8 +25,10 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => Hash::make('12345'), // password
             'remember_token' => Str::random(10),
-            'role' => 'guru',
-
+            'level' => 'guru',
+            'userid' => $this->faker->userId(),
+            'userable_id' => random_int(1, 10),
+            'userable_type' => 'App\Models\Guru'
         ];
     }
 

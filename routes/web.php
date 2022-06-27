@@ -65,6 +65,10 @@ Route::middleware('auth')->group(function() {
         });
         Route::prefix('guru')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.guru');
+            Route::post('/', [GuruController::class, 'index'])->name('admin.guru.index');
+            Route::post('/import', [GuruController::class, 'import'])->name('admin.guru.import');
+            Route::post('/store', [GuruController::class, 'store'])->name('admin.guru.store');
+            Route::delete('/{id}', [GuruController::class, 'destroy'])->name('admin.guru.destroy');
         });
         Route::prefix('siswa')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.siswa');
@@ -77,6 +81,7 @@ Route::middleware('auth')->group(function() {
             Route::post('/', [PostController::class, 'index'])->name('admin.post.index');
             Route::post('/create', [PostController::class, 'store'])->name('admin.post.store');
             Route::post('/upload-image', [PostController::class, 'uploadPostImage'])->name('admin.post.uploadImage');
+            Route::delete('/{id}', [PostController::class, 'destroy'])->name('admin.post.destroy');
         });
         Route::prefix('agenda')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.agenda');

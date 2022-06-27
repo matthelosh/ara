@@ -28,47 +28,47 @@ export default {
             {
                 id: 1,
                 title: 'Gambar 1',
-                img: '/uploads/img/galeri/1.jpg'
+                img: '/storage/uploads/img/galeri/1.jpg'
             },
             {
                 id: 2,
                 title: 'Gambar 2',
-                img: '/uploads/img/galeri/2.jpg'
+                img: '/storage/uploads/img/galeri/2.jpg'
             },
             {
                 id: 3,
                 title: 'Gambar 3',
-                img: '/uploads/img/galeri/3.jpg'
+                img: '/storage/uploads/img/galeri/3.jpg'
             },
             {
                 id: 4,
                 title: 'Gambar 3',
-                img: '/uploads/img/galeri/4.jpg'
+                img: '/storage/uploads/img/galeri/4.jpg'
             },
             {
                 id: 5,
                 title: 'Gambar 3',
-                img: '/uploads/img/galeri/5.jpg'
+                img: '/storage/uploads/img/galeri/5.jpg'
             },
             {
                 id: 6,
                 title: 'Gambar 3',
-                img: '/uploads/img/galeri/6.jpg'
+                img: '/storage/uploads/img/galeri/6.jpg'
             },
             {
                 id: 7,
                 title: 'Gambar 3',
-                img: '/uploads/img/galeri/7.jpg'
+                img: '/storage/uploads/img/galeri/7.jpg'
             },
             {
                 id: 8,
                 title: 'Gambar 3',
-                img: '/uploads/img/galeri/8.jpg'
+                img: '/storage/uploads/img/galeri/8.jpg'
             },
             {
                 id: 9,
                 title: 'Gambar 3',
-                img: '/uploads/img/galeri/9.jpg'
+                img: '/storage/uploads/img/galeri/9.jpg'
             },
             
             

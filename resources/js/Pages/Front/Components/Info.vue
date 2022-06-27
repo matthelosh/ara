@@ -19,7 +19,7 @@
                             <template v-for="(notice, i) in notices" >
                                 <v-list-item :key="i">
                                     <v-list-item-avatar rounded>
-                                        <img :src="'/img/galeri/'+(i+1)+'.png'" alt="Gambar ">
+                                        <img :src="'/storage/img/galeri/'+(i+1)+'.png'" alt="Gambar ">
                                     </v-list-item-avatar>
                                     <v-list-item-content>
                                         <v-list-item-title class="text-wrap text-justify">

@@ -146,9 +146,16 @@ export default {
 }
 
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
     .circled {
         border-radius: 50%;
     }
-    
+    .bg-gradient-success {
+        background: linear-gradient(to right, rgb(49, 201, 68), rgb(117, 205, 173));
+        box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+    }
+    .bg-gradient-primary {
+        background: linear-gradient(to right, rgb(186, 49, 201), rgb(148, 117, 205));
+        box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+    }
 </style>

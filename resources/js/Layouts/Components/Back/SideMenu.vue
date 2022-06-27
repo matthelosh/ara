@@ -2,7 +2,7 @@
     <div>
         <v-row>
             <v-col class="d-flex justify-center">
-                <v-avatar size="150">
+                <v-avatar size="100">
                     <img src="/images/2.png" alt="Avatar">
                 </v-avatar>
             </v-col>
@@ -155,6 +155,40 @@ export default {
                 ]
             },
             {
+                url: '#',
+                icon: 'mdi-human-male-board',
+                label: 'Pembelajaran',
+                roles: ['admin','wali','guru'],
+                active: false,
+                children: [
+                    {
+                        url: '#',
+                        icon: 'mdi-bookshelf',
+                        label: 'Kurikulum',
+                        roles: ['admin','wali'],
+                        active: false,
+                        children: []
+                    },
+                    {
+                        url: '#',
+                        icon: 'mdi-human-male-board-poll',
+                        label: 'Proses',
+                        roles: ['admin','wali'],
+                        active: false,
+                        children: []
+                    },
+                    {
+                        url: '#',
+                        icon: 'mdi-chart-line',
+                        label: 'Evaluasi',
+                        roles: ['admin','wali'],
+                        active: false,
+                        children: []
+                    },
+                    
+                ]
+            },
+            {
                 url: '/admin/surat',
                 icon: 'mdi-email-variant',
                 label: 'Surat',
@@ -162,7 +196,24 @@ export default {
                 active: false,
                 children: []
             },
-
+            
+            {
+                url: '/admin/pengaturan',
+                icon: 'mdi-application-settings',
+                label: 'Pengaturan',
+                roles: ['admin','wali'],
+                active: false,
+                children: []
+            },
+            {
+                url: '/admin/alat',
+                icon: 'mdi-toolbox',
+                label: 'Peralatan',
+                roles: ['admin','wali'],
+                active: false,
+                children: []
+            },
+            
         ]
     }),
     methods: {
@@ -216,8 +267,5 @@ export default {
         background: #fff;
         width: 100%;
     }
-    .bg-gradient-primary {
-        background: linear-gradient(to right, rgb(186, 49, 201), rgb(148, 117, 205));
-        box-shadow: 0 5px 10px rgba(0,0,0,0.5);
-    }
+    
 </style>

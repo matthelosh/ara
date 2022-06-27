@@ -8,7 +8,7 @@
       <v-row>
           <v-col cols="12" sm="3" v-for="i in 11" :key="i" class="text-center d-flex justify-center" style="position:relative;">
             <div class="img-box" style="--clr: ">
-                <img :src="'/uploads/img/guru/'+i+'.png'" alt="Guru">
+                <img :src="'/storage/uploads/img/guru/'+i+'.png'" alt="Guru">
             </div>
             <div class="name-box">
                 <h4>Nama Guru</h4>
