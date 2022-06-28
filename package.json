@@ -38,6 +38,7 @@
         "quill-image-resize-module": "^3.0.0",
         "vue": "^2.6.14",
         "vue-apexcharts": "^1.6.2",
+        "vue-sweet-calendar": "^0.4.1",
         "vue-xlsx": "^0.2.1",
         "vue2-editor": "^2.10.3",
         "vuetify": "^2.6.4"

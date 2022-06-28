@@ -6,13 +6,13 @@
           </v-col>
       </v-row>
       <v-row>
-          <v-col cols="12" sm="3" v-for="i in 11" :key="i" class="text-center d-flex justify-center" style="position:relative;">
+          <v-col cols="12" sm="3" v-for="(guru,i) in gurus" :key="i" class="text-center d-flex justify-center" style="position:relative;">
             <div class="img-box" style="--clr: ">
-                <img :src="'/storage/uploads/img/guru/'+i+'.png'" alt="Guru">
+                <img :src="'/storage/uploads/img/guru/'+guru.nip+'.jpg'" alt="Guru">
             </div>
             <div class="name-box">
-                <h4>Nama Guru</h4>
-                <small>Jabatan</small>
+                <h5>{{guru.name}}</h5>
+                <small>{{guru.jabatan}}</small>
             </div>
           </v-col>
       </v-row>
@@ -22,10 +22,23 @@
 export default {
     name: 'Guru',
     data: () => ({
-        items: [
-
-        ]
-    })
+        gurus: []
+    }),
+    methods: {
+        getGurus() {
+            axios({
+                method: 'post',
+                url:'/guru'
+            }).then(res => {
+                this.gurus = res.data.gurus
+            }).cath(err => {
+                console.log(err)
+            })
+        }
+    },
+    mounted(){
+        this.getGurus()
+    }
 }
 </script>
 
@@ -57,7 +70,7 @@ export default {
     .name-box
         position: absolute
         text-align: center
-        width: 200px
+        width: auto
         padding: 10px
         box-sizing: border-box
         background: #fefefe
@@ -68,8 +81,8 @@ export default {
         border-radius: 25px
         font-weight: 600
         color: #333
-        h4
-            line-height: 10px
+        h5
+            line-height: 15px
         small
             line-height: 10px
             

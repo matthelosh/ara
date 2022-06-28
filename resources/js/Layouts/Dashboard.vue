@@ -26,6 +26,7 @@
                 @click="sideMenu = !sideMenu"
             ></v-app-bar-nav-icon>
             <v-toolbar-title>{{pageTitle}}</v-toolbar-title>
+            
             <v-spacer></v-spacer>
             <v-menu offset-y>
                 <template v-slot:activator="{on,attrs}">
@@ -37,7 +38,7 @@
                     </v-avatar>
                 </template>
                 <v-list dense>
-                    <v-list-item>
+                    <!-- <v-list-item>
                         <v-list-item-avatar>
                             <v-avatar>
                                 <img src="/images/1.png" alt="">
@@ -45,22 +46,25 @@
                         </v-list-item-avatar>
                         <v-list-item-content>
                             <v-list-item-title>
-                                {{ $page.props.user.name }}
+                                {{$page.props.user.userable.name}}
                             </v-list-item-title>
                             <v-list-item-subtitle>
-                                {{ $page.props.user.role }}
+                                {{ $page.props.user.level }}
                             </v-list-item-subtitle>
                         </v-list-item-content>
-                    </v-list-item>
+                    </v-list-item> -->
                     <v-divider class="my-3"></v-divider>
                     <v-list-item-group>
-                        <v-list-item @click="logout">
+                        <!-- <v-list-item @click="logout">
                             <v-list-item-icon>
                                 <v-icon>mdi-exit-to-app</v-icon>
                             </v-list-item-icon>
                             <v-list-item-content>
-                                <v-list-item-title>Logout</v-list-item-title>
+                                <v-list-item-title>Keluar</v-list-item-title>
                             </v-list-item-content>
+                        </v-list-item> -->
+                        <v-list-item>
+                            <v-list-item-content>TO DO</v-list-item-content>
                         </v-list-item>
                     </v-list-item-group>
                 </v-list>
@@ -83,10 +87,10 @@
                         </v-list-item-avatar>
                         <v-list-item-content>
                             <v-list-item-title>
-                                {{ $page.props.user.name }}
+                                {{ $page.props.user.userable.name }}
                             </v-list-item-title>
                             <v-list-item-subtitle>
-                                {{ $page.props.user.role }}
+                                {{ $page.props.user.level }}
                             </v-list-item-subtitle>
                         </v-list-item-content>
                     </v-list-item>

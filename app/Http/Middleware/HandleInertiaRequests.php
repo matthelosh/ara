@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Middleware;
+use App\Models\User;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -39,7 +40,18 @@ class HandleInertiaRequests extends Middleware
     {
         return array_merge(parent::share($request), [
             // 'periode' => session()->get('periode'),
-            'user' => Auth::user(),
+            'user' => Auth::user() ? $this->detail(Auth::user()) : null,
         ]);
+    }
+
+
+    public function detail($user)
+    {
+        // if ( $user->level == 'admin' || $user->level == 'guru') {
+        //     return User::where('id', $user->id)->with('userable')->first();
+        // } else {
+        //     return User::where('id', $user->id)->with('siswa')->first();
+        // }
+        return User::find($user->id)->with('userable')->first();
     }
 }

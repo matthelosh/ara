@@ -102,8 +102,19 @@ export default {
     }),
     mounted () {
     //   this.$refs.calendar
+      this.getEvents()
     },
     methods: {
+      getEvents() {
+          axios({
+          method: 'post',
+          url: '/agenda'
+        }).then(res => {
+          this.events = res.data.events
+        }).catch(err => {
+          console.log(err)
+        })
+      },
       closeEvent() {
         this.selectedOpen = false
         Object.assign(this.selectedEvent, {})

@@ -34,10 +34,17 @@ Route::prefix('pengumuman')->group(function() {
     Route::post('/{slug}', [PostController::class, 'pengumuman'])->name('baca.pengumuman');
     // Route::get('/{slug}', [FrontController::class, 'read'])->name('berita.read');
 });
-
+Route::prefix('agenda')->group(function() {
+    Route::post('/', [EventController::class, 'index'])->name('front.agenda');
+});
 Route::prefix('profil')->group(function() {
     Route::get('/', [FrontController::class, 'index'])->name('profil');
 });
+Route::prefix('guru')->group(function() {
+    Route::get('/', [FrontController::class, 'index'])->name('guru');
+    Route::post('/', [GuruController::class, 'index'])->name('front.guru.index');
+});
+
 Route::prefix('info')->group(function() {
     Route::get('/', [FrontController::class, 'index'])->name('info');
 });
@@ -73,6 +80,10 @@ Route::middleware('auth')->group(function() {
         Route::prefix('siswa')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.siswa');
         });
+        Route::prefix('user')->group(function() {
+            Route::post('/assign-account-guru', [UserController::class, 'assignAccountGuru'])->name('admin.user.asignaccount.guru');
+            Route::post('/assign-account-siswa', [UserController::class, 'assignAccountSiswa'])->name('admin.user.asignaccount.siswa');
+        });
         Route::prefix('rombel')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.rombel');
         });
@@ -85,6 +96,8 @@ Route::middleware('auth')->group(function() {
         });
         Route::prefix('agenda')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.agenda');
+            Route::post('/', [EventController::class, 'index'])->name('admin.event.index');
+            Route::post('/store', [EventController::class, 'store'])->name('admin.event.store');
         });
         Route::prefix('galeri')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.galeri');

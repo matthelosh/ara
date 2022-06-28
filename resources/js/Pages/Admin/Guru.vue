@@ -16,6 +16,9 @@
                                     show-select
                                     :loading="loading"
                                     dense
+                                    v-model="selected"
+                                    item-key="id"
+                                    @toggle-select-all="selectAllToggle"
                                 >
                                     <template v-slot:top>
                                         <v-row>
@@ -34,7 +37,9 @@
                                                     <span class="d-none d-sm-inline">Tambah Data Guru</span>
                                                 </v-btn>
                                                 <v-btn class="info"
-                                                    small rounded dark>
+                                                    small rounded dark
+                                                    @click="asignAccount"
+                                                >
                                                     <v-icon>mdi-account-multiple-check</v-icon>
                                                     <span class="d-none d-sm-inline">Buat Akun</span>
                                                 </v-btn>
@@ -53,10 +58,20 @@
                                             </v-col>
                                         </v-row>
                                     </template>
+                                    <template v-slot:item.data-table-select="{item, isSelected, select}">
+                                        <v-simple-checkbox
+                                            :value="isSelected"
+                                            :readonly="item.user ? true:false"
+                                            :disabled="item.user ? true:false"
+                                            @input="select($event)"
+                                        ></v-simple-checkbox>
+                                    </template>
                                     <template v-slot:item.name="{item}">
                                         <v-btn text class="primary" small @click="editGuru(item)">
-                                            {{item.name}}
+                                            {{item.user ? '@'+item.user.username:item.name}}
+
                                         </v-btn>
+
                                     </template>
                                     <template v-slot:item.ttl="{item}">
                                         {{item.tempat_lahir}}, {{item.tanggal_lahir}}
@@ -94,10 +109,10 @@ export default {
         loading: false,
         formGuru: false,
         search: '',
+        selected: [],
         selectedGuru: {},
         gurus: [],
         headers: [
-            { text: 'No', value: 'no' },
             { text: 'NIP', value: 'nip' },
             { text: 'Nama', value: 'name' },
             { text: 'Email', value: 'email' },
@@ -108,9 +123,35 @@ export default {
             { text: 'Status', value: 'is_active' },
             { text: 'Opsi', value: 'opsi' },
         ],
+        disabled: 0,
     }),
     methods: {
-        onClosedForm(){
+        selectAllToggle(props) {
+            if ( this.selected.length != props.items.length - this.disabled) {
+                this.selected = []
+                const self = this
+                props.items.forEach(item => {
+                    if (item.user)  self.selected.push(item)
+                })
+            } else {
+                this.selected = []
+            }
+        },
+        asignAccount() {
+            let selected = this.selected
+            this.loading = true
+            axios({
+                method: 'post',
+                url: '/admin/user/assign-account-guru',
+                data: selected
+            }).then(res => {
+                this.loading = false
+                this.selected = []
+                this.disabled = 0
+                this.getGurus()
+            })
+        },
+        onClosedForm() {
             this.formGuru = false
             this.selectedGuru = {}
         },
@@ -140,9 +181,8 @@ export default {
                 method: 'post',
                 url: '/admin/guru'
             }).then(res => {
-                // let gurus = []
-                res.data.gurus.forEach((guru, index) => {
-                    guru.no = index+1
+                res.data.gurus.forEach(item => {
+                    if (item.user ) this.disabled += 1
                 })
                 this.gurus = res.data.gurus
                 this.loading = false
