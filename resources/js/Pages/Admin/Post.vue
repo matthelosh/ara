@@ -1,5 +1,5 @@
 <template>
-    <dash-layout>
+    <div>
         <v-container>
             <v-row>
                 <v-col>
@@ -66,7 +66,7 @@
         <v-snackbar v-model="snackbar.show" :color="snackbar.color">
             {{snackbar.text}}
         </v-snackbar>
-    </dash-layout>
+    </div>
 </template>
 
 <script>
@@ -77,6 +77,7 @@ import ConfirmDialog from '@/js/Pages/Admin/Components/ConfirmDialog'
 export default {
     name: 'Admin.Post',
     components: {DashLayout, PostEditor, Link, ConfirmDialog},
+    layout: [DashLayout],
     data: () => ({
         editor: {show: false},
         posts: [],

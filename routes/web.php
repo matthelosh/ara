@@ -18,6 +18,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', [FrontController::class, 'index'])->name('welcome');
+// Route::get('/tes', [FrontController::class, 'index'])->name('tes');
 Route::prefix('post')->group(function() {
     Route::post('/', [PostController::class, 'index'])->name('post.index');
 });
@@ -103,6 +104,8 @@ Route::middleware('auth')->group(function() {
         Route::prefix('galeri')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.galeri');
             Route::post('/', [GaleriController::class, 'index'])->name('admin.galeri.index');
+            Route::post('/add-image', [GaleriController::class, 'addImage'])->name('admin.galeri.add-image');
+            Route::post('/add-album', [GaleriController::class, 'addAlbum'])->name('admin.galeri.add-album');
         });
         Route::prefix('video')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.video');

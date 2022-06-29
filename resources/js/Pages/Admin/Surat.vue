@@ -1,5 +1,5 @@
 <template>
-    <dash-layout>
+    <div>
         <v-container>
             <v-row>
                 <v-col>
@@ -11,7 +11,7 @@
                 </v-col>
             </v-row>
         </v-container>
-    </dash-layout>
+    </div>
 </template>
 
 <script>
@@ -19,6 +19,7 @@ import DashLayout from '@/js/Layouts/Dashboard'
 
 export default {
     name: 'Admin.Surat',
-    components: {DashLayout}
+    components: {DashLayout},
+    layout: [DashLayout],
 }
 </script>

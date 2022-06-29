@@ -1,5 +1,5 @@
 <template>
-    <dash-layout>
+    <div>
         <v-container>
             <v-row>
                 <v-col cols="6" sm="3">
@@ -101,7 +101,7 @@
                 </v-col>
             </v-row>
         </v-container>
-    </dash-layout>
+    </div>
 </template>
 
 <script>
@@ -110,7 +110,8 @@ import DonutChart from '@/js/Pages/Admin/Components/DonutChart'
 import BarChart from '@/js/Pages/Admin/Components/BarChart'
 export default {
     name: 'Admin.Home',
-    components: {DashLayout, DonutChart, BarChart}
+    components: {DashLayout, DonutChart, BarChart},
+    layout: [DashLayout],
 }
 </script>
 

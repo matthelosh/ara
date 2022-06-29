@@ -1,5 +1,5 @@
 <template>
-    <dash-layout>
+    <div>
         <v-container>
             <v-row>
                 <v-col cols="12">
@@ -95,7 +95,7 @@
             </v-row>
         </v-container>
         <confirm-dialog ref="confirm" />
-    </dash-layout>
+    </div>
 </template>
 
 <script>
@@ -105,6 +105,7 @@ import ConfirmDialog from '@/js/Pages/Admin/Components/ConfirmDialog'
 export default {
     name: 'Admin.Guru',
     components: {DashLayout, FormGuru, ConfirmDialog},
+    layout: [DashLayout],
     data: () => ({
         loading: false,
         formGuru: false,
