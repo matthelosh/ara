@@ -4,12 +4,12 @@
             <v-col style="position:relative;">
                 <div class="image-gallery">
                     <div class="image-box" v-for="foto in fotos" :key="foto.id">
-                        <img :src="foto.img" alt="Foto">
+                        <img :src="foto.url" alt="Foto">
                         <div class="overlay">
                             <div class="details">
                                 <h3 class="title"><a href="#">{{foto.title}}</a></h3>
                                 <span class="category">
-                                    <a href="#">Kategori</a>
+                                    <a href="#">{{foto.album.name}}</a>
                                 </span>
                             </div>
                             
@@ -24,56 +24,21 @@
 <script>
 export default {
     data: () => ({
-        fotos: [
-            {
-                id: 1,
-                title: 'Gambar 1',
-                img: '/storage/uploads/img/galeri/1.jpg'
-            },
-            {
-                id: 2,
-                title: 'Gambar 2',
-                img: '/storage/uploads/img/galeri/2.jpg'
-            },
-            {
-                id: 3,
-                title: 'Gambar 3',
-                img: '/storage/uploads/img/galeri/3.jpg'
-            },
-            {
-                id: 4,
-                title: 'Gambar 3',
-                img: '/storage/uploads/img/galeri/4.jpg'
-            },
-            {
-                id: 5,
-                title: 'Gambar 3',
-                img: '/storage/uploads/img/galeri/5.jpg'
-            },
-            {
-                id: 6,
-                title: 'Gambar 3',
-                img: '/storage/uploads/img/galeri/6.jpg'
-            },
-            {
-                id: 7,
-                title: 'Gambar 3',
-                img: '/storage/uploads/img/galeri/7.jpg'
-            },
-            {
-                id: 8,
-                title: 'Gambar 3',
-                img: '/storage/uploads/img/galeri/8.jpg'
-            },
-            {
-                id: 9,
-                title: 'Gambar 3',
-                img: '/storage/uploads/img/galeri/9.jpg'
-            },
-            
-            
-        ]
-    })
+        fotos: []
+    }),
+    methods: {
+        getAlbums() {
+            axios({
+                method: 'post',
+                url: '/galeri?from=front'
+            }).then( res => {
+                this.fotos = res.data.albums.slice(0,20)
+            })
+        }
+    },
+    mounted() {
+        this.getAlbums()
+    }
 }
 </script>
 
@@ -128,10 +93,10 @@ export default {
     }
 
     .image-gallery .image-box:hover .overlay{
-        top: 20px;
-        right: 20px;
-        bottom: 20px;
-        left: 20px;
+        top: 10px;
+        right: 10px;
+        bottom: 10px;
+        left: 10px;
         opacity: 1;
         border: 3px solid black
     }
@@ -142,6 +107,7 @@ export default {
 
     .image-gallery .image-box .details .title {
         /* margin-bottom: 5px; */
+        line-height: .7em;
         font-size: 24px;
         font-weight: 600;
         position: relative;
@@ -152,6 +118,7 @@ export default {
     }
 
     .image-gallery .image-box .details .category {
+        line-height: .3em;
         font-size: 14px;
         font-weight: 400;
         position: relative;
@@ -174,12 +141,14 @@ export default {
         opacity: 1;
         visibility: visible;
         transition: all .3s .2s ease;
+        line-height: .6em!important;
     }
 
     .image-gallery .image-box .details .title a,
     .image-gallery .image-box .details .category a {
         color: #222;
         text-decoration: none;
+        line-height: .6em!important;
     }
 
     @media(max-width: 768px) {

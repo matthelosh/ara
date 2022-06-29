@@ -157,22 +157,22 @@ export default {
             {
                 url: '#',
                 icon: 'mdi-human-male-board',
-                label: 'Pembelajaran',
+                label: 'Administrasi',
                 roles: ['admin','wali','guru'],
                 active: false,
                 children: [
                     {
                         url: '#',
                         icon: 'mdi-bookshelf',
-                        label: 'Kurikulum',
+                        label: 'Buku Induk',
                         roles: ['admin','wali'],
                         active: false,
                         children: []
                     },
                     {
                         url: '#',
-                        icon: 'mdi-human-male-board-poll',
-                        label: 'Proses',
+                        icon: 'mdi-notebook-edit',
+                        label: 'Jurnal',
                         roles: ['admin','wali'],
                         active: false,
                         children: []
@@ -180,7 +180,7 @@ export default {
                     {
                         url: '#',
                         icon: 'mdi-chart-line',
-                        label: 'Evaluasi',
+                        label: 'Rapor',
                         roles: ['admin','wali'],
                         active: false,
                         children: []

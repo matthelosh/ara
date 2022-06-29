@@ -51,6 +51,7 @@ Route::prefix('info')->group(function() {
 });
 Route::prefix('galeri')->group(function() {
     Route::get('/', [FrontController::class, 'index'])->name('galeri');
+    Route::post('/', [GaleriController::class, 'index'])->name('galeri.index');
     
 });
 Route::prefix('ppdb')->group(function() {
