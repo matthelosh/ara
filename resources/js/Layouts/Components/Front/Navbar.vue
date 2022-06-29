@@ -29,10 +29,11 @@
                 <p>Kec. Wagir, Kab. Malang, Kode Pos: 65158</p>
                 <p><a href="mailto:info@sdn1-bedalisodo.sch.id">info@sdn1-bedalisodo.sch.id</a></p>
             </div>
-            <v-spacer></v-spacer>
-            <div class="campaign-top mr-16 d-none d-sm-inline">
-                <span class="error--text">INFO PPDB 2023</span>
+            <div class="campaign-top ml-16 d-none d-sm-inline">
+                <v-btn class="error--text">INFO PPDB 2023</v-btn>
             </div>
+            <v-spacer></v-spacer>
+            
         </v-app-bar>
         
     </div>

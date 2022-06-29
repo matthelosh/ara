@@ -2,7 +2,7 @@
     <div>
         <v-row>
             <v-col class="d-flex justify-center">
-                <v-avatar size="100">
+                <v-avatar size="100" class="elevation-4">
                     <img src="/images/2.png" alt="Avatar">
                 </v-avatar>
             </v-col>

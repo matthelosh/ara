@@ -50,6 +50,7 @@ Route::prefix('info')->group(function() {
 });
 Route::prefix('galeri')->group(function() {
     Route::get('/', [FrontController::class, 'index'])->name('galeri');
+    
 });
 Route::prefix('ppdb')->group(function() {
     Route::get('/', [FrontController::class, 'index'])->name('ppdb');
@@ -101,6 +102,7 @@ Route::middleware('auth')->group(function() {
         });
         Route::prefix('galeri')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.galeri');
+            Route::post('/', [GaleriController::class, 'index'])->name('admin.galeri.index');
         });
         Route::prefix('video')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.video');

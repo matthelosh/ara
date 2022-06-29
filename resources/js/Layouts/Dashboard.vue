@@ -154,12 +154,36 @@ export default {
     .circled {
         border-radius: 50%;
     }
-    .bg-gradient-success {
-        background: linear-gradient(to right, rgb(49, 201, 68), rgb(117, 205, 173));
+    .bg-gradient-error {
+        background: linear-gradient(to right, rgb(255, 50, 50), rgb(200, 50, 173));
         box-shadow: 0 5px 10px rgba(0,0,0,0.5);
     }
+    .bg-gradient-warning {
+        background: linear-gradient(to right, rgb(255, 208, 50), rgb(255, 150, 203));
+        box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+    }
+    
+    .bg-gradient-info {
+        background: linear-gradient(to right, rgb(59, 198, 250), rgb(117, 205, 173));
+        box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+    }
+    
+    .bg-gradient-success {
+        background: linear-gradient(to right, rgb(49, 201, 68), rgb(117, 205, 203));
+        box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+    }
+    
     .bg-gradient-primary {
         background: linear-gradient(to right, rgb(186, 49, 201), rgb(148, 117, 205));
+        box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+    }
+    .bg-gradient-primary-light {
+        background: linear-gradient(to right, rgb(250, 240, 255), rgb(255, 230, 250));
+        // box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+    }
+    
+    .bg-gradient-secondary {
+        background: linear-gradient(to right, rgb(148, 117, 205), rgb(186, 49, 201));
         box-shadow: 0 5px 10px rgba(0,0,0,0.5);
     }
 </style>

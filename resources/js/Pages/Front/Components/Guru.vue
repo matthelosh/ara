@@ -8,7 +8,7 @@
       <v-row>
           <v-col cols="12" sm="3" v-for="(guru,i) in gurus" :key="i" class="text-center d-flex justify-center" style="position:relative;">
             <div class="img-box" style="--clr: ">
-                <img :src="'/storage/uploads/img/guru/'+guru.nip+'.jpg'" alt="Guru">
+                <img :src="'/storage/uploads/img/guru/'+guru.nip+'.jpg'" alt="Guru" @error="onImgError($event,guru)">
             </div>
             <div class="name-box">
                 <h5>{{guru.name}}</h5>
@@ -31,9 +31,15 @@ export default {
                 url:'/guru'
             }).then(res => {
                 this.gurus = res.data.gurus
-            }).cath(err => {
+            }).catch(err => {
                 console.log(err)
             })
+        },
+        onImgError($event, guru) {
+            let defaultImg = guru.jk == 'Laki-laki' ? '/images/1.png' : '/images/2.png'
+            $event.target.src = defaultImg
+
+            // console.log(e)
         }
     },
     mounted(){

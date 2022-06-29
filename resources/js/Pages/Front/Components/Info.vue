@@ -9,13 +9,13 @@
                             PENGUMUMAN
                         </h3>
                         <v-spacer></v-spacer>
-                        <Link href="/pengumuman">
+                        <Link href="/pengumuman" v-if="notices.length > 0">
                             <small class="font-weight-light text-body-2">Lihat Semua</small>
                         </Link>
                     </v-card-title>
                     <v-card-text>
                         <v-divider class="mt-3"></v-divider>
-                        <v-list three-line>
+                        <v-list three-line v-if="notices.length > 0">
                             <template v-for="(notice, i) in notices" >
                                 <v-list-item :key="i">
                                     <v-list-item-avatar rounded>
@@ -30,6 +30,13 @@
                                 </v-list-item>
                             </template>
                         </v-list>
+                        <v-list v-else>
+                            <v-list-item>
+                                <v-list-item-content>
+                                    <v-list-item-title>Belum Ada Pengumuman</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
+                        </v-list>
                     </v-card-text>
                 </v-card>
                 <Agenda class="mt-1" />
@@ -41,18 +48,21 @@
                         <v-card-title>
                             <h3><v-icon large>mdi-newspaper</v-icon> BERITA TERBARU</h3>
                             <v-spacer></v-spacer>
-                            <Link href="/berita">
+                            <Link href="/berita" v-if="notices.length > 0">
                                 <small class="font-weight-light text-body-2">Lihat Semua</small>
                             </Link>
                         </v-card-title>
                     </v-card>
-                    <div class="info-card" v-for="berita in beritas">
+                    <div class="info-card" v-for="berita in beritas" v-if="beritas.length > 0">
                         <h1><Link :href="'/berita/'+berita.slug">{{berita.title}}</Link></h1>
                         <span class="meta">{{ tanggal(berita.created_at) }} | {{berita.author?berita.author.name : 'Anonim'}} | {{berita.category.name}}</span>
                         <v-divider class="mt-1 mb-3"></v-divider>
                         <span v-html="berita.content.substr(0, 100)" class="d-none d-sm-flex black--text"></span>
                         <Link :href="'/berita/'+berita.slug">Baca</Link>
                     </div>
+                    <v-alert>
+                        Belum Ada Berita
+                    </v-alert>
                 </div>
             </v-col>
         </v-row>
