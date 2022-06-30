@@ -102,7 +102,7 @@ class PostController extends Controller
                     'content' => $request->content,
                     'user_id' => $request->author_id,
                     'category_id' => $request->category_id,
-                    'featuredImage' => $imagePath ? $imagePath.$imageName : null,
+                    'featuredImage' => $featuredImage ? $imagePath.$imageName : null,
                 ]
                 );
                 return response()->json(['success' => true, 'msg' => 'Tulisan Disimpan'], 200);

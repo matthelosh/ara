@@ -101,7 +101,7 @@ export default {
         async deletePost(post){
             // this.confirm = true
             let text = `Klik Lanjut untuk menghapus postingan ${post.title}, Klik Batal untuk Kembali`
-            await this.$refs.confirm.open(`Hapus ${post.title}`, `${text}`).then(res => {
+            if(await this.$refs.confirm.open(`Hapus ${post.title}`, `${text}`)) {
                 axios({
                     method: 'delete',
                     url: '/admin/post/'+post.id,
@@ -113,9 +113,7 @@ export default {
                     this.snackbar = { show: true, text: err.response.data.msg, color: 'error'},
                     this.getPosts()
                 })
-            }).catch(err => {
-                console.log(err)
-            })
+            }
         },
         getPosts() {
             this.tableLoading = true

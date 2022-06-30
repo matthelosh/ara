@@ -117,6 +117,7 @@
 import SideMenu from './Components/Back/SideMenu.vue'
 export default {
     name: 'Dashboard',
+    props: {page_title: String},
     components: { SideMenu },
     data: () => ({
         // title: 'Judul',

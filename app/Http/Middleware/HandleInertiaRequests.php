@@ -41,6 +41,7 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             // 'periode' => session()->get('periode'),
             'user' => Auth::user() ? $this->detail(Auth::user()) : null,
+            'sekolah' => 'App\Models\Sekolah'::first(),
         ]);
     }
 

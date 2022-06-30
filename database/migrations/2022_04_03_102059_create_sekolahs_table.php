@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('sekolahs', function (Blueprint $table) {
             $table->id();
-            $table->uuid('sekolah_id');
+            $table->strin('ks', 40);
             $table->string('nama', 100);
             $table->string('nss', 30);
             $table->string('npsn', 10);
