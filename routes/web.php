@@ -72,6 +72,9 @@ Route::middleware('auth')->group(function() {
         Route::get('/', [DashController::class, 'admin'])->name('admin.home');
         Route::prefix('sekolah')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.sekolah');
+            Route::post('/logo/store', [SekolahController::class, 'storeLogo'])->name('admin.sekolah.logo.store');
+            Route::put('/', [SekolahController::class, 'update'])->name('admin.sekolah.update');
+            Route::put('/{id}', [SekolahController::class, 'changeKepsek'])->name('admin.sekolah.change-kepsek');
         });
         Route::prefix('guru')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.guru');
@@ -101,6 +104,7 @@ Route::middleware('auth')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.agenda');
             Route::post('/', [EventController::class, 'index'])->name('admin.event.index');
             Route::post('/store', [EventController::class, 'store'])->name('admin.event.store');
+            Route::delete('/{id}', [EventController::class, 'destroy'])->name('admin.event.destroy');
         });
         Route::prefix('galeri')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.galeri');

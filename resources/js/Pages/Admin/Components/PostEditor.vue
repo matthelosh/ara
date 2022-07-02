@@ -63,9 +63,9 @@
 <script>
 import {Link} from '@inertiajs/inertia-vue'
 import { VueEditor, Quill } from 'vue2-editor'
-  import { ImageDrop } from 'quill-image-drop-module'
-  import ImageResize from 'quill-image-resize-module'
-  import htmlEditButton from 'quill-html-edit-button'
+import { ImageDrop } from 'quill-image-drop-module'
+import ImageResize from 'quill-image-resize-module'
+import htmlEditButton from 'quill-html-edit-button'
 
   Quill.register('modules/imageDrop', ImageDrop)
   Quill.register('modules/imageResize', ImageResize)

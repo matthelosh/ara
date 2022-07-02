@@ -88,8 +88,13 @@ class EventController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Event $event)
+    public function destroy(Event $event, $id)
     {
-        //
+        try {
+            $event->findOrFail($id)->delete();
+            return response()->json(['success' => true, 'msg' => 'Agenda Dihapus'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'msg' => $e->getMessage()], 500);   
+        }
     }
 }

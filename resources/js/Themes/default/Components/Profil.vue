@@ -9,22 +9,14 @@
                             <h1 class="text-center text-h4 font-weight-black">VISI</h1>
                             <p class="text-center">
                                 <v-icon>mdi-format-quote-open</v-icon>
-                                Mewujudkan Peserta Didik yang Mandiri dalam Berkarya, Disiplin dalam Hidup yang Berdasarkan pada Ketakwaan Kepada Tuhan Yang Maha Esa
+                                {{$page.props.sekolah.visi}}
                                 <v-icon>mdi-format-quote-close</v-icon>
                             </p>
                         </article>
                         <article>
                             <h1 class="text-center text-h4 font-weight-black">MISI</h1>
                             <p class="ml-10">
-                                Untuk mewujudkan visi tersebut, SD Negeri 1 Bedalisodo menjalankan misi:
-                                <ol>
-                                    <li>Menyelenggarakan pendidikan kecakapan hidup sesuai lokalitas peserta didik.</li>
-                                    <li>Memberikan pengajaran tentang gotong royong dan kerukunan.</li>
-                                    <li>Membiasakan peserta didik untuk hidup disiplin di sekolah.</li>
-                                    <li>Membiasakan peserta didik untuk menjaga lingkungan kelas dan sekolah.</li>
-                                    <li>Memberikan pembelajaran tentang merawat tanaman di lingkungan sekolah.</li>
-                                    <li>Memberikan pembelajaran keagamaan dan spiritual</li>
-                                </ol>
+                                <span v-html="$page.props.sekolah.misi"></span>
                             </p>
                         </article>
 

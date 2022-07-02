@@ -86,7 +86,19 @@
 		                      :type="type"
 		                      @click:event="showEvent"
 		                      @click:date="viewDate"
-		                      ></v-calendar>
+		                      @mouseenter:event=""
+		                      >
+		                      	<template v-slot:event="{event}" >
+		                      		<v-row >
+		                      			<v-col class="d-flex justify-between">
+		                      				<v-btn x-small icon @click.stop="deleteEvent(event)" color="white">
+			                      				<v-icon x-small>mdi-close</v-icon>
+			                      			</v-btn>
+				                      		{{event.name}}
+			                      		</v-col>
+		                      		</v-row>
+		                      	</template>
+		                      </v-calendar>
 		                  </v-sheet>
 						</v-card-text>
 					</v-card>
@@ -185,6 +197,16 @@ export default {
 		loading: false,
 	}),
 	methods: {
+		deleteEvent(event) {
+			axios({
+				method: 'delete',
+				url: '/admin/agenda/'+event.id
+			}).then(res => {
+				this.getEvents()
+			}).catch(err => {
+				console.log(err)
+			})
+		},
 		getEvents(){
 			axios({
 				method: 'post',
