@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[562],{562:(t,e,n)=>{n.r(e),n.d(e,{default:()=>a});const a=(0,n(1900).Z)({},(function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("v-app",{attrs:{dark:""}},[n("v-container",{attrs:{"fill-height":"","align-center":"","justify-center":""}},[n("h1",{staticClass:"text-h1"},[t._v("Ini Area Terlarang")])])],1)}),[],!1,null,null,null).exports}}]);
+//# sourceMappingURL=562.js.map
