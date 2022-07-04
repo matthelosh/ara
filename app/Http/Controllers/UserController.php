@@ -47,7 +47,7 @@ class UserController extends Controller
                 $email = explode('@', $input['email']);
                 User::updateOrCreate(
                     [
-                        'userid' => $input['nip'] ?? $input['nisn'],
+                        'userid' => $input['nip'],
                         'level' => 'guru',
                         'userable_id' => $input['id'],
                         'userable_type' => 'App\Models\Guru'
@@ -64,6 +64,31 @@ class UserController extends Controller
             return response()->json(['success' => false, 'msg' => $e->getMessage()], 500);
         }
     }
+    public function assignAccountSiswa(Request $request)
+        {
+            try {
+                foreach($request->all() as $input)
+                {
+                    $email = explode('@', $input['email']);
+                    User::updateOrCreate(
+                        [
+                            'userid' => $input['nisn'],
+                            'level' => 'siswa',
+                            'userable_id' => $input['id'],
+                            'userable_type' => 'App\Models\Siswa'
+                        ],[
+                            'username' => $email[0],
+                            'password' => Hash::make('12345'),
+                            'email' => $input['email'],
+                        ]
+                        
+                    );
+                }
+                return response()->json(['success' => true, 'msg' => 'Akun guru diaktifkan dengan password default 12345.'], 200);
+            } catch (\Exception $e) {
+                return response()->json(['success' => false, 'msg' => $e->getMessage()], 500);
+            }
+        }
 
     /**
      * Display the specified resource.

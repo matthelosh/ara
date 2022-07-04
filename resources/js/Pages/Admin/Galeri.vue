@@ -104,8 +104,7 @@
 import DashLayout from '@/js/Layouts/Dashboard'
 export default {
 	name: 'AdminGaleri',
-	layout: [DashLayout],
-	components: { DashLayout },
+	layout: DashLayout,
 	data: () => ({
 		albums: [],
 		dialogAlbum: false,

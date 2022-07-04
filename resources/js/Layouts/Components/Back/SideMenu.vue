@@ -72,7 +72,7 @@ export default {
                 url: '/admin',
                 icon: 'mdi-monitor-dashboard',
                 label: 'Dashboard',
-                roles: ['admin','wali','mapel','siswa'],
+                roles: ['admin','guru','mapel','siswa'],
                 active: false,
                 children: []
             },
@@ -192,7 +192,7 @@ export default {
                 url: '/admin/surat',
                 icon: 'mdi-email-variant',
                 label: 'Surat',
-                roles: ['admin','wali'],
+                roles: ['admin'],
                 active: false,
                 children: []
             },
@@ -201,7 +201,7 @@ export default {
                 url: '/admin/pengaturan',
                 icon: 'mdi-application-settings',
                 label: 'Pengaturan',
-                roles: ['admin','wali'],
+                roles: ['admin'],
                 active: false,
                 children: []
             },
@@ -209,7 +209,7 @@ export default {
                 url: '/admin/alat',
                 icon: 'mdi-toolbox',
                 label: 'Peralatan',
-                roles: ['admin','wali'],
+                roles: ['admin'],
                 active: false,
                 children: []
             },
@@ -226,7 +226,8 @@ export default {
             let currentPath = window.location.pathname
             let menus = []
             this.menus.forEach(menu => {
-                if(menu.children.length < 1) {
+                if (menu.roles.includes(this.$page.props.user.level)) {
+                if(menu.children.length < 1 ) {
                     if(menu.url == currentPath) {
                         menu.active = true
                         menus.push(menu)
@@ -252,7 +253,7 @@ export default {
                     menu.active = menu.children.some(child => child.active === true)
                     menus.push(menu)
                 }
-                
+                }
             })
             return menus
             // return currentPath

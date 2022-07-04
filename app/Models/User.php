@@ -65,4 +65,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Siswa::class, 'user_id','nisn');
     }
+
+    public function videos()
+    {
+        return $this->hasMany(Video::class, 'user_id', 'nip');
+    }
 }

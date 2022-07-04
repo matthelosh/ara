@@ -12,7 +12,7 @@
 	import DashLayout from '@/js/Layouts/Dashboard'
 	export default {
 		name: 'NotFound',
-		layout: [DashLayout],
+		layout: DashLayout,
 
 	}
 </script>

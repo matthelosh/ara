@@ -19,6 +19,7 @@ createInertiaApp({
         if(name.startsWith('Front/')) {
             let path = name.split('/')
             return import(`./Themes/${path[1]}/Pages/${path[2]}`)
+            // return import(`./Themes/${path[1]}/Pages/Index`)
         } else {
             return import(`./Pages/${name}`).then(module => {
                 return module ? module : import('./Pages/NotFound')

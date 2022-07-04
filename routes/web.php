@@ -28,6 +28,9 @@ Route::prefix('pengumuman')->group(function() {
 Route::prefix('agenda')->group(function() {
     Route::post('/', [EventController::class, 'index'])->name('front.agenda');
 });
+Route::prefix('video')->group(function() {
+    Route::post('/', [VideoController::class, 'index'])->name('front.video');
+});
 Route::prefix('profil')->group(function() {
     Route::get('/', [FrontController::class, 'index'])->name('profil');
 });
@@ -60,27 +63,29 @@ Route::middleware('auth')->group(function() {
     // Admin Route
     Route::prefix('admin')->group(function() {
         Route::get('/', [DashController::class, 'admin'])->name('admin.home');
-        Route::prefix('sekolah')->group(function() {
+        Route::prefix('sekolah')->middleware('role:admin')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.sekolah');
             Route::post('/logo/store', [SekolahController::class, 'storeLogo'])->name('admin.sekolah.logo.store');
             Route::put('/', [SekolahController::class, 'update'])->name('admin.sekolah.update');
             Route::put('/{id}', [SekolahController::class, 'changeKepsek'])->name('admin.sekolah.change-kepsek');
         });
-        Route::prefix('guru')->group(function() {
+        Route::prefix('guru')->middleware('role:admin')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.guru');
             Route::post('/', [GuruController::class, 'index'])->name('admin.guru.index');
             Route::post('/import', [GuruController::class, 'import'])->name('admin.guru.import');
             Route::post('/store', [GuruController::class, 'store'])->name('admin.guru.store');
             Route::delete('/{id}', [GuruController::class, 'destroy'])->name('admin.guru.destroy');
         });
-        Route::prefix('siswa')->group(function() {
+        Route::prefix('siswa')->middleware('role:admin')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.siswa');
+            Route::post('/', [SiswaController::class, 'index'])->name('admin.siswa.index');
+            Route::post('/store', [SiswaController::class, 'store'])->name('admin.siswa.store');
         });
-        Route::prefix('user')->group(function() {
+        Route::prefix('user')->middleware('role:admin')->group(function() {
             Route::post('/assign-account-guru', [UserController::class, 'assignAccountGuru'])->name('admin.user.asignaccount.guru');
             Route::post('/assign-account-siswa', [UserController::class, 'assignAccountSiswa'])->name('admin.user.asignaccount.siswa');
         });
-        Route::prefix('rombel')->group(function() {
+        Route::prefix('rombel')->middleware('role:admin')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.rombel');
         });
         Route::prefix('post')->group(function() {
@@ -105,7 +110,7 @@ Route::middleware('auth')->group(function() {
         Route::prefix('video')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.video');
         });
-        Route::prefix('surat')->group(function() {
+        Route::prefix('surat')->middleware('role:admin')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.surat');
         });
 
@@ -117,5 +122,7 @@ Route::middleware('auth')->group(function() {
 });
 
 Route::group(['prefix' => 'error'], function() {
-    Route::get('403', [ErrorController::class, 'index'])->name('error.403');
+    Route::get('403', function() {
+        return Inertia::render('Errors/403');
+    })->name('error.403');
 });

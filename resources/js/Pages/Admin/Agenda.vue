@@ -161,8 +161,8 @@ import {Calendar} from 'vue-sweet-calendar'
 import 'vue-sweet-calendar/dist/SweetCalendar.css'
 export default {
 	name: 'AdminAgenda',
-	components: {DashLayout, Calendar},
-	layout: [DashLayout],
+	components: {Calendar},
+	layout: DashLayout,
 	data: () => ({
 		colors: [
 			'primary','warning','info', 'success','error','teal', '#363636', '#9a9a9a'

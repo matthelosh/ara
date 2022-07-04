@@ -104,8 +104,8 @@ import FormGuru from '@/js/Pages/Admin/Components/FormGuru'
 import ConfirmDialog from '@/js/Pages/Admin/Components/ConfirmDialog'
 export default {
     name: 'Admin.Guru',
-    components: {DashLayout, FormGuru, ConfirmDialog},
-    layout: [DashLayout],
+    components: {FormGuru, ConfirmDialog},
+    layout: DashLayout,
     data: () => ({
         loading: false,
         formGuru: false,

@@ -110,8 +110,8 @@ import DonutChart from '@/js/Pages/Admin/Components/DonutChart'
 import BarChart from '@/js/Pages/Admin/Components/BarChart'
 export default {
     name: 'Admin.Home',
-    components: {DashLayout, DonutChart, BarChart},
-    layout: [DashLayout],
+    components: {DonutChart, BarChart},
+    layout: DashLayout,
 }
 </script>
 

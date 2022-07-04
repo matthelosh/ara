@@ -76,8 +76,8 @@ import PostEditor from '@/js/Pages/Admin/Components/PostEditor'
 import ConfirmDialog from '@/js/Pages/Admin/Components/ConfirmDialog'
 export default {
     name: 'Admin.Post',
-    components: {DashLayout, PostEditor, Link, ConfirmDialog},
-    layout: [DashLayout],
+    components: {PostEditor, Link, ConfirmDialog},
+    layout: DashLayout,
     data: () => ({
         editor: {show: false},
         posts: [],
@@ -87,7 +87,7 @@ export default {
             {text: 'No', value: 'no' },
             {text: 'Judul', value: 'title'},
             {text: 'Kategori', value: 'category.name'},
-            {text: 'Penulis', value: 'author.name'},
+            {text: 'Penulis', value: 'author.username'},
             {text: 'Lainnya', value: 'misc'},
             {text: 'Opsi', value: 'opsi'},
         ],

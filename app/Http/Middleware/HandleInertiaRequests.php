@@ -40,8 +40,9 @@ class HandleInertiaRequests extends Middleware
     {
         return array_merge(parent::share($request), [
             // 'periode' => session()->get('periode'),
-            'user' => Auth::user() ? $this->detail(Auth::user()) : null,
+            'user' => $request->user() ? $this->detail($request->user()) : null,
             'sekolah' => 'App\Models\Sekolah'::with('kepsek')->first(),
+            'periode' => 'App\Models\Periode'::where('is_active',1)->first(),
         ]);
     }
 
@@ -53,6 +54,7 @@ class HandleInertiaRequests extends Middleware
         // } else {
         //     return User::where('id', $user->id)->with('siswa')->first();
         // }
-        return User::find($user->id)->with('userable')->first();
+        return User::where('id', $user->id)->with('userable')->first();
+        // return $user;
     }
 }

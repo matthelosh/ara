@@ -19,7 +19,6 @@ import DashLayout from '@/js/Layouts/Dashboard'
 
 export default {
     name: 'Admin.Surat',
-    components: {DashLayout},
-    layout: [DashLayout],
+    layout: DashLayout,
 }
 </script>

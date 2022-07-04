@@ -14,7 +14,7 @@ class FrontController extends Controller
         $routeName = $request->route()->getName();
         $endPoint=explode('.', $routeName);
         $page = count($endPoint) > 1 ? ucfirst( $endPoint[0]) . '/' . ucfirst($endPoint[1]) : ucfirst($endPoint[0]);
-        return Inertia::render('Front/'.$theme->name.'/'.$page);
+        return Inertia::render('Front/'.$theme->name.'/'.$page, ['page' => $page]);
         // return $theme->name.'/'.$page;
     }
 }

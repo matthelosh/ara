@@ -11,7 +11,6 @@
                             <v-btn color="bg-gradient-primary" dark @click="saveSekolah">Simpan</v-btn>
                         </v-toolbar>
                         <v-card-text>
-                            
                             <v-container>
                                 <v-row>
                                     <v-col cols="12" sm="6">
@@ -112,7 +111,6 @@
                                         </v-card>
                                     </v-col>
                                     <v-col cols="12" sm="6">
-                                        
                                         <v-card v-if="sekolah">
                                             <v-card-title>Visi Misi Sekolah</v-card-title>
                                             <v-card-text class="text-center">
@@ -146,8 +144,8 @@ import DashLayout from '@/js/Layouts/Dashboard'
 import { VueEditor, Quill } from 'vue2-editor'
 export default {
     name: 'Sekolah',
-    layout: [DashLayout],
-    components: {DashLayout, VueEditor},
+    layout: DashLayout,
+    components: {VueEditor},
     data: () => ({
         snackbar: { show: false, },
         sekolah: null,

@@ -33,7 +33,7 @@ class PostController extends Controller
                 $posts = Post::where('category_id', 4)->orderBy('created_at','DESC')->get();
                 return response()->json(['success' => true, 'posts' => $posts], 200);
             } else {
-                $post = Post::where('category_id', 4)->where('slug', $slug)->first();
+                $post = Post::where('category_id', 4)->where('slug', $slug)->with('author.userable')->first();
                 return response()->json(['success' => true, 'post' => $post], 200);
             }
 
@@ -50,7 +50,7 @@ class PostController extends Controller
                 $posts = Post::where('category_id', '!=', 4)->orderBy('created_at','DESC')->get();
                 return response()->json(['success' => true, 'posts' => $posts], 200);
             } else {
-                $post = Post::where('category_id', '!=', 4)->where('slug', $slug)->first();
+                $post = Post::where('category_id', '!=', 4)->where('slug', $slug)->with('author.userable')->first();
                 return response()->json(['success' => true, 'post' => $post], 200);
             }
 
