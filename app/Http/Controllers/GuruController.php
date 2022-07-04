@@ -100,7 +100,9 @@ class GuruController extends Controller
         try {
             // $guru->user->delete();
             $guru = $guru->find($id);
-            $guru->user->delete();
+            // dd($guru->user);
+            if($guru->user) $guru->user->delete();
+            
             $guru->delete();
 
             return response()->json(['success' => true, 'msg' => 'Hapus Guru Sukses'], 200);
