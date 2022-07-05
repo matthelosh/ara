@@ -187,4 +187,9 @@ export default {
         background: linear-gradient(to right, rgb(148, 117, 205), rgb(186, 49, 201));
         box-shadow: 0 5px 10px rgba(0,0,0,0.5);
     }
+
+    .v-data-table::v-deep td {
+        font-size: .7rem!important;
+        color: #333!important;
+    }
 </style>

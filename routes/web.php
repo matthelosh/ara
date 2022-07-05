@@ -87,6 +87,8 @@ Route::middleware('auth')->group(function() {
         });
         Route::prefix('rombel')->middleware('role:admin')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.rombel');
+            Route::post('/', [RombelController::class, 'index'])->name('admin.rombel.index');
+            Route::post('/store', [RombelController::class, 'store'])->name('admin.rombel.store');
         });
         Route::prefix('post')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.post');
@@ -112,6 +114,19 @@ Route::middleware('auth')->group(function() {
         });
         Route::prefix('surat')->middleware('role:admin')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.surat');
+            Route::prefix('masuk')->group(function() {
+                Route::get('/', [DashController::class, 'admin'])->name('admin.inmail');
+            });
+            Route::prefix('keluar')->group(function() {
+                Route::get('/', [DashController::class, 'admin'])->name('admin.outmail');
+            });
+        });
+
+        Route::prefix('settings')->group(function() {
+            Route::get('/', [DashController::class, 'admin'])->name('admin.setting');
+        });
+        Route::prefix('tools')->group(function() {
+            Route::get('/', [DashController::class, 'admin'])->name('admin.tools');
         });
 
         // Background Route

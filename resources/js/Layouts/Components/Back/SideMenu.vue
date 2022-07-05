@@ -194,11 +194,28 @@ export default {
                 label: 'Surat',
                 roles: ['admin'],
                 active: false,
-                children: []
+                children: [
+                    {
+                        url: '/admin/surat/masuk',
+                        icon: 'mdi-inbox',
+                        label: 'Surat Masuk',
+                        roles: ['admin'],
+                        active: false,
+                        children: []
+                    },
+                    {
+                        url: '/admin/surat/keluar',
+                        icon: 'mdi-email-send-outline',
+                        label: 'Surat Keluar',
+                        roles: ['admin'],
+                        active: false,
+                        children: []
+                    },
+                ]
             },
             
             {
-                url: '/admin/pengaturan',
+                url: '/admin/settings',
                 icon: 'mdi-application-settings',
                 label: 'Pengaturan',
                 roles: ['admin'],
@@ -206,7 +223,7 @@ export default {
                 children: []
             },
             {
-                url: '/admin/alat',
+                url: '/admin/tools',
                 icon: 'mdi-toolbox',
                 label: 'Peralatan',
                 roles: ['admin'],

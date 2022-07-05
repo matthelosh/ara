@@ -20,5 +20,9 @@ class Rombel extends Model
     	return $this->belongsTo(Guru::class, 'guru_id', 'nip');
     }
 
+    public function siswas()
+    {
+        return $this->belongsToMany(Siswa::class, 'rombel_siswa', 'rombel_id', 'siswa_id');
+    }
     
 }
