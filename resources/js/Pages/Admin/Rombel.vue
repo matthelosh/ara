@@ -208,7 +208,7 @@
 		},
 		methods: {
 			jk(siswas, jk) {
-				return jk
+				return _.filter(siswas, (siswa => siswa.jk == jk)).length
 			},
 			saveRombel() {
 				this.loading = true

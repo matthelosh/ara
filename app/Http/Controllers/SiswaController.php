@@ -22,6 +22,61 @@ class SiswaController extends Controller
         }
     }
 
+    public function nonmember(Request $request)
+    {
+        try {
+            $periode = $request->periode;
+            $nonmembers = Siswa::whereDoesntHave('rombel', function($q) use($periode) {
+                $q->where('rombels.periode_id', $periode);
+            })->where('is_active', 1)->get();
+            return response()->json(['success' => true, 'nonmembers' =>$nonmembers], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'msg' => $e->getMessage()], 500);
+        }
+    }
+
+    public function inactivate(Request $request)
+    {
+        try {
+            foreach($request->siswas as $siswa)
+            {
+                Siswa::where('id', $siswa['id'])->update(['is_active' => 0]);
+                return response()->json(['success' => true, 'msg' => 'Siswa dinonaktifkan'], 200);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'msg' => $e->getMessage()], 500);
+        }
+    }
+
+    public function registerMember(Request $request)
+    {
+        try {
+            $rombel = 'App\Models\Rombel'::where('kode_rombel', $request->rombel_id)->first();
+            // dd($request->rombel);
+            foreach($request->siswas as $siswa)
+            {
+                $rombel->siswas()->attach($siswa['id'],['periode_id' => $request->periode]);
+            }
+            return response()->json(['success' => true, 'msg' => 'Siswa Dimasukkan rombel'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'msg' => $e->getMessage()], 500);
+        }
+    }
+    public function unregisterMember(Request $request)
+    {
+        try {
+            $rombel = 'App\Models\Rombel'::where('kode_rombel', $request->rombel)->first();
+            // dd($request->rombel);
+            foreach($request->siswas as $siswa)
+            {
+                $rombel->siswas()->detach($siswa['id']);
+            }
+            return response()->json(['success' => true, 'msg' => 'Siswa Dikeluarkan dari rombel'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'msg' => $e->getMessage()], 500);
+        }
+    }
+
     public function import(Request $request)
     {
         try {

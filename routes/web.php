@@ -81,6 +81,10 @@ Route::middleware('auth')->group(function() {
             Route::post('/', [SiswaController::class, 'index'])->name('admin.siswa.index');
             Route::post('/store', [SiswaController::class, 'store'])->name('admin.siswa.store');
             Route::post('/import', [SiswaController::class, 'import'])->name('admin.siswa.import');
+            Route::post('/nonmember', [SiswaController::class, 'nonMember'])->name('admin.siswa.nonmember');
+            Route::put('/inactivate', [SiswaController::class, 'inactivate'])->name('admin.siswa.inactivate');
+            Route::put('/register-member', [SiswaController::class, 'registerMember'])->name('admin.siswa.register-member');
+            Route::put('/unregister-member', [SiswaController::class, 'unregisterMember'])->name('admin.siswa.unregister-member');
         });
         Route::prefix('user')->middleware('role:admin')->group(function() {
             Route::post('/assign-account-guru', [UserController::class, 'assignAccountGuru'])->name('admin.user.asignaccount.guru');
