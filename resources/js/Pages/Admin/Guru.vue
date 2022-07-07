@@ -67,9 +67,13 @@
                                         ></v-simple-checkbox>
                                     </template>
                                     <template v-slot:item.name="{item}">
-                                        <v-btn text class="primary" small @click="editGuru(item)">
-                                            {{item.user ? '@'+item.user.username:item.name}}
 
+                                        <v-btn text class="primary"  @click="editGuru(item)">
+                                            <v-avatar size="32">
+                                            <img :src="'/storage/uploads/img/guru/'+item.nip+'.jpg'" alt="Foto" onerror="this.onerror=null;this.src='/images/1.png'">
+                                            <!-- <img src="/images/1.png" alt=""> -->
+                                        </v-avatar>
+                                            {{item.user ? '@'+item.user.username:item.name}}
                                         </v-btn>
 
                                     </template>

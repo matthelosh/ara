@@ -48,7 +48,7 @@
                                                                         </v-menu>
                                                                         <input type="file" ref="logo" class="d-none" @change="onLogoSelected">
                                                                         <v-avatar tile size="128" class="mx-10" @click="$refs.logo.click()">
-                                                                            <img :src="logo" class="elevation-3" alt="Logo">
+                                                                            <img :src="logo" class="elevation-3" alt="Logo" onerror="this.onerror=null;this.src='/images/logo-new.svg'">
                                                                         </v-avatar>
                                                                     </v-col>
                                                                 </v-row>

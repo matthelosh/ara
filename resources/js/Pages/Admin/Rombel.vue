@@ -64,7 +64,7 @@
 							<v-card-title>
 								<h3 class="font-weight-bold"><v-icon class="mb-1">mdi-google-classroom</v-icon> Form<small class="font-weight-thin">Rombel</small></h3>
 								<v-spacer></v-spacer>
-								<v-btn fab small class="ml-1" @click="mode='view';rombel={};guruImg='/images/1.png';wali_kelas='Pilih Wali Kelas'" color="error"><v-icon>mdi-close</v-icon></v-btn>
+								<v-btn fab small class="ml-1" @click="mode='view';guruImg='/images/1.png';wali_kelas='Pilih Wali Kelas'" color="error"><v-icon>mdi-close</v-icon></v-btn>
 							</v-card-title>
 							<v-card-text>
 								<v-container>
@@ -124,9 +124,10 @@
 										</v-col>
 										<v-col cols="12" sm="6">
 											<v-data-table
+												dense
 												:items="rombel.siswas"
-												:header="headerMembers"
-
+												:headers="headerMembers"
+												:search="searchSiswa"
 											>
 												<template v-slot:top>
 													<v-row>
@@ -134,7 +135,7 @@
 															<h5>Anggota Rombel</h5>
 														</v-col>
 														<v-col cols="6">
-															<v-text-field v-model="searchSiswa" dense hide-details outlined append-icon="mdi-magnify"></v-text-field>
+															<v-text-field v-model="searchSiswa" dense hide-details outlined append-icon="mdi-magnify" class="my-1"></v-text-field>
 														</v-col>
 													</v-row>
 												</template>
@@ -146,7 +147,7 @@
 						</v-card>
 					</v-fade-transition>
 					<v-fade-transition>
-						<manajemen-rombel v-if="mode=='manajemen'" :rombel="rombel"></manajemen-rombel>
+						<manajemen-rombel v-if="mode=='manajemen'" :rombel="rombel" @close="mode='view'"></manajemen-rombel>
 					</v-fade-transition>
 				</v-col>
 			</v-row>
@@ -175,11 +176,12 @@
 				{ text: 'Opsi', value: 'opsi', sortable: false},
 			],
 			emptyRombel: {
-				kode_rombel: '',
+				kode_rombel: null,
 				name: '',
 				tingkat: '',
 				grup: '',
-				periode_id: ''
+				periode_id: '',
+				siswas: []
 			},
 			gurus: [],
 			loading: false,
@@ -198,8 +200,8 @@
 			rombel: {
 				handler(after, before) {
 					this.rombel.tingkat = parseInt(after.tingkat)
-					let kode = after.kode_rombel.split('-')
-					this.rombel.grup = kode[1].length >1 ? kode[1][1].toUpperCase() : '0'
+					let kode = after.kode_rombel ? after.kode_rombel.split('-') : ['0','0']
+					this.rombel.grup = kode[1].length > 1 ? kode[1][1].toUpperCase() : '0'
 					this.guruImg = '/storage/uploads/img/guru/'+after.guru_id+'.jpg'
 					this.wali_kelas = _.find(this.gurus, guru => guru.nip == after.guru_id).name
 				},

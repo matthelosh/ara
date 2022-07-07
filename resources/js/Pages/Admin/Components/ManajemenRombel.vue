@@ -1,6 +1,10 @@
 <template>
 	<v-container>
 		<v-row>
+			<v-spacer></v-spacer>
+			<v-btn icon color="error" @click="$emit('close')" small class="mr-3"><v-icon>mdi-close</v-icon></v-btn>
+		</v-row>
+		<v-row>
 			<v-col>
 				<v-card>
 					<v-card-text>

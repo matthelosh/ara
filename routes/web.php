@@ -120,10 +120,10 @@ Route::middleware('auth')->group(function() {
         Route::prefix('surat')->middleware('role:admin')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.surat');
             Route::prefix('masuk')->group(function() {
-                Route::get('/', [DashController::class, 'admin'])->name('admin.inmail');
+                Route::get('/', [DashController::class, 'admin'])->name('admin.suratmasuk');
             });
             Route::prefix('keluar')->group(function() {
-                Route::get('/', [DashController::class, 'admin'])->name('admin.outmail');
+                Route::get('/', [DashController::class, 'admin'])->name('admin.suratkeluar');
             });
         });
 
