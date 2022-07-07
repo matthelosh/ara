@@ -9,7 +9,7 @@ class Siswa extends Model
 {
     use HasFactory;
     protected $fillable = [
-    	'nisn','nis','nik','no_akta','no_kip','no_kk','nama','jk','tempat_lahir','tanggal_lahir','alamat','rt','rw','desa','kecamatan','kode_pos','kabupaten','provinsi','hp','email','is_active'
+    	'nisn','nis','nik','no_akta','no_kip','no_kk','nama','jk','tempat_lahir','tanggal_lahir','alamat','rt','rw','desa','kecamatan','kode_pos','kabupaten','provinsi','hp','email','is_active','agama'
     ];
 
     public function rombel()

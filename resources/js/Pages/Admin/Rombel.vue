@@ -29,16 +29,26 @@
 											<v-row>
 												<v-spacer></v-spacer>
 												<v-col sm="4">
-													<v-text-field outlined append-icon="mdi-magnify" label="Cari" dense hide-details></v-text-field>
+													<v-text-field v-model="search" outlined append-icon="mdi-magnify" label="Cari" dense hide-details></v-text-field>
 												</v-col>
 											</v-row>
 										</v-container>
 									</template>
+
 									<template v-slot:item.kode_rombel="{item}">
 										<v-btn small outlined @click="mode='add';rombel=item;">{{item.kode_rombel}}</v-btn>
 									</template>
+									<template v-slot:item.wali_kelas="{item}">
+										<v-avatar>
+											<img :src="'/storage/uploads/img/guru/'+item.guru.nip+'.jpg'" alt="Foto" onerror="this.onerror=null;this.src='/images/1.png'">
+										</v-avatar>
+										<span>{{item.guru.name}}</span>
+									</template>
+									<template v-slot:item.siswa="{item}">
+										L: <span v-html="jk(item.siswas, 'l')"></span>  | P: <span v-html="jk(item.siswas, 'p')"></span>  | JML: {{item.siswas.length}}
+									</template>
 									<template v-slot:item.opsi="{item}">
-										<v-btn small icon color="primary">
+										<v-btn small icon color="primary" @click="mode='manajemen'; rombel=item;">
 											<v-icon>mdi-human-queue</v-icon>
 										</v-btn>
 										<v-btn small icon color="error">
@@ -50,70 +60,93 @@
 						</v-card>
 					</v-expand-transition>
 					<v-fade-transition>
-						<v-card v-if="mode=='add'" max-width="600" class="mx-auto">
+						<v-card v-if="mode=='add'" class="mx-auto">
 							<v-card-title>
-								<h3 class="font-weight-bold"><v-icon class="mb-1">mdi-google-classroom</v-icon> Tambah<small class="font-weight-thin">Rombel</small></h3>
+								<h3 class="font-weight-bold"><v-icon class="mb-1">mdi-google-classroom</v-icon> Form<small class="font-weight-thin">Rombel</small></h3>
 								<v-spacer></v-spacer>
-								<v-btn fab small class="ml-1" @click="mode='view'" color="error"><v-icon>mdi-close</v-icon></v-btn>
+								<v-btn fab small class="ml-1" @click="mode='view';rombel={};guruImg='/images/1.png';wali_kelas='Pilih Wali Kelas'" color="error"><v-icon>mdi-close</v-icon></v-btn>
 							</v-card-title>
 							<v-card-text>
 								<v-container>
 									<v-row>
-										<v-col cols="12" sm="4" class="d-flex justify-center">
-											<v-menu bottom left >
-                                                <template v-slot:activator="{on, attrs}"> 
-                                                	<div>
-                                                		
-	                                                    <v-avatar rounded class="mx-10 elevation-4" size="128" v-if="rombel" @click="getGurus" v-bind="attrs" v-on="on">
-	                                                        <img :src="guruImg" alt="Kepala Sekolah" onerror="this.onerror=null; this.src='/images/1.png'">
-	                                                    </v-avatar>
-	                                                    <h3 class="text-center">{{wali_kelas}}</h3>
-                                                    </div>
-                                                </template>
-                                                <v-list dense>
-                                                    <v-list-item v-for="guru in gurus" :key="guru.id" @click="setWaliKelas(guru.nip)" class="my-2">
-                                                        <v-list-item-avatar>
-                                                            <img :src="'/storage/uploads/img/guru/'+guru.nip+'.jpg'" 
-                                                                alt="Foto"
-                                                                onerror="this.onerror=null;this.src='/images/1.png'"
-                                                            >
-                                                        </v-list-item-avatar>
-                                                        <v-list-item-content>
-                                                            <v-list-item-title>
-                                                                {{guru.name}}
-                                                            </v-list-item-title>
-                                                        </v-list-item-content>
-                                                    </v-list-item>
-                                                </v-list>
-                                            </v-menu>
+										<v-col cols="12" sm="6">
+											<v-row>
+												<v-col cols="12" sm="4" class="d-flex justify-center">
+													<v-menu bottom left >
+		                                                <template v-slot:activator="{on, attrs}"> 
+		                                                	<div>
+		                                                		
+			                                                    <v-avatar rounded class="mx-10 elevation-4" size="128" v-if="rombel" @click="getGurus" v-bind="attrs" v-on="on">
+			                                                        <img :src="guruImg" alt="Wali Kelas" onerror="this.onerror=null; this.src='/images/1.png'">
+			                                                    </v-avatar>
+			                                                    <h6 class="text-center">{{wali_kelas}}</h6>
+		                                                    </div>
+		                                                </template>
+		                                                <v-list dense>
+		                                                    <v-list-item v-for="guru in gurus" :key="guru.id" @click="setWaliKelas(guru.nip)" class="my-2">
+		                                                        <v-list-item-avatar>
+		                                                            <img :src="'/storage/uploads/img/guru/'+guru.nip+'.jpg'" 
+		                                                                alt="Foto"
+		                                                                onerror="this.onerror=null;this.src='/images/1.png'"
+		                                                            >
+		                                                        </v-list-item-avatar>
+		                                                        <v-list-item-content>
+		                                                            <v-list-item-title>
+		                                                                {{guru.name}}
+		                                                            </v-list-item-title>
+		                                                        </v-list-item-content>
+		                                                    </v-list-item>
+		                                                </v-list>
+		                                            </v-menu>
+												</v-col>
+												<v-col cols="12" sm="8">
+													<v-form ref="formRombel" @submit.prevent="saveRombel">
+														<v-row>
+															<v-col cols="12" >
+																<v-select label="Tingkat" v-model="rombel.tingkat" :items="[1,2,3,4,5,6]" dense outlined hide-details  />
+															</v-col>
+															<v-col cols="12" >
+																<v-select label="Grup" v-model="rombel.grup" :items="['0','A','B','C','D','E']" dense outlined @change="setRombel" hide-details  />
+															</v-col>
+															<v-col cols="12" >
+																<v-text-field label="Kode Rombel" v-model="rombel.kode_rombel" dense outlined append-icon="mdi-barcode-scan" disabled hide-details></v-text-field>
+															</v-col>
+															<v-col cols="12" >
+																<v-text-field label="Nama Rombel" v-model="rombel.name" dense outlined append-icon="mdi-label" disabled hide-details></v-text-field>
+															</v-col>
+															<v-col cols="12" >
+																<v-btn block color="bg-gradient-primary" dark type="submit" :loading="loading">Simpan</v-btn>
+															</v-col>
+														</v-row>
+													</v-form>
+												</v-col>
+											</v-row>
 										</v-col>
-										<v-col cols="12" sm="8">
-											<v-form ref="formRombel" @submit.prevent="saveRombel">
-												<v-row>
-													<v-col cols="12" >
-														<v-select label="Tingkat" v-model="rombel.tingkat" :items="[1,2,3,4,5,6]" dense outlined hide-details  />
-													</v-col>
-													<v-col cols="12" >
-														<v-select label="Grup" v-model="rombel.grup" :items="['0','A','B','C','D','E']" dense outlined @change="setRombel" hide-details  />
-													</v-col>
-													<v-col cols="12" >
-														<v-text-field label="Kode Rombel" v-model="rombel.kode_rombel" dense outlined append-icon="mdi-barcode-scan" disabled hide-details></v-text-field>
-													</v-col>
-													<v-col cols="12" >
-														<v-text-field label="Nama Rombel" v-model="rombel.name" dense outlined append-icon="mdi-label" disabled hide-details></v-text-field>
-													</v-col>
-													<v-col cols="12" >
-														<v-btn block color="bg-gradient-primary" dark type="submit" :loading="loading">Simpan</v-btn>
-													</v-col>
-												</v-row>
-											</v-form>
+										<v-col cols="12" sm="6">
+											<v-data-table
+												:items="rombel.siswas"
+												:header="headerMembers"
+
+											>
+												<template v-slot:top>
+													<v-row>
+														<v-col cols="6">
+															<h5>Anggota Rombel</h5>
+														</v-col>
+														<v-col cols="6">
+															<v-text-field v-model="searchSiswa" dense hide-details outlined append-icon="mdi-magnify"></v-text-field>
+														</v-col>
+													</v-row>
+												</template>
+											</v-data-table>
 										</v-col>
-										
 									</v-row>
-									
 								</v-container>
 							</v-card-text>
 						</v-card>
+					</v-fade-transition>
+					<v-fade-transition>
+						<manajemen-rombel v-if="mode=='manajemen'" :rombel="rombel"></manajemen-rombel>
 					</v-fade-transition>
 				</v-col>
 			</v-row>
@@ -124,8 +157,10 @@
 
 <script>
 	import DashLayout from '@/js/Layouts/Dashboard'
+	import ManajemenRombel from './Components/ManajemenRombel'
 	export default {
 		name: 'AdminRombel',
+		components: { ManajemenRombel},
 		layout: DashLayout,
 		data: () => ({
 			mode: 'view',
@@ -135,7 +170,7 @@
 				{ text: 'No', value: 'no', sortable: false},
 				{ text: 'Kode Rombel', value: 'kode_rombel'},
 				{ text: 'Nama Rombel', value: 'name'},
-				{ text: 'Wali Kelas', value: 'guru.name'},
+				{ text: 'Wali Kelas', value: 'wali_kelas'},
 				{ text: 'Jml Siswa', value: 'siswa'},
 				{ text: 'Opsi', value: 'opsi', sortable: false},
 			],
@@ -152,6 +187,11 @@
 			rombel: {},
 			wali_kelas : 'Pilih Wali Kelas' ,
 			guruImg: '/images/1.png',
+			headerMembers: [
+				{text: 'NISN', value: 'nisn'},
+				{text: 'Nama', value: 'nama'},
+			],
+			searchSiswa: ''
 			// selectedRombel: {}
 		}),
 		watch: {
@@ -167,6 +207,9 @@
 			}
 		},
 		methods: {
+			jk(siswas, jk) {
+				return jk
+			},
 			saveRombel() {
 				this.loading = true
 				this.rombel.periode_id = this.$page.props.periode.kode_periode

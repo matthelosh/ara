@@ -22,6 +22,46 @@ class SiswaController extends Controller
         }
     }
 
+    public function import(Request $request)
+    {
+        try {
+            foreach($request->siswas as $input)
+            {
+                Siswa::updateOrCreate(
+                [
+                    'id' => $input['id'] ?? null,
+                    'nisn' => $input['nisn'],
+                    'nis' => $input['nis']??null,
+                ],[
+                    
+                    
+                    'nik' => $input['nik ']?? null,
+                    'no_akta' => $input['no_akta'] ?? null,
+                    'no_kip' => $input['no_kip'] ?? null,
+                    'no_kk' => $input['no_kk'] ?? null,
+                    'nama' => $input['nama'],
+                    'jk' => $input['jk'],
+                    'tempat_lahir' => $input['tempat_lahir'],
+                    'tanggal_lahir' => $input['tanggal_lahir'],
+                    'alamat' => $input['alamat'],
+                    'rt' => $input['rt'],
+                    'rw' => $input['rw'],
+                    'desa' => $input['desa'],
+                    'kecamatan' => $input['kecamatan'],
+                    'kode_pos' => $input['kode_pos'],
+                    'kabupaten' =>$input['kabupaten'],
+                    'provinsi' => $input['provinsi'],
+                    'hp' => $input['hp'],
+                    'email' => $input['email'],
+                ]
+            );
+            }
+            return response()->json(['success' => true, 'msg' => 'Simpan Siswa Sukses'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'msg' => $e->getMessage()], 500);
+        }
+    }
+
 
     /**
      * Store a newly created resource in storage.

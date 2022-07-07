@@ -80,6 +80,7 @@ Route::middleware('auth')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.siswa');
             Route::post('/', [SiswaController::class, 'index'])->name('admin.siswa.index');
             Route::post('/store', [SiswaController::class, 'store'])->name('admin.siswa.store');
+            Route::post('/import', [SiswaController::class, 'import'])->name('admin.siswa.import');
         });
         Route::prefix('user')->middleware('role:admin')->group(function() {
             Route::post('/assign-account-guru', [UserController::class, 'assignAccountGuru'])->name('admin.user.asignaccount.guru');
