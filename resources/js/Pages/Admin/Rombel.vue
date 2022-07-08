@@ -36,7 +36,7 @@
 									</template>
 
 									<template v-slot:item.kode_rombel="{item}">
-										<v-btn small outlined @click="mode='add';rombel=item;">{{item.kode_rombel}}</v-btn>
+										<v-btn small outlined @click="editRombel(item)">{{item.kode_rombel}}</v-btn>
 									</template>
 									<template v-slot:item.wali_kelas="{item}">
 										<v-avatar>
@@ -51,7 +51,7 @@
 										<v-btn small icon color="primary" @click="mode='manajemen'; rombel=item;">
 											<v-icon>mdi-human-queue</v-icon>
 										</v-btn>
-										<v-btn small icon color="error">
+										<v-btn small icon color="error" @click="deleteRombel(item)">
 											<v-icon>mdi-delete</v-icon>
 										</v-btn>
 									</template>
@@ -64,7 +64,7 @@
 							<v-card-title>
 								<h3 class="font-weight-bold"><v-icon class="mb-1">mdi-google-classroom</v-icon> Form<small class="font-weight-thin">Rombel</small></h3>
 								<v-spacer></v-spacer>
-								<v-btn fab small class="ml-1" @click="mode='view';guruImg='/images/1.png';wali_kelas='Pilih Wali Kelas'" color="error"><v-icon>mdi-close</v-icon></v-btn>
+								<v-btn fab small class="ml-1" @click="closeFormRombel" color="error"><v-icon>mdi-close</v-icon></v-btn>
 							</v-card-title>
 							<v-card-text>
 								<v-container>
@@ -152,6 +152,7 @@
 				</v-col>
 			</v-row>
 		</v-container>
+		<confirm-dialog ref="confirm"></confirm-dialog>
 		<v-snackbar v-model="snackbar.show" :color="snackbar.color" right>{{snackbar.text}}</v-snackbar>
 	</div>
 </template>
@@ -159,9 +160,10 @@
 <script>
 	import DashLayout from '@/js/Layouts/Dashboard'
 	import ManajemenRombel from './Components/ManajemenRombel'
+	import ConfirmDialog from './Components/ConfirmDialog'
 	export default {
 		name: 'AdminRombel',
-		components: { ManajemenRombel},
+		components: { ManajemenRombel, ConfirmDialog},
 		layout: DashLayout,
 		data: () => ({
 			mode: 'view',
@@ -169,6 +171,7 @@
 			rombels: [],
 			headers: [
 				{ text: 'No', value: 'no', sortable: false},
+				{ text: 'Tingkat', value: 'tingkat'},
 				{ text: 'Kode Rombel', value: 'kode_rombel'},
 				{ text: 'Nama Rombel', value: 'name'},
 				{ text: 'Wali Kelas', value: 'wali_kelas'},
@@ -181,6 +184,7 @@
 				tingkat: '',
 				grup: '',
 				periode_id: '',
+				// guru:{},
 				siswas: []
 			},
 			gurus: [],
@@ -196,19 +200,36 @@
 			searchSiswa: ''
 			// selectedRombel: {}
 		}),
-		watch: {
-			rombel: {
-				handler(after, before) {
-					this.rombel.tingkat = parseInt(after.tingkat)
-					let kode = after.kode_rombel ? after.kode_rombel.split('-') : ['0','0']
-					this.rombel.grup = kode[1].length > 1 ? kode[1][1].toUpperCase() : '0'
-					this.guruImg = '/storage/uploads/img/guru/'+after.guru_id+'.jpg'
-					this.wali_kelas = _.find(this.gurus, guru => guru.nip == after.guru_id).name
-				},
-				deep: true
-			}
-		},
 		methods: {
+			async deleteRombel(rombel){
+				if ( await this.$refs.confirm.open("Hapus Rombel", `Yakin Hapus Rombel ${rombel.name}?`)) {
+					axios({
+						method: 'delete',
+						url: '/admin/rombel/'+rombel.id
+					}).then(res => {
+						this.snackbar = {show:true, color: 'success', text: `Rombel ${rombel.name} dihapus.`}
+						this.getRombels()
+					})
+				}
+			},
+			closeFormRombel(){
+				this.mode = 'view'
+				Object.assign(this.rombel, this.emptyRombel)
+				this.getRombels()
+				this.guruImg = '/images/1.png'
+				this.wali_kelas = 'Pilih Wali Kelas'
+				this.getRombels()
+			},
+			editRombel(rombel) {
+				// console.log(rombel)
+				this.mode = 'add'
+				let kode = rombel.kode_rombel.split('-') 
+				rombel.grup = kode[1].length > 1 ? kode[1][1].toUpperCase() : '0'
+				rombel.tingkat = parseInt(rombel.tingkat)
+				this.rombel = rombel
+				this.guruImg = '/storage/uploads/img/guru/'+rombel.guru_id+'.jpg'
+				this.wali_kelas = _.find(this.gurus, guru => guru.nip == rombel.guru_id).name 
+			},
 			jk(siswas, jk) {
 				return _.filter(siswas, (siswa => siswa.jk == jk)).length
 			},
@@ -223,6 +244,10 @@
 					this.rombel = this.emptyRombel
 					this.snackbar = { show: true, color: 'success', text: res.data.msg }
 					this.loading=false
+					this.guruImg = '/images/1.png'
+					this.wali_kelas = 'Pilih Wali Kelas'
+					Object.assign(this.rombel, this.emptyRombel)
+					this.getRombels()
 				}).catch(err => {
 					this.snackbar = { show: true, color: 'error', text: err.response.data.msg }
 					this.loading=false
@@ -234,6 +259,7 @@
 				this.guruImg = '/storage/uploads/img/guru/'+nip+'.jpg'
 			},
 			setRombel() {
+				// alert('hi')
 				let kode_rombel = this.$page.props.periode.kode_periode+'-'+this.rombel.tingkat+(this.rombel.grup == '0' ? "":this.rombel.grup.toLowerCase())
 				let hurufs=["SATU","DUA","TIGA","EMPAT","LIMA","ENAM"]
 				let roman=['I','II','III','IV','V','VI']

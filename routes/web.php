@@ -93,6 +93,7 @@ Route::middleware('auth')->group(function() {
         Route::prefix('rombel')->middleware('role:admin')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.rombel');
             Route::post('/', [RombelController::class, 'index'])->name('admin.rombel.index');
+            Route::delete('/{id}', [RombelController::class, 'destroy'])->name('admin.rombel.destroy');
             Route::post('/store', [RombelController::class, 'store'])->name('admin.rombel.store');
         });
         Route::prefix('post')->group(function() {

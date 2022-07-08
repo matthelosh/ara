@@ -47,6 +47,7 @@ class RombelController extends Controller
                     'name' => $input['name'],
                     'periode_id' => $request['periode_id'],
                     'guru_id' => $request['guru_id'],
+                    'tingkat' => $request['tingkat']
                 ]
             );
 
@@ -96,8 +97,15 @@ class RombelController extends Controller
      * @param  \App\Models\Rombel  $rombel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Rombel $rombel)
+    public function destroy(Rombel $rombel, $id)
     {
-        //
+        try {
+            $rombel = $rombel->find($id);
+            $rombel->siswas()->detach();
+            $rombel->delete();
+            return response()->json(['success' => true, 'msg' => 'Rombel Dihapus.'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'msg' => $e->getMessage()], 500);
+        }
     }
 }
