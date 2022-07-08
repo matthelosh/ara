@@ -55,11 +55,11 @@
 									</template>
 									<template v-slot:item.disposisi="{item}">
 										{{item.disposisi ? item.disposisi.status: 'Belum Ada'}}
-										<v-btn icon small><v-icon color="primary">mdi-email-send-outline</v-icon></v-btn>
+										<v-btn icon small><v-icon color="primary">mdi-email-fast-outline</v-icon></v-btn>
 									</template>
 									<template v-slot:item.opsi="{item}">
 										<div>
-											<v-btn icon color="error"><v-icon>mdi-delete</v-icon></v-btn>
+											<v-btn icon ><v-icon color="error" @click="deleteSuratMasuk(item)">mdi-delete</v-icon></v-btn>
 										</div>
 									</template>
 								</v-data-table>
@@ -145,39 +145,22 @@
 			</v-row>
 		</v-container>
 		<v-snackbar v-model="snackbar.show" :color="snackbar.color" top right>{{snackbar.text}}</v-snackbar>
+		<confirm-dialog ref="confirm"></confirm-dialog>
 	</div>
 </template>
 
 <script>
 	import DashLayout from '@/js/Layouts/Dashboard'
-
+	import ConfirmDialog from './Components/ConfirmDialog'
 	export default {
 		name: 'Suratmasuk',
+		components: {ConfirmDialog},
 		layout: DashLayout,
 		data: () =>({
 			loading: false,
 			formSurat: 'view',
 			search: '',
-			inboxes: [
-				{
-					no: 1,
-					tanggal: '2022-05-03',
-					no_surat: '800/312/23.34.1.4/V/2022',
-					sifat: 'Penting',
-					perihal: 'Pemberitahuan',
-					pengirim: 'Dinas Pendidikan Kab. Malang',
-					disposisi: 'Menunggu Disposisi'
-				},
-				{
-					no: 2,
-					tanggal: '2022-06-03',
-					no_surat: '800/310/23.34.1.4/VI/2022',
-					sifat: 'Penting',
-					perihal: 'Undangan KKG PAI Kec. Wagir',
-					pengirim: 'KKG PAI Kec. Wagir',
-					disposisi: 'Muhammad Soleh, S. Pd. I (Guru PAI)'
-				},
-			],
+			inboxes: [],
 			headers: [
 				{text: 'No', value: 'no', sortable: false},
 				{text: 'Diterima', value: 'tanggal_diterima'},
@@ -195,6 +178,22 @@
 			snackbar: {show: false, color:"error", text: ''}
 		}),
 		methods: {
+			async deleteSuratMasuk(surat){
+				this.loading = true
+				if ( await this.$refs.confirm.open("Hapus Surat Masuk", `Yakin Menghapus surat masuk dengan Nomor ${surat.no_surat}`)) {
+					axios({
+						method: 'delete',
+						url: '/admin/surat/masuk/'+surat.id,
+						data: {_method: 'delete'}
+					}).then(res => {
+						this.loading = false
+						this.getSurats()
+						this.snackbar = { show: true, color: 'success', text: `Surat Masuk, No: ${surat.no_surat} Dihapus.`}
+					}).catch(err => {
+						this.snackbar = { show: true, color: 'error', text: err.response.data.msg}
+					})
+				} 
+			},
 			editSurat(surat) {
 				this.formSurat = 'add'
 				this.fileUrl = surat.file_surat

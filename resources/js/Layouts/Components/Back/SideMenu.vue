@@ -196,8 +196,16 @@ export default {
                 active: false,
                 children: [
                     {
-                        url: '/admin/surat/masuk',
+                        url: '/admin/surat/agenda',
                         icon: 'mdi-inbox',
+                        label: 'Agenda Surat',
+                        roles: ['admin'],
+                        active: false,
+                        children: []
+                    },
+                    {
+                        url: '/admin/surat/masuk',
+                        icon: 'mdi-email-receive-outline',
                         label: 'Surat Masuk',
                         roles: ['admin'],
                         active: false,

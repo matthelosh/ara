@@ -124,6 +124,7 @@ Route::middleware('auth')->group(function() {
                 Route::get('/', [DashController::class, 'admin'])->name('admin.suratmasuk');
                 Route::post('/', [SuratController::class, 'inbox'])->name('admin.suratmasuk.inbox');
                 Route::post('/store', [SuratController::class, 'storeSuratMasuk'])->name('admin.suratmasuk.store');
+                Route::delete('/{id}', [SuratController::class, 'destroySuratMasuk'])->name('admin.suratmasuk.destroy');
             });
             Route::prefix('keluar')->group(function() {
                 Route::get('/', [DashController::class, 'admin'])->name('admin.suratkeluar');

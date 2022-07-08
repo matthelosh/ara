@@ -53,4 +53,14 @@ class SuratController extends Controller
     		return response()->json(['success' => false, 'msg' => $e->getMessage()], 500);
     	}
     }
+
+    public function destroySuratMasuk(Request $request, $id)
+    {
+    	try {
+    		SuratMasuk::find($id)->delete();
+    		return response()->json(['success' => true, 'msg' => 'Data Surat Masuk Dihapus'], 200);
+    	} catch (\Exception $e) {
+    		return response()->json(['success' => false, 'msg' => $e->getMessage()], 500);
+    	}
+    }
 }
