@@ -45,7 +45,25 @@
 										<span>{{item.guru.name}}</span>
 									</template>
 									<template v-slot:item.siswa="{item}">
-										L: <span v-html="jk(item.siswas, 'l')"></span>  | P: <span v-html="jk(item.siswas, 'p')"></span>  | JML: {{item.siswas.length}}
+										
+										<v-badge overlap>
+											<template v-slot:badge>
+												<span v-html="jk(item.siswas, 'l')"></span>
+											</template>
+											<v-icon large>mdi-human-male</v-icon>
+										</v-badge>
+										<v-badge overlap color="pink">
+											<template v-slot:badge>
+												<span v-html="jk(item.siswas, 'p')"></span>
+											</template>
+											<v-icon large>mdi-human-female</v-icon>
+										</v-badge>
+										<v-badge overlap>
+											<template v-slot:badge>
+												{{item.siswas.length}}
+											</template>
+											<v-icon large>mdi-human-male-female</v-icon>
+										</v-badge>
 									</template>
 									<template v-slot:item.opsi="{item}">
 										<v-btn small icon color="primary" @click="mode='manajemen'; rombel=item;">
