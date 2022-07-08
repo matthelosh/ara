@@ -157,7 +157,7 @@ export default {
             {
                 url: '#',
                 icon: 'mdi-human-male-board',
-                label: 'Administrasi',
+                label: 'Pembelajaran',
                 roles: ['admin','wali','guru'],
                 active: false,
                 children: [

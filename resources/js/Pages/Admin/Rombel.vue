@@ -218,7 +218,6 @@
 				this.getRombels()
 				this.guruImg = '/images/1.png'
 				this.wali_kelas = 'Pilih Wali Kelas'
-				this.getRombels()
 			},
 			editRombel(rombel) {
 				// console.log(rombel)
@@ -241,7 +240,6 @@
 					url: '/admin/rombel/store',
 					data: this.rombel
 				}).then(res => {
-					this.rombel = this.emptyRombel
 					this.snackbar = { show: true, color: 'success', text: res.data.msg }
 					this.loading=false
 					this.guruImg = '/images/1.png'

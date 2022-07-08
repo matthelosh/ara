@@ -41,8 +41,9 @@ class SiswaController extends Controller
             foreach($request->siswas as $siswa)
             {
                 Siswa::where('id', $siswa['id'])->update(['is_active' => 0]);
-                return response()->json(['success' => true, 'msg' => 'Siswa dinonaktifkan'], 200);
+                
             }
+            return response()->json(['success' => true, 'msg' => 'Siswa dinonaktifkan'], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'msg' => $e->getMessage()], 500);
         }
