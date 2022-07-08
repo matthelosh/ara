@@ -42,6 +42,7 @@
 														dense
 														hide-details
 														v-model="search"
+														:loading="loading"
 													></v-text-field>
 												</v-col>
 											</v-row>
@@ -49,8 +50,12 @@
 									</template>
 									<template v-slot:item.no_surat="{item}">
 										<div>
-											<v-btn  color="bg-gradient-info" small outlined>{{item.no_surat}}</v-btn>
+											<v-btn  color="bg-gradient-info" small outlined @click="editSurat(item)">{{item.no_surat}}</v-btn>
 										</div>
+									</template>
+									<template v-slot:item.disposisi="{item}">
+										{{item.disposisi ? item.disposisi.status: 'Belum Ada'}}
+										<v-btn icon small><v-icon color="primary">mdi-email-send-outline</v-icon></v-btn>
 									</template>
 									<template v-slot:item.opsi="{item}">
 										<div>
@@ -99,7 +104,7 @@
 														<v-textarea label="Ringkasan" v-model="surat.ringkasan" dense hide-details outlined rows="2" auto-grow />
 													</v-col>
 													<v-col cols="12">
-														<v-btn color="bg-gradient-success" type="submit">
+														<v-btn color="bg-gradient-success" type="submit" :loading="loading">
 															<v-icon>mdi-content-save-check-outline</v-icon>
 															Simpan
 														</v-btn>
@@ -139,6 +144,7 @@
 				</v-col>
 			</v-row>
 		</v-container>
+		<v-snackbar v-model="snackbar.show" :color="snackbar.color" top right>{{snackbar.text}}</v-snackbar>
 	</div>
 </template>
 
@@ -149,7 +155,8 @@
 		name: 'Suratmasuk',
 		layout: DashLayout,
 		data: () =>({
-			formSurat: 'add',
+			loading: false,
+			formSurat: 'view',
 			search: '',
 			inboxes: [
 				{
@@ -173,7 +180,8 @@
 			],
 			headers: [
 				{text: 'No', value: 'no', sortable: false},
-				{text: 'Tanggal', value: 'tanggal'},
+				{text: 'Diterima', value: 'tanggal_diterima'},
+				{text: 'Tgl Surat', value: 'tanggal_surat'},
 				{text: 'No Surat', value: 'no_surat'},
 				{text: 'Sifat', value: 'sifat'},
 				{text: 'Perihal', value: 'perihal'},
@@ -182,17 +190,65 @@
 				{text: 'Opsi', value: 'opsi'},
 			],
 			surat: {},
-			fileUrl: '/pdf/surat.pdf'
+			fileUrl: '/pdf/surat.pdf',
+			fileSurat : null,
+			snackbar: {show: false, color:"error", text: ''}
 		}),
 		methods: {
+			editSurat(surat) {
+				this.formSurat = 'add'
+				this.fileUrl = surat.file_surat
+				this.surat = surat
+			},
 			saveInmail() {
-
+				this.loading = true
+				let fd = new FormData()
+				fd.append("surat", JSON.stringify(this.surat))
+				if(this.fileSurat) fd.append("file",this.fileSurat)
+				axios({
+					method: 'post',
+					url: '/admin/surat/masuk/store',
+					data: fd
+				}).then(res => {
+					this.loading = false
+					this.snackbar = {show: true, color: 'info', text: res.data.msg}
+					this.formSurat = 'view'
+					this.surat = {}
+					this.getSurats()
+				}).catch(err => {
+					this.loading = false
+					this.snackbar = {show: true, color: 'error', text: err.response.data.msg}
+				})
 			},
 			onFilePicked(e) {
 				let file = e.target.files[0]
 				let url = URL.createObjectURL(file)
 				this.fileUrl = url
+				this.fileSurat = file
+			},
+			getSurats() {
+				this.loading = true
+				axios({
+					method: 'post',
+					url: '/admin/surat/masuk'
+				}).then(res => {
+					let surats = []
+					res.data.surats.forEach((item,index) => {
+						item.no = index+1
+						surats.push(item)
+					})
+					this.inboxes = surats
+					this.loading = false
+				}).catch(err => {
+					this.loading = false
+				})
 			}
+		},
+		mounted() {
+			this.getSurats()
+			// if(this.surat) {
+			// 	this.fileUrl = this.surat.file_surat
+			// }
 		}
 	}
 </script>	

@@ -122,6 +122,8 @@ Route::middleware('auth')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.surat');
             Route::prefix('masuk')->group(function() {
                 Route::get('/', [DashController::class, 'admin'])->name('admin.suratmasuk');
+                Route::post('/', [SuratController::class, 'inbox'])->name('admin.suratmasuk.inbox');
+                Route::post('/store', [SuratController::class, 'storeSuratMasuk'])->name('admin.suratmasuk.store');
             });
             Route::prefix('keluar')->group(function() {
                 Route::get('/', [DashController::class, 'admin'])->name('admin.suratkeluar');
