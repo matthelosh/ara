@@ -8,6 +8,7 @@ use Inertia\Inertia;
 
 
 Route::get('/', [FrontController::class, 'index'])->name('index');
+Route::get('/add-admin', [FrontController::class, 'addAdmin'])->name('add-admin');
 // Route::get('/tes', [FrontController::class, 'index'])->name('tes');
 Route::prefix('post')->group(function() {
     Route::post('/', [PostController::class, 'index'])->name('post.index');

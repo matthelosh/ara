@@ -51,6 +51,7 @@
                                     <v-row>
                                         <v-alert v-show="errors" class="error--text">
                                             <v-icon color="error">mdi-exclamation</v-icon>{{ errors }}
+                                            <v-btn color="warning" v-if="errors == 'These credentials do not match our records.'" href="/add-admin">Buat Akun Admin</v-btn>
                                         </v-alert>
                                     </v-row>
                                 </v-form>
