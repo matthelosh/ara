@@ -75,7 +75,7 @@
 								<v-row>
 									
 									<v-col cols="12" sm="8">
-										<v-form ref="formInmail" @submit.prevent="saveInmail">
+										<v-form ref="formInmail" @submit.prevent="SaveSuratkeluar">
 											<v-container>
 												<v-row>
 													<v-col cols="12" sm="4">
@@ -217,7 +217,7 @@
 			types: [],
 		}),
 		methods: {
-			saveInmail() {
+			SaveSuratkeluar() {
 
 			},
 			onFilePicked(e) {

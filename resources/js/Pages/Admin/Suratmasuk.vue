@@ -15,9 +15,9 @@
 									<v-icon>mdi-plus-circle-outline</v-icon>
 									<span class="d-none d-sm-inline">Tambah</span>
 								</v-btn>
-								<v-btn small color="bg-gradient-primary" class="mx-1" dark @click="formSurat='import'">
-									<v-icon>mdi-plus-circle-multiple-outline</v-icon>
-									<span class="d-none d-sm-inline">Impor Excel</span>
+								<v-btn small color="bg-gradient-success" class="mx-1" dark>
+									<v-icon>mdi-file-excel</v-icon>
+									<span class="d-none d-sm-inline">Ekspor</span>
 								</v-btn>
 							</v-card-title>
 							<v-card-text>
@@ -27,6 +27,7 @@
 									:search="search"
 									dense
 									:header-props="{ sortIcon: null }"
+									:loading="loading"
 								>
 									<template v-slot:top>
 										<v-container>
@@ -42,7 +43,6 @@
 														dense
 														hide-details
 														v-model="search"
-														:loading="loading"
 													></v-text-field>
 												</v-col>
 											</v-row>
@@ -50,15 +50,16 @@
 									</template>
 									<template v-slot:item.no_surat="{item}">
 										<div>
-											<v-btn  color="bg-gradient-info" small outlined @click="editSurat(item)">{{item.no_surat}}</v-btn>
+											<v-btn  color="bg-gradient-info" small outlined @click="detailSurat(item)">{{item.no_surat}}</v-btn>
 										</div>
 									</template>
 									<template v-slot:item.disposisi="{item}">
-										{{item.disposisi ? item.disposisi.status: 'Belum Ada'}}
-										<v-btn icon small><v-icon color="primary">mdi-email-fast-outline</v-icon></v-btn>
+										{{statusDisposisi(item)}}
+										<v-btn icon small @click="formDisposisi = {show: true, surat: item}"><v-icon color="primary">mdi-email-fast-outline</v-icon></v-btn>
 									</template>
 									<template v-slot:item.opsi="{item}">
 										<div>
+											<v-btn  icon @click="editSurat(item)"><v-icon color="warning">mdi-pencil-box</v-icon></v-btn>
 											<v-btn icon ><v-icon color="error" @click="deleteSuratMasuk(item)">mdi-delete</v-icon></v-btn>
 										</div>
 									</template>
@@ -130,15 +131,69 @@
 						</v-card>
 					</v-expand-transition>
 					<v-expand-transition>
-						<v-card v-if="formSurat=='import'">
+						<v-card v-if="formSurat=='detail'">
 							<v-card-title>
 								<h3>
-									<v-icon class="mb-1">mdi-plus-circle-multiple-outline</v-icon>
-									<span class="d-none d-sm-inline font-weight-bold">Impor<small class="grey--text font-weight-thin">Surat</small></span>
+									<v-icon class="mb-1">mdi-file-word</v-icon>
+									<span class="d-none d-sm-inline font-weight-bold">Detail<small class="grey--text font-weight-thin">Surat <v-chip dark dense small>{{surat.no_surat}}</v-chip></small></span>
 								</h3>
 								<v-spacer></v-spacer>
 								<v-btn fab small color="bg-gradient-error" @click="formSurat='view'" dark><v-icon>mdi-close</v-icon></v-btn>
 							</v-card-title>
+							<v-card-text>
+								<v-container>
+									<v-row>
+										<v-col cols="12" sm="4">
+											<v-simple-table class="elevation-4">
+												<template v-slot:default>
+													<tbody>
+														<tr v-for="(header, i) in headers.slice(0,7)" :key="i">
+															<th>{{header.text}}</th>
+															<td>{{surat[header.value]}}</td>
+														</tr>
+														<tr>
+															<th>File Surat</th>
+															<td>
+																<a :href="surat.file_surat" target="_blank">Lihat/Unduh</a>
+															</td>
+														</tr>
+													</tbody>
+												</template>
+											</v-simple-table>
+
+										</v-col>
+										<v-col>
+											<v-card class="elecation-4">
+												<v-card-text>
+													<v-simple-table>
+														<template v-slot:top>
+															<h3>Riwayat Disposisi</h3>
+														</template>
+														<template v-slot:default>
+															<thead>
+																<th>No</th>
+																<th>Tanggal</th>
+																<th>Dari</th>
+																<th>Instruksi/Informasi</th>
+																<th>Diteruskan Ke</th>
+															</thead>
+															<tbody>
+																<tr v-for="(disposisi, index) in surat.disposisis" :key="index">
+																	<td>{{index+1}}</td>
+																	<td>{{disposisi.created_at}}</td>
+																	<td>{{disposisi.guru.name}} ({{disposisi.guru.jabatan}})</td>
+																	<td>{{disposisi.konten}}</td>
+																	<td>{{disposisi.kepada}}</td>
+																</tr>
+															</tbody>
+														</template>
+													</v-simple-table>
+												</v-card-text>
+											</v-card>
+										</v-col>
+									</v-row>
+								</v-container>
+							</v-card-text>
 						</v-card>
 					</v-expand-transition>
 				</v-col>
@@ -146,20 +201,23 @@
 		</v-container>
 		<v-snackbar v-model="snackbar.show" :color="snackbar.color" top right>{{snackbar.text}}</v-snackbar>
 		<confirm-dialog ref="confirm"></confirm-dialog>
+		<form-disposisi v-if="formDisposisi.show" :dialog="formDisposisi" @close="closeFormDisposisi"></form-disposisi>
 	</div>
 </template>
 
 <script>
 	import DashLayout from '@/js/Layouts/Dashboard'
 	import ConfirmDialog from './Components/ConfirmDialog'
+	import FormDisposisi from './Components/FormDisposisi'
 	export default {
 		name: 'Suratmasuk',
-		components: {ConfirmDialog},
+		components: {ConfirmDialog, FormDisposisi},
 		layout: DashLayout,
 		data: () =>({
 			loading: false,
 			formSurat: 'view',
 			search: '',
+			formDisposisi: {show: false, disposisi: null},
 			inboxes: [],
 			headers: [
 				{text: 'No', value: 'no', sortable: false},
@@ -178,6 +236,15 @@
 			snackbar: {show: false, color:"error", text: ''}
 		}),
 		methods: {
+
+			detailSurat(surat) {
+				this.formSurat = 'detail'
+				this.surat = surat
+			},
+			closeFormDisposisi(){
+				this.formDisposisi = { show: false, disposisi: null}
+				this.getSurats()
+			},
 			async deleteSuratMasuk(surat){
 				this.loading = true
 				if ( await this.$refs.confirm.open("Hapus Surat Masuk", `Yakin Menghapus surat masuk dengan Nomor ${surat.no_surat}`)) {
@@ -187,7 +254,7 @@
 						data: {_method: 'delete'}
 					}).then(res => {
 						this.loading = false
-						this.getSurats()
+						this.getSurats()	
 						this.snackbar = { show: true, color: 'success', text: `Surat Masuk, No: ${surat.no_surat} Dihapus.`}
 					}).catch(err => {
 						this.snackbar = { show: true, color: 'error', text: err.response.data.msg}
@@ -241,7 +308,16 @@
 				}).catch(err => {
 					this.loading = false
 				})
-			}
+			},
+			statusDisposisi(surat) {
+				const disposisis = surat.disposisis
+				let last = disposisis.length > 0 ? disposisis[disposisis.length-1] : null
+				// return !last ? 'Belum Ada' : last.status
+				return !last ? 'Belum Ada' : last.kepada
+			},
+		},
+		computed: {
+
 		},
 		mounted() {
 			this.getSurats()

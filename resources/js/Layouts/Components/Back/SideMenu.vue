@@ -192,7 +192,7 @@ export default {
                 url: '/admin/surat',
                 icon: 'mdi-email-variant',
                 label: 'Surat',
-                roles: ['admin'],
+                roles: ['admin', 'guru'],
                 active: false,
                 children: [
                     {

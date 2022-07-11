@@ -69,7 +69,7 @@ Route::middleware('auth')->group(function() {
             Route::put('/', [SekolahController::class, 'update'])->name('admin.sekolah.update');
             Route::put('/{id}', [SekolahController::class, 'changeKepsek'])->name('admin.sekolah.change-kepsek');
         });
-        Route::prefix('guru')->middleware('role:admin')->group(function() {
+        Route::prefix('guru')->middleware('role:admin,guru')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.guru');
             Route::post('/', [GuruController::class, 'index'])->name('admin.guru.index');
             Route::post('/import', [GuruController::class, 'import'])->name('admin.guru.import');
@@ -118,11 +118,15 @@ Route::middleware('auth')->group(function() {
         Route::prefix('video')->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.video');
         });
-        Route::prefix('surat')->middleware('role:admin')->group(function() {
+        Route::prefix('surat')->middleware(['role:admin,guru'])->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.surat');
+
             Route::prefix('masuk')->group(function() {
                 Route::get('/', [DashController::class, 'admin'])->name('admin.suratmasuk');
                 Route::post('/', [SuratController::class, 'inbox'])->name('admin.suratmasuk.inbox');
+                Route::prefix('disposisi')->group(function() {
+                    Route::post('/store', [SuratController::class, 'storeDisposisiMasuk'])->name('admin.surat.masuk.disposisi.store');
+                });
                 Route::post('/store', [SuratController::class, 'storeSuratMasuk'])->name('admin.suratmasuk.store');
                 Route::delete('/{id}', [SuratController::class, 'destroySuratMasuk'])->name('admin.suratmasuk.destroy');
             });

@@ -10,15 +10,21 @@ class Disposisi extends Model
     use HasFactory;
     protected $fillable = [
     	'surat_id',
+        'reply_to',
+        'guru_id',
     	'kepada',
-    	'kontent',
-    	'batas_waktu',
-    	'catatam',
+    	'konten',
     	'status'
     ];
 
     public function suratMasuk()
     {
-    	return $this->belogsTo(Suratmasuk::class, 'surat_id', 'no-surat');
+    	return $this->belongsTo(Suratmasuk::class, 'surat_id', 'no_surat');
     }
+    public function guru()
+    {
+        return $this->belongsTo(Guru::class, 'guru_id', 'nip');
+    }
+
+
 }

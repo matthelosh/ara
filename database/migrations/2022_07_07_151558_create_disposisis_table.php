@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('disposisis', function (Blueprint $table) {
             $table->id();
+            $table->string('guru_id', 30);
+            $table->integer('reply_to')->nullable();
             $table->string('surat_id', 100);
             $table->string('kepada', 100);
             $table->text('konten');
-            $table->date('batas_waktu');
-            $table->text('catatan');
             $table->string('status');
             $table->timestamps();
         });

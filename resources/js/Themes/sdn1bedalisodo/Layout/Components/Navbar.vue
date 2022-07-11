@@ -205,11 +205,15 @@ export default {
                 background-size: 200% 1%
                 background-position: left bottom
                 transition: all .2s linear
+                border-radius: 3px
+                // box-sizing: border-box
                 :hover
                     background: linear-gradient(to right, transparent 50%, lime 50%)
                     background-size: 200% 1%
                     background-position: right bottom!important
                     transition: all .2s linear
+                    padding: 0 10px
+                    box-shadow: -5px 0 10px rgba(0,0,0,0.5)
                 margin: 10px 0
                 a
                     display: block

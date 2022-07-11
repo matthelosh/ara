@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\SuratMasuk;
 use App\Models\SuratKeluar;
+use App\Models\Disposisi;
 
 class SuratController extends Controller
 {
@@ -13,7 +14,7 @@ class SuratController extends Controller
 	public function inbox(Request $request)
 	{
 		try {
-			$surats = SuratMasuk::orderBy('tanggal_diterima', 'DESC')->get();
+			$surats = SuratMasuk::orderBy('tanggal_diterima', 'DESC')->with('disposisis.guru')->get();
 			return response()->json(['success' => true, 'surats' => $surats], 200);
 		} catch (\Exception $e) {
 			return response()->json(['success' => false, 'msg' => $e->getMessage()], 500);
@@ -49,6 +50,32 @@ class SuratController extends Controller
     		);
 
     		return response()->json(['success' => true, 'msg' => 'Surat Masuk Disimpan'], 200);
+    	} catch (\Exception $e) {
+    		return response()->json(['success' => false, 'msg' => $e->getMessage()], 500);
+    	}
+    }
+
+    public function storeDisposisiMasuk(Request $request)
+    {
+    	try {
+    		$input = $request->all();
+    		foreach ($input['kepada'] as $kepada) {
+    			$kepadas = $kepada['name'].' ('.$kepada['jabatan'].'),';
+    		}
+    		$disposisi = Disposisi::updateOrCreate(
+    			[
+    				'id' => $input['id'] ?? null,
+    				'surat_id' => $input['surat_id'],
+    				'guru_id' => $request->user()->userid,
+    			],[
+
+			    	'kepada' => $kepadas,
+			    	'konten' => $input['konten'],
+			    	'status' => $input['status'] ?? 'Dibaca'
+    			]
+    		);
+    		// dd($disposisi->id);
+    		return response()->json(['success' => true, 'msg' => 'Disposisi Surat Masuk Disimpan'], 200);
     	} catch (\Exception $e) {
     		return response()->json(['success' => false, 'msg' => $e->getMessage()], 500);
     	}

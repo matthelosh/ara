@@ -20,8 +20,8 @@ class SuratMasuk extends Model
     	'file_surat'
     ];
 
-    public function disposisi()
+    public function disposisis()
     {
-    	return $this->HasOne(Disposisi::class, 'surat_id','no_surat');
+    	return $this->hasMany(Disposisi::class, 'surat_id','no_surat');
     }
 }
