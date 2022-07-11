@@ -10,6 +10,7 @@ class SuratKeluar extends Model
     use HasFactory;
     protected $fillable = [
     	'no_surat',
+        'klasifikasi_id',
     	'tanggal_surat',
     	'jenis',
     	'tipe',

@@ -196,6 +196,13 @@ export default {
                 active: false,
                 children: [
                     {
+                        url: '/admin/surat/klasifikasi',
+                        icon: 'mdi-view-list',
+                        label: 'Klasifikasi Surat',
+                        roles: ['admin'],
+                        active: false,
+                        children: []
+                    },{
                         url: '/admin/surat/agenda',
                         icon: 'mdi-inbox',
                         label: 'Agenda Surat',

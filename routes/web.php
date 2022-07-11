@@ -121,6 +121,12 @@ Route::middleware('auth')->group(function() {
         });
         Route::prefix('surat')->middleware(['role:admin,guru'])->group(function() {
             Route::get('/', [DashController::class, 'admin'])->name('admin.surat');
+            Route::prefix('klasifikasi')->group(function() {
+                Route::get('/', [DashController::class, 'admin'])->name('admin.klasifikasisurat');
+                Route::post('/', [SuratController::class, 'indexKlasifikasi'])->name('admin.klasifikasisurat.index');
+                Route::post('/store', [SuratController::class, 'storeKlasifikasi'])->name('admin.klasifikasisurat.store');
+            });
+            
 
             Route::prefix('masuk')->group(function() {
                 Route::get('/', [DashController::class, 'admin'])->name('admin.suratmasuk');

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('ks', 40);
             $table->string('nama', 100);
+            $table->string('kode_lembaga', 50);
             $table->string('nss', 30);
             $table->string('npsn', 10);
             $table->string('status_sekolah_str', 30);

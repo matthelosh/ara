@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('surat_keluars', function (Blueprint $table) {
             $table->id();
             $table->string('no_surat', 100)->unique();
+            $table->string('klasifikasi_id', 10);
             $table->date('tanggal_surat');
             $table->string('jenis', 50);
             $table->string('tipe', 50);

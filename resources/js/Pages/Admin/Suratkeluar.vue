@@ -22,7 +22,7 @@
 							</v-card-title>
 							<v-card-text>
 								<v-data-table
-									:items="inboxes"
+									:items="surats"
 									:headers="headers"
 									:search="search"
 									dense
@@ -78,13 +78,15 @@
 										<v-form ref="formInmail" @submit.prevent="SaveSuratkeluar">
 											<v-container>
 												<v-row>
-													<v-col cols="12" sm="4">
+													<v-col cols="12" sm="5">
 														<v-text-field label="No Surat" v-model="surat.no_surat" dense hide-details outlined append-icon="mdi-barcode-scan" disabled></v-text-field>
 													</v-col>
 													<v-col cols="12" sm="3">
 														<v-text-field label="Tanggal Surat" v-model="surat.tanggal_surat" dense hide-details outlined type="date" ></v-text-field>
 													</v-col>
-
+													<v-col cols="12" sm="4">
+														<v-select label="Klasifikasi Surat" v-model="surat.klasifikasi_id" :items="klasifikasis" item-text="keterangan" item-value="kode" dense hide-details outlined type="date" @change="onKlasifikasiChanged"></v-select>
+													</v-col>
 													<v-col cols="12" sm="5">
 														<v-select label="Jenis Surat" v-model="surat.jenis" :items="jenises" item-text="label" item-value="kode" dense hide-details outlined type="date" @change="onJenisChanged"></v-select>
 													</v-col>
@@ -159,28 +161,7 @@
 		data: () =>({
 			formSurat: 'add',
 			search: '',
-			inboxes: [
-				{
-					no: 1,
-					tanggal: '2022-05-03',
-					no_surat: '800/312/23.34.1.4/V/2022',
-					sifat: 'Penting',
-					perihal: 'Pemberitahuan',
-					pengirim: 'Kepala Sekolah',
-					kepada: 'Dinas Pendidikan Kab. Malang',
-					disposisi: 'Menunggu Disposisi'
-				},
-				{
-					no: 2,
-					tanggal: '2022-06-03',
-					no_surat: '800/310/23.34.1.4/VI/2022',
-					sifat: 'Penting',
-					perihal: 'Undangan KKG PAI Kec. Wagir',
-					pengirim: 'Kepala Sekolah',
-					kepada: 'KKG PAI Kec. Wagir',
-					disposisi: 'Muhammad Soleh, S. Pd. I (Guru PAI)'
-				},
-			],
+			surats:[],
 			headers: [
 				{text: 'No', value: 'no', sortable: false},
 				{text: 'Tanggal', value: 'tanggal'},
@@ -215,6 +196,7 @@
 				{jenis_id: 'spr', tipe: 'Perintah Melaksanakan Tugas'},
 			],
 			types: [],
+			klasifikasis: []
 		}),
 		methods: {
 			SaveSuratkeluar() {
@@ -228,7 +210,26 @@
 			onJenisChanged(e) {
 				// alert(e)
 				this.types = _.filter(this.tipes, (tipe => tipe.jenis_id == e))
+			},
+			onKlasifikasiChanged(e) {
+				let no_surat = this.surats.length > 0 ? this.surats[this.surats.length-1].no_surat.split('/') : null
+				let no = no_surat ? (parseInt(no_surat[1])+1) : 1
+				let romans = ['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII']
+				let date = new Date()
+				let new_no = `${e}/${no}/${this.$page.props.sekolah.kode_lembaga}/${romans[date.getMonth()]}/${date.getFullYear()}`
+				this.surat.no_surat = new_no
+			},
+			getKlasifikasi() {
+				axios({
+					method: 'post',
+					url: '/admin/surat/klasifikasi'
+				}).then(res => {
+					this.klasifikasis = res.data.klasifikasis
+				})
 			}
+		},
+		mounted() {
+			this.getKlasifikasi()
 		}
 	}
 </script>	

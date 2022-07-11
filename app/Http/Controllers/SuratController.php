@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Models\Klasifikasisurat;
 use App\Models\SuratMasuk;
 use App\Models\SuratKeluar;
 use App\Models\Disposisi;
@@ -81,6 +82,30 @@ class SuratController extends Controller
     	}
     }
 
+	public function indexKlasifikasi(Request $request)
+	{
+		try {
+			$klasifikasis = Klasifikasisurat::get();
+			return response()->json(['success' => true, 'klasifikasis' => $klasifikasis], 200);
+		} catch (\Exception $e) {
+			return response()->json(['success' => false, 'msg' => $e->getMessage()], 500);
+		}
+	}
+	
+	public function storeKlasifikasi(Request $request)
+	{
+		try {
+			Klasifikasisurat::updateOrCreate([
+                'id' => $request['id'] ?? null
+            ],[
+				'kode' => $request['kode'],
+				'keterangan' => $request['keterangan']
+			]);
+			return response()->json(['success' => true, 'msg' => 'Klasifikasi Surat Disimpan'], 200);
+		} catch (\Exception $e) {
+			return response()->json(['success' => false, 'msg' => $e->getMessage()], 500);
+		}
+	}
     public function destroySuratMasuk(Request $request, $id)
     {
     	try {
