@@ -19,10 +19,12 @@ return new class extends Migration
             $table->string('klasifikasi_id', 10);
             $table->date('tanggal_surat');
             $table->string('jenis', 50);
+            $table->string('perihal', 100);
             $table->string('tipe', 50);
             $table->string('sifat', 50);
             $table->enum('lingkup', ['Internal','Eksternal']);
-            $table->string('penerima', 50);
+            $table->string('pengirim', 100);
+            $table->string('penerima', 100);
             $table->string('alamat', 100);
             $table->text('ringkasan');
             $table->string('file_surat', 191)->nullable();

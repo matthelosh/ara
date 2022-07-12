@@ -139,6 +139,8 @@ Route::middleware('auth')->group(function() {
             });
             Route::prefix('keluar')->group(function() {
                 Route::get('/', [DashController::class, 'admin'])->name('admin.suratkeluar');
+                Route::post('/', [SuratController::class, 'outbox'])->name('admin.suratkeluar.inbox');
+                Route::post('/store', [SuratController::class, 'storeSuratKeluar'])->name('admin.suratkeluar.store');
             });
         });
 

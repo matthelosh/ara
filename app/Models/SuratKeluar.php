@@ -15,10 +15,17 @@ class SuratKeluar extends Model
     	'jenis',
     	'tipe',
     	'sifat',
+        'perihal',
     	'lingkup',
+        'pengirim',
     	'penerima',
     	'ringkasan',
     	'alamat',
     	'file_surat'
     ];
+
+    public function disposisis()
+    {
+        return $this->hasMany(Disposisi::class, 'surat_id', 'no_surat');
+    }
 }

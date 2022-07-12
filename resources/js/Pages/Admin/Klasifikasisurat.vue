@@ -3,14 +3,15 @@
     	<v-container>
     		<v-row>
     			<v-expand-transition>
-    				<v-col cols="12" sm="6" v-if="form">
-    					<v-card>
-    						<v-btn fab small absolute right color="error" @click="form=false;klasifikasi={};">
+    				<v-col cols="12" sm="4" v-if="form">
+    					<v-card style="overflow:hidden;">
+    						<v-btn fab small absolute right color="error" @click="form=false;klasifikasi={};" style="right:-10px;top:-10px;">
     							<v-icon>mdi-close</v-icon>
     						</v-btn>
+                            <v-card-title>Tambah Klasifikasi</v-card-title>
     						<v-card-text>
     							<v-form ref="formKlasifikasi" @submit.prevent="saveKlasifikasi">
-    								<v-container>
+    								<!-- <v-container> -->
     									<v-row>
     										<v-col cols="12">
     											<v-text-field label="Kode" v-model="klasifikasi.kode" filled hide-details></v-text-field>
@@ -22,7 +23,7 @@
     											<v-btn block type="submit" color="bg-gradient-primary" dark :loading="loading">Simpan</v-btn>
     										</v-col>
     									</v-row>
-    								</v-container>
+    								<!-- </v-container> -->
     							</v-form>
     						</v-card-text>
     					</v-card>

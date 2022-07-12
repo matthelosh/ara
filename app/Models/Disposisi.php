@@ -21,6 +21,10 @@ class Disposisi extends Model
     {
     	return $this->belongsTo(Suratmasuk::class, 'surat_id', 'no_surat');
     }
+    public function SuratKeluar()
+    {
+        return $this->belongsTo(SuratKeluar::class, 'surat_id', 'no_surat');
+    }
     public function guru()
     {
         return $this->belongsTo(Guru::class, 'guru_id', 'nip');

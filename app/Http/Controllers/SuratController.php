@@ -21,6 +21,15 @@ class SuratController extends Controller
 			return response()->json(['success' => false, 'msg' => $e->getMessage()], 500);
 		}
 	}
+    public function outbox(Request $request)
+    {
+        try {
+            $surats = SuratKeluar::orderBy('created_at', 'DESC')->with('disposisis.guru')->get();
+            return response()->json(['success' => true, 'surats' => $surats], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'msg' => $e->getMessage()], 500);
+        }
+    }
 
     public function storeSuratMasuk(Request $request)
     {
@@ -54,6 +63,44 @@ class SuratController extends Controller
     	} catch (\Exception $e) {
     		return response()->json(['success' => false, 'msg' => $e->getMessage()], 500);
     	}
+    }
+    public function storeSuratKeluar(Request $request)
+    {
+        try {
+            $file = $request->file('file') ?? null;
+            $surat = json_decode($request->surat);
+            // dd($surat);
+            $file_name = null;
+            if ( $file ) {
+                $ext = $file->getClientOriginalExtension();
+                $file_name = Str::random(16).'.'.$ext;
+                $file->storeAs('public/uploads/surat/keluar', $file_name);
+            }
+
+            SuratKeluar::updateOrCreate(
+                [
+                    'id' => $surat->id ?? null,
+                    'no_surat' => $surat->no_surat
+                ],[
+                    'klasifikasi_id' => $surat->klasifikasi_id,
+                    'pengirim' => $surat->pengirim->name.'('.$surat->pengirim->jabatan.')',
+                    'tanggal_surat' => $surat->tanggal_surat,
+                    'perihal' => $surat->perihal ?? null,
+                    'sifat' => $surat->sifat,
+                    'jenis' => $surat->jenis,
+                    'tipe' => $surat->tipe,
+                    'lingkup' => $surat->lingkup,
+                    'penerima' => $surat->penerima->name.'('.$surat->penerima->jabatan.')',
+                    'alamat' => $surat->alamat,
+                    'ringkasan' => $surat->ringkasan,
+                    'file_surat' => $file_name ? '/storage/uploads/surat/masuk/'.$file_name : null
+                ]
+            );
+
+            return response()->json(['success' => true, 'msg' => 'Surat Keluar Disimpan'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'msg' => $e->getMessage()], 500);
+        }
     }
 
     public function storeDisposisiMasuk(Request $request)

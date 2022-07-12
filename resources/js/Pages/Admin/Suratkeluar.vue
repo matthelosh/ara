@@ -8,7 +8,10 @@
 							<v-card-title>
 								<h3>
 									<v-icon class="mb-1">mdi-email-send-outline</v-icon>
-									Surat Masuk
+									<span class="d-none d-sm-inline font-weight-bold">
+										Surat<small class="font-weight-thin">Keluar</small>
+									</span>
+									
 								</h3>
 								<v-spacer></v-spacer>
 								<v-btn small color="bg-gradient-error" dark class="mx-1" @click="formSurat='add'">
@@ -52,6 +55,10 @@
 											<v-btn  color="bg-gradient-info" small outlined>{{item.no_surat}}</v-btn>
 										</div>
 									</template>
+									<template v-slot:item.disposisi="{item}">
+										{{statusDisposisi(item)}}
+										<v-btn icon small @click="formDisposisi = {show: true, surat: item}"><v-icon color="primary">mdi-email-fast-outline</v-icon></v-btn>
+									</template>
 									<template v-slot:item.opsi="{item}">
 										<div>
 											<v-btn icon color="error"><v-icon>mdi-delete</v-icon></v-btn>
@@ -73,9 +80,8 @@
 							</v-card-title>
 							<v-card-text>
 								<v-row>
-									
 									<v-col cols="12" sm="8">
-										<v-form ref="formInmail" @submit.prevent="SaveSuratkeluar">
+										<v-form ref="formInmail" @submit.prevent="saveSuratkeluar">
 											<v-container>
 												<v-row>
 													<v-col cols="12" sm="5">
@@ -100,13 +106,50 @@
 														<v-select label="Lingkup" v-model="surat.lingkup" dense hide-details outlined append-icon="mdi-email-newsletter" :items="['Internal','Eksternal']" />
 													</v-col>
 													<v-col cols="12" sm="6">
-														<v-text-field label="Pengirim" v-model="surat.pengirim" dense hide-details outlined append-icon="mdi-account-tie" />
+														<v-select :items="daris" item-text="name" item-value="name" label="Pengirim" v-model="surat.pengirim" 
+														return-object dense hide-details outlined append-icon="mdi-account-tie" >
+															<template v-slot:selection="data">
+																{{data.item.name}}
+															</template>
+															<template v-slot:item="data">
+																<template v-if="typeof data.item !=='object'">
+																	<v-list-item-content v-text="data.item"></v-list-item-content>
+																</template>
+																<template v-else>
+																	<v-list-item-content>
+																		<v-list-item-title v-html="data.item.name"></v-list-item-title>
+																		<v-list-item-subtitle v-html="data.item.jabatan"></v-list-item-subtitle>
+																	</v-list-item-content>
+																</template>
+															</template>
+														</v-select>
 													</v-col>
 													<v-col cols="12" sm="6">
-														<v-text-field label="Penerima" v-model="surat.penerima" dense hide-details outlined append-icon="mdi-account-tie" />
+														<v-text-field v-if="surat.lingkup == 'Eksternal'" label="Penerima" v-model="surat.penerima" dense hide-details outlined append-icon="mdi-account-tie" />
+														<v-select v-else :items="daris" item-text="name" item-value="name" label="Penerima" v-model="surat.penerima" 
+														return-object dense hide-details outlined append-icon="mdi-account-tie" >
+															<template v-slot:selection="data">
+																{{data.item.name}}
+															</template>
+															<template v-slot:item="data">
+																<template v-if="typeof data.item !=='object'">
+																	<v-list-item-content v-text="data.item"></v-list-item-content>
+																</template>
+																<template v-else>
+																	<v-list-item-content>
+																		<v-list-item-title v-html="data.item.name"></v-list-item-title>
+																		<v-list-item-subtitle v-html="data.item.jabatan"></v-list-item-subtitle>
+																	</v-list-item-content>
+																</template>
+															</template>
+														</v-select>
 													</v-col>
 													<v-col cols="12" sm="6">
 														<v-text-field label="Alamat" v-model="surat.alamat" dense hide-details outlined append-icon="mdi-map-marker" />
+													</v-col>
+													<v-col cols="12" sm="6">
+														<v-textarea label="Ringkasan" v-model="surat.ringkasan" dense hide-details outlined append-icon="mdi-map-marker" 
+														rows="2" auto-grow />
 													</v-col>
 													<v-col cols="12">
 														<v-btn color="bg-gradient-success" type="submit">
@@ -122,8 +165,8 @@
 										<v-container fill-height align-start justify-center>
 											<v-card>
 												<v-card-text>
-													<v-btn text color="primary" small block @click="$refs.fileInmail.click()">Unggah File Surat</v-btn>
-													<input type="file" ref="fileInmail" accept=".pdf,.jpg,.jpeg,.png,.JPG, .JPEG,.PNG" @change="onFilePicked" class="d-none">
+													<v-btn text color="primary" small block @click="$refs.fileOutmail.click()">Unggah File Surat</v-btn>
+													<input type="file" ref="fileOutmail" accept=".pdf,.jpg,.jpeg,.png,.JPG, .JPEG,.PNG" @change="onFilePicked" class="d-none">
 													<embed :src="fileUrl+'#toolbar=0'" frameborder="0" width="100%" height="400px" ></embed>
 												</v-card-text>
 											</v-card>
@@ -149,22 +192,26 @@
 				</v-col>
 			</v-row>
 		</v-container>
+		<form-disposisi v-if="formDisposisi.show" :dialog="formDisposisi" @close="closeFormDisposisi"></form-disposisi>
 	</div>
 </template>
 
 <script>
 	import DashLayout from '@/js/Layouts/Dashboard'
-
+	import FormDisposisi from './Components/FormDisposisi'
 	export default {
-		name: 'Inmail',
+		name: 'Outmail',
+		components: {FormDisposisi},
 		layout: DashLayout,
 		data: () =>({
+			loading: false,
 			formSurat: 'add',
+			formDisposisi: {show: false, disposisi: null},
 			search: '',
 			surats:[],
 			headers: [
 				{text: 'No', value: 'no', sortable: false},
-				{text: 'Tanggal', value: 'tanggal'},
+				{text: 'Tanggal', value: 'tanggal_surat'},
 				{text: 'No Surat', value: 'no_surat'},
 				{text: 'Sifat', value: 'sifat'},
 				{text: 'Perihal', value: 'perihal'},
@@ -196,16 +243,56 @@
 				{jenis_id: 'spr', tipe: 'Perintah Melaksanakan Tugas'},
 			],
 			types: [],
-			klasifikasis: []
+			klasifikasis: [],
+			daris: [],
+			kepadas: [],
+			fileSurat: null
 		}),
 		methods: {
-			SaveSuratkeluar() {
-
+			closeFormDisposisi(){
+				this.formDisposisi = { show: false, disposisi: null}
+				this.getSurats()
+			},
+			saveSuratkeluar() {
+				this.loading = true
+				let fd = new FormData()
+				fd.append('surat', JSON.stringify(this.surat))
+				if(this.fileSurat) fd.append('file', this.fileSurat)
+				axios({
+					method: 'post',
+					url: '/admin/surat/keluar/store',
+					data: fd
+				}).then(res => {
+					this.loading = false
+					this.getSurats()
+					this.formSurat = 'view'
+				}).catch(err => {
+					this.loading = false
+					console.log(err.response.data.msg)
+				})
+			},
+			getSurats(){
+				this.loading = true
+				axios({
+					method: 'post',
+					url: '/admin/surat/keluar'
+				}).then(res => {
+					let surats = []
+					res.data.surats.forEach((item,index) => {
+						item.no = index+1
+						surats.push(item)
+					})
+					this.surats = surats
+					this.loading = false
+				}).catch(err => {
+					this.loading = false
+				})
 			},
 			onFilePicked(e) {
 				let file = e.target.files[0]
 				let url = URL.createObjectURL(file)
 				this.fileUrl = url
+				this.fileSurat = file
 			},
 			onJenisChanged(e) {
 				// alert(e)
@@ -226,10 +313,28 @@
 				}).then(res => {
 					this.klasifikasis = res.data.klasifikasis
 				})
-			}
+			},
+			getGurus() {
+				axios({
+	                method: 'post',
+	                url: '/admin/guru'
+	            }).then(res => {
+	                this.daris = res.data.gurus
+	            }).catch(err => {
+	                this.snackbar = { show: true, text: err.response.data.msg, color: 'bg-gradient-error'}
+	            })
+			},
+			statusDisposisi(surat) {
+				const disposisis = surat.disposisis
+				let last = disposisis.length > 0 ? disposisis[disposisis.length-1] : null
+				// return !last ? 'Belum Ada' : last.status
+				return !last ? 'Belum Ada' : last.kepada
+			},
 		},
 		mounted() {
 			this.getKlasifikasi()
+			this.getGurus()
+			this.getSurats()
 		}
 	}
 </script>	
